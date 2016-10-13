@@ -1,0 +1,11 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/pressly/chi",
+			"repository": "https://github.com/pressly/chi",
+			"revision": "2cad94402baa6eb7584258df02fed068f1502ada",
+			"branch": "master"
+		}
+	]
+}

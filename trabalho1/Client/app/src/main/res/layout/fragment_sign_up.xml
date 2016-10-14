@@ -1,0 +1,103 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="layout.fragLog.SignUp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout
+        android:id="@+id/table_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:shrinkColumns="1"
+        android:paddingTop="4dip">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_name"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_username"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_password"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint"
+                android:inputType="textPassword"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_credit_card"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_credit_card"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:gravity="top"
+                android:hint="@string/hint" />
+        </TableRow>
+
+        <Button
+            android:id="@+id/button_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sign_up"
+            android:text="@string/label_button_sign_up" />
+    </TableLayout>
+
+</FrameLayout>

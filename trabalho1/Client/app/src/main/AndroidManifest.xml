@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".log_in.LoginTab"
+            android:label="@string/title_activity_login_tab"></activity>
     </application>
 
 </manifest>

@@ -25,3 +25,6 @@ IMPORTANT:
 -> after building the apk from android studio
 -> abd install <file name'app-debug.apk'>.apk
 
+(data transmition done in json or xml)
+
+

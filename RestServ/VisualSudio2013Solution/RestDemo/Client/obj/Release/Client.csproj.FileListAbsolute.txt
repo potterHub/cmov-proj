@@ -1,0 +1,14 @@
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\Project1\bin\Release\Client.exe.config
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\Project1\bin\Release\Client.exe
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\Project1\obj\Release\ResolveAssemblyReference.cache
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\Project1\obj\Release\Client.exe
+C:\Users\Miguel Monteiro\Documents\Visual Studio 2010\Projects\RestDemo\Client\bin\Release\Client.exe.config
+C:\Users\Miguel Monteiro\Documents\Visual Studio 2010\Projects\RestDemo\Client\bin\Release\Client.exe
+C:\Users\Miguel Monteiro\Documents\Visual Studio 2010\Projects\RestDemo\Client\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Miguel Monteiro\Documents\Visual Studio 2010\Projects\RestDemo\Client\obj\Release\Client.exe
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\Client.exe.config
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\Client.exe
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\RestService.dll
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\RestService.pdb
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\obj\Release\Client.csprojResolveAssemblyReference.cache
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\obj\Release\Client.exe

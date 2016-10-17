@@ -1,0 +1,13 @@
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\RestHost\obj\x86\Release\ResolveAssemblyReference.cache
+c:\users\miguel monteiro\documents\visual studio 2010\Projects\NewRestDemo\RestHost\bin\Release\RestHost.exe.config
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestHost.exe.config
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestHost.exe
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestHost.pdb
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestService.dll
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestService.pdb
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\obj\x86\Release\RestHost.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\obj\x86\Release\RestHost.exe
+C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\obj\x86\Release\RestHost.pdb
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\bin\Release\RestHost.exe.config
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\obj\x86\Release\RestHost.exe
+D:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestHost\obj\x86\Release\RestHost.pdb

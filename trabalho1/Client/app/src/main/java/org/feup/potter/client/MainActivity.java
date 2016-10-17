@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.feup.potter.client.log_in.LoginTab;
 
 public class MainActivity extends Activity {
 
@@ -16,9 +15,9 @@ public class MainActivity extends Activity {
 
         // starting login tab
         // do something when clicking the button
-        Intent intent = new Intent(this,LoginTab.class);
+       // Intent intent = new Intent(this,SignIn.class);
 
         // starts the second activity
-        startActivity(intent);
+        //  startActivity(intent);
     }
 }

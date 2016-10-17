@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dialog Fragment Demo</string>
+    <string name="dialog_title">Get Name</string>
+    <string name="hello_button">Say Hello</string>
+    <string name="initial_name">Your Name</string>
+    <string name="done_button">Done</string>
+</resources>

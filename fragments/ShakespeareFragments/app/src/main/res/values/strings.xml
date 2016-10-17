@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shakespeare Fragments</string>
+    <string name="main_name">Shakespeare</string>
+    <string name="title_activity_details">Fragment</string>
+</resources>

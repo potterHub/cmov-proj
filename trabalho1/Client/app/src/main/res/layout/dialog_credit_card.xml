@@ -1,11 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="layout.fragLog.SignIn">
+    android:layout_height="match_parent">
 
     <TableLayout
-        android:id="@+id/table_sign_in"
+        android:id="@+id/table_sign_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
@@ -19,12 +17,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_username"
+                android:text="@string/label_card_type"
+                android:textAppearance="@android:style/TextAppearance"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_card_type" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_credit_card_number"
                 android:textAppearance="@android:style/TextAppearance"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edit_username"
+                android:id="@+id/edit_card_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -38,25 +54,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_password"
+                android:text="@string/label_data"
                 android:textAppearance="@android:style/TextAppearance"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edit_password"
+                android:id="@+id/edit_month"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/hint"
-                android:inputType="textPassword"/>
+                android:hint="@string/hint_month"/>
+
+            <EditText
+                android:id="@+id/edit_year"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_year"/>
         </TableRow>
 
         <Button
-            android:id="@+id/button_send"
+            android:id="@+id/button_done"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="sign_in"
-            android:text="@string/label_button_sign_in" />
+            android:text="@string/label_button_done" />
     </TableLayout>
+
 
 </FrameLayout>

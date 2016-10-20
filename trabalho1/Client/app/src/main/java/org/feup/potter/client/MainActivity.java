@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.feup.potter.client.log_in.SingUp;
+
 
 public class MainActivity extends Activity {
 
@@ -15,9 +17,13 @@ public class MainActivity extends Activity {
 
         // starting login tab
         // do something when clicking the button
-       // Intent intent = new Intent(this,SignIn.class);
+
+        // just get user from db (if exists log in)
+
+        // if not register fragment
+        Intent intent = new Intent(this,SingUp.class);
 
         // starts the second activity
-        //  startActivity(intent);
+        startActivity(intent);
     }
 }

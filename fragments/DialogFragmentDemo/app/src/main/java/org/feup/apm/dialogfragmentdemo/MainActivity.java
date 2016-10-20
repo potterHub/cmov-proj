@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements GetNameDialogListener, OnClickListener{
   private TextView tv;
-  
+
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    
     Button but = (Button)findViewById(R.id.button);
     but.setOnClickListener(this);
+
     tv = (TextView)findViewById(R.id.name);
   }
-  
+
   /* for the activity button */
   public void onClick(View v) {
     GetNameDialogFragment dialog = GetNameDialogFragment.newInstance(getString(R.string.initial_name));

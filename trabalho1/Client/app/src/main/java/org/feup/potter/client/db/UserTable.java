@@ -1,4 +1,4 @@
-package DB;
+package org.feup.potter.client.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;

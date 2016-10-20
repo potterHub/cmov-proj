@@ -8,6 +8,14 @@
     <string name="label_credit_card">Credit Card</string>
     <string name="hint"> </string>
 
+    <string name="label_card_type">Card type:</string>
+    <string name="label_credit_card_number">Card number:</string>
+    <string name="label_credit_card_title">Credit card</string>
+    <string name="label_button_done">Done</string>
+    <string name="label_data">Expiration data:</string>
+    <string name="hint_month">mm</string>
+    <string name="hint_year">yy</string>
+
     <string name="label_button_sign_in">Sing-in</string>
     <string name="label_button_sign_up">Sing-up</string>
     <string name="title_activity_login_tab">Log in</string>

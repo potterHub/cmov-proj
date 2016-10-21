@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
 
     // this interface is for the communications between the activity that manages this fragment
     public interface CredidCardInterface {
-        public void whenCreditCardAdded(GetCreditCardDialog Dialog);
+        public void whenCreditCardAdded(CreditCard card);
     }
 
     // interface object
@@ -114,7 +115,22 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
     /* for the dialog button */
     @Override
     public void onClick(View v) {
-        interfaceWithMain.whenCreditCardAdded(this);
+        CreditCard c = null;
+        try {
+            c = (CreditCard) this.mSpinnerCardType.getSelectedItem();
+            c.setCardNumber(this.edit_number.getText().toString());
+            try {
+                // change to data editText
+
+                //c.setMonthExpiration(this.edit_month.getText().toString());
+                //c.setYearExpiration(this.edit_year.getText().toString());
+            }catch(NumberFormatException e){
+
+            }
+        }catch (ClassCastException e){
+            Log.d("error","casting credit card");
+        }
+        interfaceWithMain.whenCreditCardAdded(c);
         dismiss();
     }
 }

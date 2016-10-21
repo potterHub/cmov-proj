@@ -22,9 +22,16 @@ public class CreditCard {
     private int monthExpiration;
     private int yearExpiration;
 
+    // to check if the card is valid done in sets(still need to be done)
+    private boolean validCard;
+    public boolean isValid() {
+        return this.validCard;
+    }
+
     public CreditCard(CardType type, Integer imageId){
         this.type = type;
         this.imageId = imageId;
+        this.validCard = false;
     }
 
     public String getText(){

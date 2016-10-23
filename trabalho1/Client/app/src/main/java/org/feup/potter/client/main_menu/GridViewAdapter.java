@@ -13,9 +13,9 @@ import android.widget.TextView;
 import org.feup.potter.client.R;
 
 public class GridViewAdapter extends ArrayAdapter<Item> {
-    Context mContext;
-    int resourceId;
-    ArrayList<Item> data = new ArrayList<Item>();
+    private Context mContext;
+    private int resourceId;
+    private ArrayList<Item> data = new ArrayList<Item>();
 
     public GridViewAdapter(Context context, int layoutResourceId, ArrayList<Item> data) {
         super(context, layoutResourceId, data);
@@ -24,6 +24,7 @@ public class GridViewAdapter extends ArrayAdapter<Item> {
         this.data = data;
     }
 
+    // tuning each menu icon
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View itemView = convertView;

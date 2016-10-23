@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.feup.potter.client.R;
 
+
 public class SignIn extends Activity implements View.OnClickListener {
 
     private EditText text_user_name;

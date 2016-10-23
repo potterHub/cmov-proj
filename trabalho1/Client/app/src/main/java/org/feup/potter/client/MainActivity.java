@@ -13,53 +13,50 @@ import android.widget.Toast;
 import org.feup.potter.client.main_menu.GridViewAdapter;
 import org.feup.potter.client.main_menu.Item;
 
-public class MainActivity extends Activity implements OnItemClickListener
-{
-    GridView gridview;
-    GridViewAdapter gridviewAdapter;
-    ArrayList<Item> data = new ArrayList<Item>();
+public class MainActivity extends Activity implements OnItemClickListener {
+    private GridView gridview;
+
+    private GridViewAdapter gridviewAdapter;
+
+    private ArrayList<Item> menuItems = new ArrayList<Item>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initView(); // Initialize the GUI Components
-        fillData(); // Insert The Data
-        setDataAdapter(); // Set the Data Adapter
-    }
+        // Initialize the GUI Components
+        this.gridview = (GridView) findViewById(R.id.grid_menu_view);
+        this.gridview.setOnItemClickListener(this);
 
-    // Initialize the GUI Components
-    private void initView()
-    {
-        gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setOnItemClickListener(this);
-    }
+        // Insert Data in to the gridView (because of the adapater inserting menuItems into the menuItems list)
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_menus)
+                , getResources().getDrawable(R.drawable.menus_icon)));
 
-    // Insert The Data
-    private void fillData()
-    {
-        data.add(new Item("op 1", getResources().getDrawable(R.drawable.rest_img)));
-        data.add(new Item("op 2", getResources().getDrawable(R.drawable.rest_img)));
-        data.add(new Item("op 3", getResources().getDrawable(R.drawable.rest_img)));
-        data.add(new Item("op 4", getResources().getDrawable(R.drawable.rest_img)));
-        data.add(new Item("op 5", getResources().getDrawable(R.drawable.rest_img)));
-        data.add(new Item("op 6", getResources().getDrawable(R.drawable.rest_img)));
-    }
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_order)
+                , getResources().getDrawable(R.drawable.order_icon)));
 
-    // Set the Data Adapter
-    private void setDataAdapter()
-    {
-        gridviewAdapter = new GridViewAdapter(getApplicationContext(), R.layout.grid_view_menu_icon, data);
-        gridview.setAdapter(gridviewAdapter);
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_transactions)
+                , getResources().getDrawable(R.drawable.transactions_icon)));
+
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_vouchers)
+                , getResources().getDrawable(R.drawable.vouchers_icon)));
+
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_setting)
+                , getResources().getDrawable(R.drawable.settings_icon)));
+
+        this.menuItems.add(new Item(getResources().getString(R.string.menu_login)
+                , getResources().getDrawable(R.drawable.login_icon)));
+
+        // Set the Data Adapter for the menu
+        this.gridviewAdapter = new GridViewAdapter(getApplicationContext(), R.layout.grid_view_menu_icon, this.menuItems);
+        this.gridview.setAdapter(this.gridviewAdapter);
     }
 
     @Override
-    public void onItemClick(final AdapterView<?> arg0, final View view, final int position, final long id)
-    {
-        String message = "Clicked : " + data.get(position).getTitle();
-        Toast.makeText(getApplicationContext(), message , Toast.LENGTH_SHORT).show();
+    public void onItemClick(final AdapterView<?> arg0, final View view, final int position, final long id) {
+        String message = "Clicked : " + menuItems.get(position).getTitle();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

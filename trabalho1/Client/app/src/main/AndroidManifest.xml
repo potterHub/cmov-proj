@@ -8,12 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".log_in.SingUp">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".log_in.SignIn"
+                  android:parentActivityName=".log_in.SignUp"
+                  android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".log_in.SignUp"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>
 

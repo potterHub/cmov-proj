@@ -15,11 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".log_in.SignUp"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
         <activity android:name=".log_in.SignIn"
                   android:parentActivityName=".log_in.SignUp"
                   android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
-        <activity android:name=".log_in.SignUp"
+        <activity android:name=".menus.MenusActivity"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>

@@ -3,15 +3,19 @@ package org.feup.potter.client;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.SingleLineTransformationMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import org.feup.potter.client.log_in.SignUp;
 import org.feup.potter.client.main_menu.GridViewAdapter;
 import org.feup.potter.client.main_menu.Item;
+import org.feup.potter.client.menus.MenusActivity;
 
 public class MainActivity extends Activity implements OnItemClickListener {
     private GridView gridview;
@@ -55,9 +59,27 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
     @Override
     public void onItemClick(final AdapterView<?> arg0, final View view, final int position, final long id) {
-        String message = "Clicked : " + menuItems.get(position).getTitle();
+        String message = "Clicked : " + this.menuItems.get(position).toString();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
 
+        switch (position) {
+            case 0: // menus
+                Intent i = new Intent(MainActivity.this, MenusActivity.class);
+                startActivity(i);
+                break;
+            case 1: // orders
+                break;
+            case 2: // transactions
+                break;
+            case 3: // vouchers
+                break;
+            case 4: // settings
+                break;
+            case 5: // login
+                Intent i5 = new Intent(MainActivity.this, SignUp.class);
+                startActivity(i5);
+                break;
+        }
+    }
 }
 

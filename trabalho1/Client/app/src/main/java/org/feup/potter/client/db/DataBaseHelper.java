@@ -14,16 +14,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // tables
     private UserTable users;
+    private ItemTable items;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
 
         this.users = new UserTable(this);
+        this.items = new ItemTable(this);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         this.users.creatTable(db);
+        this.items.creatTable(db);
     }
 
     @Override
@@ -31,5 +34,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public UserTable getUsersTable(){
         return users;
+    }
+    public ItemTable getItemsTable(){
+        return items;
     }
 }

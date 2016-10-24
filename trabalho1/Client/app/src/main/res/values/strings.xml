@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Acme Cafe</string>
 
+    <string name="money">€</string>
+
     <string name="label_log">Log-in</string>
     <string name="label_name">Name:</string>
     <string name="label_username">User name:</string>
@@ -23,6 +25,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="menu_menus">Menus</string>
+    <string name="menus_empty">There is no menus available... please try again later.</string>
+
     <string name="menu_order">Order</string>
     <string name="menu_transactions">Transactions</string>
     <string name="menu_vouchers">Vouchers</string>

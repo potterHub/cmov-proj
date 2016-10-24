@@ -58,15 +58,15 @@
                 android:textAppearance="@android:style/TextAppearance"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edit_month"
+            <Spinner
+                android:id="@+id/spinner_month"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/hint_month"/>
 
-            <EditText
-                android:id="@+id/edit_year"
+            <Spinner
+                android:id="@+id/spinner_year"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

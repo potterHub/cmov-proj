@@ -1,4 +1,0 @@
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestService\bin\Debug\RestService.dll
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestService\bin\Debug\RestService.pdb
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestService\obj\Debug\RestService.dll
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\RestService\obj\Debug\RestService.pdb

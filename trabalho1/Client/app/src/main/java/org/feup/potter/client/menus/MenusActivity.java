@@ -19,6 +19,7 @@ import org.feup.potter.client.db.ItemTable;
 
 public class MenusActivity extends ListActivity {
     //
+    private DataBaseHelper dataBase;
     private ItemTable dataHelper;
 
     // list
@@ -31,9 +32,9 @@ public class MenusActivity extends ListActivity {
         setContentView(R.layout.activity_menus);
 
         // creates the data base
-        DataBaseHelper DataBase = new DataBaseHelper(this);
+        this.dataBase = new DataBaseHelper(this);
 
-        this.dataHelper = DataBase.getItemsTable();
+        this.dataHelper = dataBase.getItemsTable();
         // gets the items table cursor model
         this.model = dataHelper.getAll();
         // defines the cursor as a managing cursor
@@ -43,6 +44,12 @@ public class MenusActivity extends ListActivity {
 
         //attach the adapter to the list
         this.setListAdapter(this.dataBaseAdapter);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        this.dataBase.close();
     }
 
 

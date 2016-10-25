@@ -1,0 +1,15 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.3'
+    defaultConfig {
+        versionCode 1
+        versionName '1.0'
+        minSdkVersion 18
+        applicationId 'org.feup.apm.testrestservice'
+        targetSdkVersion 24
+    }
+    productFlavors {
+    }
+}

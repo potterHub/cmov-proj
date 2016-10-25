@@ -1,6 +1,0 @@
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\Client.exe.config
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\Client.exe
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\bin\Release\Client.pdb
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\obj\x86\Release\Client.csprojResolveAssemblyReference.cache
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\obj\x86\Release\Client.exe
-C:\Users\Miguel\Documents\Visual Studio 2013\Projects\RestDemo\Client\obj\x86\Release\Client.pdb

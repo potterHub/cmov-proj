@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Acme Cafe</string>
+
+    <string name="money">€</string>
+
+    <string name="label_log">Log-in</string>
+    <string name="label_name">Name:</string>
+    <string name="label_username">User name:</string>
+    <string name="label_password">Password:</string>
+    <string name="label_credit_card">Credit Card</string>
+    <string name="hint"> </string>
+
+    <string name="label_card_type">Card type:</string>
+    <string name="label_credit_card_number">Card number:</string>
+    <string name="label_credit_card_title">Credit card</string>
+    <string name="label_button_done">Done</string>
+    <string name="label_data">Expiration data:</string>
+    <string name="hint_month">mm</string>
+    <string name="hint_year">yy</string>
+
+    <string name="label_button_sign_in">Sign-in</string>
+    <string name="label_button_sign_up">Sign-up</string>
+    <string name="title_activity_login_tab">Log in</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="menu_menus">Menus</string>
+    <string name="menus_empty">There is no menus available... please try again later.</string>
+
+    <string name="menu_order">Order</string>
+    <string name="menu_transactions">Transactions</string>
+    <string name="menu_vouchers">Vouchers</string>
+    <string name="menu_setting">Settings</string>
+    <string name="menu_login">Login</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_confrim_password">Re-type pass:</string>
+</resources>

@@ -7,7 +7,7 @@ import (
 const MainPath = "/users"
 
 func SubRoutes(router chi.Router) {
-	router.Post("/register", createUser)
+	router.Post("/register", registerUser)
 	router.Post("/login", authenticateUser)
 	router.Get("/logout", logoutUser)
 	router.Get("/vouchers", getUserVouchers)

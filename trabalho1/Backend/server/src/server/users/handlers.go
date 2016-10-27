@@ -2,7 +2,7 @@ package users
 
 import "net/http"
 
-func createUser(w http.ResponseWriter, r *http.Request) {
+func registerUser(w http.ResponseWriter, r *http.Request) {
 
 }
 

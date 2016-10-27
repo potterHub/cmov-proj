@@ -16,6 +16,7 @@ import org.feup.potter.client.log_in.SignUp;
 import org.feup.potter.client.main_menu.GridViewAdapter;
 import org.feup.potter.client.main_menu.Item;
 import org.feup.potter.client.menus.MenusActivity;
+import org.feup.potter.client.order.OrderActivity;
 
 public class MainActivity extends Activity implements OnItemClickListener {
     private GridView gridview;
@@ -68,6 +69,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
                 startActivity(i);
                 break;
             case 1: // orders
+                Intent i2 = new Intent(MainActivity.this, OrderActivity.class);
+                startActivity(i2);
                 break;
             case 2: // transactions
                 break;

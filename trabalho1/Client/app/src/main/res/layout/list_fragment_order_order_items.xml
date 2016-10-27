@@ -2,16 +2,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- @android:id/list id to identify the listView that displays the list from activityList -->
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
+    <!-- @android:id/empty id to identify the textView that displays the empty list message -->
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/menus_empty"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:text="@string/list_order_empty"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_gravity="center_horizontal"/>
 </FrameLayout>

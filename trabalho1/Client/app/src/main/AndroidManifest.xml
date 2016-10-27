@@ -27,6 +27,10 @@
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
+        <activity android:name=".order.OrderActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
     </application>
 
 </manifest>

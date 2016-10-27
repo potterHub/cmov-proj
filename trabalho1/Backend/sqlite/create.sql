@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 PRAGMA encoding = "UTF-8";
 
-DROP TABLE IF EXISTS cmov;
+DROP TABLE IF EXISTS sale;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS itemType;
 DROP TABLE IF EXISTS customer;
@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS customerVoucher;
 CREATE TABLE sale (
   idSale INTEGER,
   idCustomer INTEGER NOT NULL,
-  total INTEGER CHECK (total IS NOT NULL AND total > 0 ),
+  total INTEGER CHECK (total IS NOT NULL AND total > 0),
   myDateTime DATETIME NOT NULL,
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
   PRIMARY KEY (idSale)
@@ -100,12 +100,16 @@ CREATE TABLE itemVoucher (
   idItem INTEGER,
   idVoucher INTEGER,
   FOREIGN KEY (idItem) REFERENCES item(idItem),
-  FOREIGN KEY (idVoucher) REFERENCES voucher(idVoucher)
+  FOREIGN KEY (idVoucher) REFERENCES voucher(idVoucher),
+  PRIMARY KEY (idItem, idVoucher)
 );
 
 CREATE TABLE customerVoucher (
   idVoucher INTEGER,
   idCustomer INTEGER,
   myDateTime DATETIME NOT NULL,
-  code TEXT CHECK (code IS NOT NULL AND length(code) >= 28)
+  code TEXT CHECK (code IS NOT NULL AND length(code) >= 28),
+  FOREIGN KEY (idVoucher) REFERENCES voucher(idVoucher),
+  FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
+  PRIMARY KEY (idVoucher, idCustomer)
 );

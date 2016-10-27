@@ -25,13 +25,17 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="menu_menus">Menus</string>
-    <string name="menus_empty">There is no menus available... please try again later.</string>
+    <string name="menus_empty">There are no menus available... please try again later.</string>
 
     <string name="menu_order">Order</string>
     <string name="menu_transactions">Transactions</string>
     <string name="menu_vouchers">Vouchers</string>
     <string name="menu_setting">Settings</string>
     <string name="menu_login">Login</string>
+
+    <string name="list_items_empty">There are no items in stock...</string>
+    <string name="list_order_empty">No items picked to order...</string>
+    <string name="list_voucher_empty">No Vauchers picked to discount...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

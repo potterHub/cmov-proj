@@ -1,8 +1,6 @@
 PRAGMA foreign_keys = ON;
 PRAGMA encoding = "UTF-8";
 
--- INSERT INTO sale (idSale, idCustomer, total, myDateTime) VALUES
-
 INSERT INTO itemType (idItemType, description) VALUES
   (1, "Beverage"),
   (2, "Fresh Juice"),
@@ -10,7 +8,8 @@ INSERT INTO itemType (idItemType, description) VALUES
   (4, "Ice Cream"),
   (5, "Sandwich"),
   (6, "Soup"),
-  (7, "Snack");
+  (7, "Snack"),
+  (8, "Coffee");
 
 INSERT INTO item (idItem, idItemType, price, description) VALUES
   (1, 1, 1.35, "Pepsi"),
@@ -52,22 +51,26 @@ INSERT INTO item (idItem, idItemType, price, description) VALUES
   (37, 7, 0.65, "Skittles"),
   (38, 7, 0.85, "Smarties"),
   (39, 7, 1.05, "Ruffles Jámon"),
-  (40, 7, 0.95, "Lay's Classic");
+  (40, 7, 0.95, "Lay's Classic"),
+  (41, 8, 0.75, "Cappuccino"),
+  (42, 8, 0.65, "Americano"),
+  (43, 8, 0.80, "Caffe Mocha");
 
--- INSERT INTO customer (idCustomer, creditCardId, name, username, password, PIN) VALUES
---
--- INSERT INTO voucher (voucherId, voucherTypeId, description) VALUES
---
--- INSERT INTO voucherType (voucherTypeId, description) VALUES
---
--- INSERT INTO creditCard (creditCardId, creditCardTypeId, year, month) VALUES
---
--- INSERT INTO creditCardType (creditCardTypeId, description) VALUES
---
+INSERT INTO creditCardType (idCreditCardType, description) VALUES
+  (1, "Visa"),
+  (2, "Mastercard");
+
+INSERT INTO voucherType (idVoucherType, description) VALUES
+  (1, "Discount Items"),
+  (2, "Discount Item type"),
+  (3, "Free Items"),
+  (4, "Free Item type");
+
+-- INSERT INTO voucher (idVoucher, idVoucherType, idItemType, description) VALUES
+-- INSERT INTO voucherItem (idItem, idVoucher) VALUES
+
+-- INSERT INTO creditCard (idCreditCard, idCreditCardType, year, month) VALUES
+-- INSERT INTO customer (idCustomer, idCreditCard, name, username, password, PIN) VALUES
+-- INSERT INTO sale (idSale, idCustomer, total, myDateTime) VALUES
 -- INSERT INTO saleItem (idSale, idItem, quantity) VALUES
---
--- INSERT INTO saleVoucher (idSale, idVoucher) VALUES
---
--- INSERT INTO itemVoucher (idItem, idVoucher) VALUES
---
--- INSERT INTO customerVoucher (idVoucher, idCustomer) VALUES
+-- INSERT INTO customerSaleVoucher (idCustomer, idVoucher, idSale, gotVoucher, usedVoucher, code) VALUES

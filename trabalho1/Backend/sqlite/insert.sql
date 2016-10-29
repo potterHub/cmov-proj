@@ -52,25 +52,35 @@ INSERT INTO item (idItem, idItemType, price, description) VALUES
   (38, 7, 0.85, "Smarties"),
   (39, 7, 1.05, "Ruffles Jámon"),
   (40, 7, 0.95, "Lay's Classic"),
-  (41, 8, 0.75, "Cappuccino"),
-  (42, 8, 0.65, "Americano"),
-  (43, 8, 0.80, "Caffe Mocha");
+  (41, 7, 0.50, "Popcorn"),
+  (42, 8, 0.75, "Cappuccino"),
+  (43, 8, 0.65, "Americano"),
+  (44, 8, 0.80, "Caffe Mocha");
 
 INSERT INTO creditCardType (idCreditCardType, description) VALUES
   (1, "Visa"),
   (2, "Mastercard");
 
-INSERT INTO voucherType (idVoucherType, description) VALUES
-  (1, "Discount Items"),
-  (2, "Discount Item type"),
-  (3, "Free Items"),
-  (4, "Free Item type");
+INSERT INTO voucherTemplateType (idVoucherTemplateType, description) VALUES
+  (1, "Global discount"),
+  (2, "Discount Item"),
+  (3, "Discount Item type"),
+  (4, "Discount Items"),
+  (5, "Free Item"),
+  (6, "Free Item type"),
+  (7, "Free Items");
 
--- INSERT INTO voucher (idVoucher, idVoucherType, idItemType, description) VALUES
--- INSERT INTO voucherItem (idItem, idVoucher) VALUES
+INSERT INTO voucherTemplate (idVoucherTemplate, idVoucherTemplateType, idItemType, description, value) VALUES
+  (1, 1, NULL, "5% Discount", 0.05),
+  (2, 5, NULL, "Free popcorn", 1),
+  (3, 6, 8, "Free coffee", 1);
+
+INSERT INTO voucherTemplateItem (idVoucherTemplate, idItem) VALUES
+  (2, 41);
+
+-- INSERT INTO voucher (idVoucher, idVoucherTemplate, idCustomer, idSale, code, gotVoucher, usedVoucher) VALUES
 
 -- INSERT INTO creditCard (idCreditCard, idCreditCardType, year, month) VALUES
 -- INSERT INTO customer (idCustomer, idCreditCard, name, username, password, PIN) VALUES
 -- INSERT INTO sale (idSale, idCustomer, total, myDateTime) VALUES
 -- INSERT INTO saleItem (idSale, idItem, quantity) VALUES
--- INSERT INTO customerSaleVoucher (idCustomer, idVoucher, idSale, gotVoucher, usedVoucher, code) VALUES

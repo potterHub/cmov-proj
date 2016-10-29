@@ -1,13 +1,13 @@
 PRAGMA foreign_keys = ON;
 PRAGMA encoding = "UTF-8";
 
-DROP TABLE IF EXISTS customerSaleVoucher;
-DROP TABLE IF EXISTS voucherItem;
+DROP TABLE IF EXISTS voucher;
+DROP TABLE IF EXISTS voucherTemplateItem;
+DROP TABLE IF EXISTS voucherTemplate;
+DROP TABLE IF EXISTS voucherTemplateType;
 DROP TABLE IF EXISTS saleItem;
 DROP TABLE IF EXISTS sale;
 DROP TABLE IF EXISTS customer;
-DROP TABLE IF EXISTS voucher;
-DROP TABLE IF EXISTS voucherType;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS itemType;
 DROP TABLE IF EXISTS creditCard;
@@ -56,30 +56,46 @@ CREATE TABLE customer (
   PRIMARY KEY (idCustomer)
 );
 
-CREATE TABLE voucherType (
-  idVoucherType INTEGER,
+CREATE TABLE voucherTemplateType (
+  idVoucherTemplateType INTEGER,
   description TEXT NOT NULL,
   UNIQUE(description),
-  PRIMARY KEY (idVoucherType)
+  PRIMARY KEY (idVoucherTemplateType)
+);
+
+CREATE TABLE voucherTemplate (
+  idVoucherTemplate INTEGER,
+  idVoucherTemplateType INTEGER,
+  idItemType INTEGER,
+  description TEXT NOT NULL,
+  value REAL CHECK (value >= 0),
+  UNIQUE(description),
+  FOREIGN KEY (idItemType) REFERENCES itemType(idItemType),
+  FOREIGN KEY (idVoucherTemplateType) REFERENCES voucherTemplateType(idVoucherTemplateType),
+  PRIMARY KEY (idVoucherTemplate)
+);
+
+CREATE TABLE voucherTemplateItem (
+  idVoucherTemplate INTEGER,
+  idItem INTEGER,
+  FOREIGN KEY (idVoucherTemplate) REFERENCES voucherTemplate(idVoucherTemplate),
+  FOREIGN KEY (idItem) REFERENCES item(idItem),
+  PRIMARY KEY (idItem, idVoucherTemplate)
 );
 
 CREATE TABLE voucher (
   idVoucher INTEGER,
-  idVoucherType INTEGER NOT NULL,
-  idItemType INTEGER,
-  description TEXT NOT NULL,
-  value REAL CHECK (value >= 0),
-  FOREIGN KEY (idVoucherType) REFERENCES voucherType(idVoucherType),
-  FOREIGN KEY (idItemType) REFERENCES itemType(idItemType),
+  idVoucherTemplate INTEGER NOT NULL,
+  idCustomer INTEGER NOT NULL,
+  idSale INTEGER,
+  code TEXT CHECK (code IS NOT NULL AND LENGTH(code) >= 28),
+  gotVoucher DATETIME NOT NULL,
+  usedVoucher DATETIME,
+  UNIQUE (code),
+  FOREIGN KEY (idVoucherTemplate) REFERENCES voucherTemplate(idVoucherTemplate),
+  FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
+  FOREIGN KEY (idSale) REFERENCES sale(idSale),
   PRIMARY KEY (idVoucher)
-);
-
-CREATE TABLE voucherItem (
-  idVoucher INTEGER,
-  idItem INTEGER,
-  FOREIGN KEY (idVoucher) REFERENCES voucher(idVoucher),
-  FOREIGN KEY (idItem) REFERENCES item(idItem),
-  PRIMARY KEY (idItem, idVoucher)
 );
 
 CREATE TABLE sale (
@@ -98,18 +114,4 @@ CREATE TABLE saleItem (
   FOREIGN KEY (idSale) REFERENCES sale(idSale),
   FOREIGN KEY (idItem) REFERENCES item(idItem),
   PRIMARY KEY (idSale, idItem)
-);
-
-CREATE TABLE customerSaleVoucher (
-  idCustomer INTEGER NOT NULL,
-  idSale INTEGER,
-  idVoucher INTEGER NOT NULL,
-  gotVoucher DATETIME NOT NULL,
-  usedVoucher DATETIME,
-  code TEXT CHECK (code IS NOT NULL AND LENGTH(code) >= 28),
-  FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
-  FOREIGN KEY (idSale) REFERENCES sale(idSale),
-  FOREIGN KEY (idVoucher) REFERENCES voucher(idVoucher),
-  UNIQUE (code),
-  PRIMARY KEY (idCustomer, idVoucher, idSale)
 );

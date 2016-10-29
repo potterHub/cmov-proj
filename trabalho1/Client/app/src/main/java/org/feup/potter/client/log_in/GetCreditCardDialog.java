@@ -66,7 +66,7 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
         this.mSpinnerCardType = (Spinner) findViewById(R.id.spinner_card_type);
 
         SpinnerAdapter adapter = new SpinnerAdapter((Activity) this.context,
-                R.layout.spinner_credit_card_type_row, R.id.text, list);
+                R.layout.row_spinner_credit_card_type, R.id.text, list);
 
         mSpinnerCardType.setAdapter(adapter);
 

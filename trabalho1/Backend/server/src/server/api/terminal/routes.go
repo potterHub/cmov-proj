@@ -1,10 +1,10 @@
-package terminals
+package terminal
 
 import (
 	"github.com/pressly/chi"
 )
 
-const MainPath = "/terminals"
+const MainPath = "/terminal"
 
 func SubRoutes(router chi.Router) {
 	router.Post("/order", issueOrder)

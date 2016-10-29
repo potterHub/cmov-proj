@@ -1,10 +1,10 @@
-package users
+package user
 
 import (
 	"github.com/pressly/chi"
 )
 
-const MainPath = "/users"
+const MainPath = "/user"
 
 func SubRoutes(router chi.Router) {
 	router.Post("/register", registerUser)

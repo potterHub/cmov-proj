@@ -1,4 +1,4 @@
-package terminals
+package terminal
 
 import "net/http"
 

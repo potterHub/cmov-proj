@@ -8,17 +8,18 @@ import (
 	"server/api/item"
 	"server/api/terminal"
 	"server/api/user"
-	"server/sqlite"
+	"server/db"
+	"server/globals"
 )
 
 const sqlite3DbPath = "../../sqlite/app.sqlite3"
 
 func main() {
-
 	cdToBinary();
 
-	db := sqlite.Connect(sqlite3DbPath);
+	db := db.Connect(sqlite3DbPath);
 	defer db.Close()
+	globals.DB = db
 
 	router := chi.NewRouter()
 

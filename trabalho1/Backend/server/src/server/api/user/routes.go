@@ -11,8 +11,8 @@ func SubRoutes(router chi.Router) {
 	router.Post("/login", authenticateUser)
 	router.Get("/logout", logoutUser)
 	router.Get("/vouchers", getUserVouchers)
-	router.Route("/profile", subRoutesUserManagement)
 	router.Get("/orders", getUserOrders)
+	router.Route("/profile", subRoutesUserManagement)
 }
 
 func subRoutesUserManagement(router chi.Router) {

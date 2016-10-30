@@ -7,5 +7,6 @@ import (
 const MainPath = "/item"
 
 func SubRoutes(router chi.Router) {
-	router.Get("/item", getItems)
+	router.Get("/", getItems)
+	router.Get("/:id", getItem)
 }

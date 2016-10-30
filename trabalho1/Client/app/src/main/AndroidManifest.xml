@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".LunchAppData"
         android:icon="@drawable/rest_img"
         android:label="@string/app_name"
         android:supportsRtl="true"

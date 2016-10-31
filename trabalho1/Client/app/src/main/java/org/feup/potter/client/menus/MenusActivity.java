@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.feup.potter.client.R;
 import org.feup.potter.client.db.DataBaseHelper;
@@ -34,27 +35,34 @@ import java.util.ArrayList;
 
 public class MenusActivity extends ListActivity implements HttpResponse {
     // list that holds the data
-    private ArrayList<String[]> menus;
+    protected ArrayList<String[]> menus;
     // adapter to sync the data list with the ListView
-    private ArrayAdapter<String[]> listAdapter;
+    protected ArrayAdapter<String[]> listAdapter;
 
 
-    private GetItem connApi;
+    protected GetItem connApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menus);
 
-        //
-        this.menus = new ArrayList<String[]>();
-        // instanciate the adapter
-        this.listAdapter = new ListRowAdapter();
-        //attach the adapter to the list
-        this.setListAdapter(this.listAdapter);
-
+        // initiate list adapter
+        initiateListAndListAdapter(true);
 
         // connection api
+        connectToServer();
+    }
+
+    protected void initiateListAndListAdapter(boolean onlyList) {
+        this.menus = new ArrayList<String[]>();
+        // instantiate the adapter
+        this.listAdapter = new ListRowAdapter(onlyList);
+        //attach the adapter to the list
+        this.setListAdapter(this.listAdapter);
+    }
+
+    protected void connectToServer() {
         this.connApi = new GetItem(this); // this must implement HttpResponse interface
         Thread thr = new Thread(this.connApi);
         thr.start();
@@ -121,10 +129,12 @@ public class MenusActivity extends ListActivity implements HttpResponse {
 
     // Cursor adapter (to implement the list row view)
     public class ListRowAdapter extends ArrayAdapter<String[]> {
+        private boolean onlyList;
 
         // receives the cursor model
-        public ListRowAdapter() {
-            super(MenusActivity.this, R.layout.row_list_menu, menus);
+        public ListRowAdapter(boolean onlyList) {
+            super(MenusActivity.this, onlyList ? R.layout.row_list_menu : R.layout.row_list_menu_to_order, menus);
+            this.onlyList = onlyList;
         }
 
         @Override // to make our custom adapter build each row according with our list layout
@@ -132,10 +142,10 @@ public class MenusActivity extends ListActivity implements HttpResponse {
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = MenusActivity.this.getLayoutInflater();
-                row = inflater.inflate(R.layout.row_list_menu, parent, false); // get out the custom layout
+                row = inflater.inflate(onlyList ? R.layout.row_list_menu : R.layout.row_list_menu_to_order, parent, false); // get out the custom layout
             }
 
-            String [] data = menus.get(position);
+            final String[] data = menus.get(position);
 
             // set the custom row view values
             ((TextView) row.findViewById(R.id.title)).setText(data[1]);        // sets the restaurant name by the cursor from the selected line
@@ -144,6 +154,19 @@ public class MenusActivity extends ListActivity implements HttpResponse {
             // set the symbol image by the restaurant type
             // ImageView img = (ImageView) row.findViewById(R.id.img);
             // img.setImageBitmap(dataHelper.getImg(cursor));
+
+            if (!onlyList) {
+                Button button = (Button) row.findViewById(R.id.button_add_to_order);
+                button.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // change to string.xml and stuff
+                        Toast.makeText(MenusActivity.this, data[1] + " added", Toast.LENGTH_LONG).show();
+                        // need to add to the application data or sql
+                    }
+                });
+            }
 
             // return the changed row
             return (row);

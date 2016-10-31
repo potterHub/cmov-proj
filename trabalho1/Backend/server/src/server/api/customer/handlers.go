@@ -71,7 +71,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	newCustomer.Password = string(hashedPassword)
 
 	// Assign a 4 digit random PIN
-	newCustomer.PIN = rand.Intn(1000) + 1000
+	newCustomer.PIN = rand.Intn(9000) + 1000
 
 	// Insert the new customer
 	err = globals.DB.InsertCustomer(&newCustomer)

@@ -38,8 +38,9 @@ CREATE TABLE creditCardType (
 CREATE TABLE creditCard (
   idCreditCard INTEGER,
   idCreditCardType INTEGER NOT NULL,
+  code TEXT NOT NULL,
   year INTEGER,
-  month INTEGER CHECK (month >= 0 AND month <= 12),
+  month INTEGER CHECK (month > 0 AND month <= 12),
   FOREIGN KEY (idCreditCardType) REFERENCES creditCardType(idCreditCardType),
   PRIMARY KEY (idCreditCard)
 );
@@ -47,9 +48,9 @@ CREATE TABLE creditCard (
 CREATE TABLE customer (
   idCustomer INTEGER,
   idCreditCard INTEGER NOT NULL,
-  name TEXT NOT NULL,
-  username TEXT CHECK (username IS NOT NULL AND length(username) > 4),
-  password TEXT CHECK (password IS NOT NULL AND length(password) > 6),
+  name TEXT CHECK (name IS NOT NULL AND length(name) >= 4),
+  username TEXT CHECK (username IS NOT NULL AND length(username) >= 4),
+  password TEXT CHECK (password IS NOT NULL AND length(password) >= 6),
   PIN INTEGER CHECK (PIN IS NOT NULL AND length(PIN) = 4),
   FOREIGN KEY (idCreditCard) REFERENCES creditCard(idCreditCard),
   UNIQUE(username),

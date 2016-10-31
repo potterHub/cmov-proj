@@ -7,9 +7,12 @@ import (
 	"path/filepath"
 	"server/api/item"
 	"server/api/terminal"
-	"server/api/user"
+	"server/api/customer"
 	"server/db"
 	"server/globals"
+	"server/authentication"
+	"time"
+	"math/rand"
 )
 
 const sqlite3DbPath = "../../sqlite/app.sqlite3"
@@ -22,10 +25,13 @@ func main() {
 	globals.DB = db
 
 	router := chi.NewRouter()
+	router.Use(authentication.GetToken())
 
-	router.Route(user.MainPath, user.SubRoutes)
+	router.Route(customer.MainPath, customer.SubRoutes)
 	router.Route(terminal.MainPath, terminal.SubRoutes)
 	router.Route(item.MainPath, item.SubRoutes)
+
+	rand.NewSource(time.Now().UnixNano())
 
 	http.ListenAndServe(":8080", router)
 }

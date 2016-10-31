@@ -89,7 +89,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Replies with JSON with token and PIN
-	response := []byte(`{"token":` + tokenString + `,"PIN":` + strconv.Itoa(newCustomer.PIN) + "}")
+	response := []byte(`{"token":"` + tokenString + `","PIN":` + strconv.Itoa(newCustomer.PIN) + "}")
 	w.Write(response)
 }
 

@@ -9,11 +9,12 @@ import java.net.URL;
 
 public class ServerConnectionAPI {
 
-    private final String address = "localhost";// path to server root
-    private final int port = 8080;
+    // http://127.0.0.1:8080/item
+    protected final String address = "192.168.1.90";// path to server root
+    protected final int port = 8080;
 
-    private final String getItemsPath = "";
-    private final String register = "";
+    protected final String getItemsPath = "item";
+    protected final String register = "";
 
     // how to call it
     /*
@@ -23,48 +24,13 @@ public class ServerConnectionAPI {
 
 
      */
+    protected HttpResponse androidActivity;
 
-    private class GetItems implements Runnable {
-        private HttpResponse androidActivity;
-
-        // serverURL + path
-        GetItems(HttpResponse myclass) {
-            this.androidActivity = myclass;
-        }
-
-        @Override
-        public void run() {
-            URL url;
-            HttpURLConnection urlConnection = null;
-
-            try {
-                url = new URL("http://" + address + ":" + port + "/" + getItemsPath);
-
-                //writeText("GET " + url.toExternalForm());
-
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setDoInput(true);
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setUseCaches(false);
-
-                int responseCode = urlConnection.getResponseCode();
-                if (responseCode == 200) {
-                    String response = readStream(urlConnection.getInputStream());
-
-                    androidActivity.handleResponse(responseCode, response);
-                } else
-                    androidActivity.handleResponse(responseCode, "");
-            } catch (Exception e) {
-                androidActivity.handleResponse(0, e.toString());
-            } finally {
-                if (urlConnection != null)
-                    urlConnection.disconnect();
-            }
-        }
+    protected ServerConnectionAPI(HttpResponse myclass) {
+        this.androidActivity = myclass;
     }
 
-
-    private String readStream(InputStream in) {
+    protected String readStream(InputStream in) {
         BufferedReader reader = null;
         StringBuffer response = new StringBuffer();
         try {

@@ -7,21 +7,19 @@ import android.os.Bundle;
 import org.feup.potter.client.db.DataBaseHelper;
 
 public class DialogMenuDetailsFrag extends DialogFragment {
-    public static DialogMenuDetailsFrag newInstance(long idItem) {
+    public static DialogMenuDetailsFrag newInstance(String [] data) {
         DialogMenuDetailsFrag frag = new DialogMenuDetailsFrag();
         Bundle args = new Bundle();
-        args.putSerializable("idItem", idItem + "");
+        args.putSerializable("menuItem", data);
         frag.setArguments(args);
         return frag;
     }
 
-    private DataBaseHelper dataBase;
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        String idItem = getArguments().getString("idItem");
+        String[] data = getArguments().getStringArray("menuItem");
 
-        DialogMenuDetails dialog = new DialogMenuDetails(getActivity(), idItem);
+        DialogMenuDetails dialog = new DialogMenuDetails(getActivity(), data);
         return dialog;
     }
 }

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,27 +24,18 @@ public class DialogMenuDetails extends Dialog implements View.OnClickListener {
     private TextView description_text_view;
 
     private ImageView imgView;
-    private EditText typeView;
+    private TextView typeView;
 
 
-    private String itemId;
+    private String [] menuItem;
 
-    public DialogMenuDetails(Context context, String itemId) {
+    public DialogMenuDetails(Context context, String[] data) {
         super(context);
-
-        this.name_text_view = (TextView) findViewById(R.id.text_view_item_name_details);
-        this.price_text_view = (TextView) findViewById(R.id.text_view_item_price_details);
-        this.description_text_view = (TextView) findViewById(R.id.text_view_item_description);
-
-        this.imgView = (ImageView) findViewById(R.id.img_item_details);
-        this.typeView = (EditText) findViewById(R.id.text_view_item_type);
-        // to do not make it editable
-        this.typeView.setKeyListener(null);
-
-
         setTitle(R.string.dialog_item_details);
         setOwnerActivity((Activity) context);
-        this.itemId = itemId;
+
+        this.menuItem = data;
+        Log.d("dialog",menuItem.length + "");
     }
 
     @Override
@@ -52,23 +44,20 @@ public class DialogMenuDetails extends Dialog implements View.OnClickListener {
         setContentView(R.layout.dialog_menu_item_details);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // check if give conflicts with the previous association done by the list
-        DataBaseHelper dataBase = new DataBaseHelper(getOwnerActivity());
+        this.name_text_view = (TextView) findViewById(R.id.text_view_item_name_details);
+        this.price_text_view = (TextView) findViewById(R.id.text_view_item_price_details);
+        this.description_text_view = (TextView) findViewById(R.id.text_view_item_description);
 
-        ItemTable dataHelper = dataBase.getItemsTable();
+        this.imgView = (ImageView) findViewById(R.id.img_item_details);
+        this.typeView = (TextView) findViewById(R.id.text_view_item_type);
 
-        Cursor c = dataHelper.getByIdItem(itemId);
-        c.moveToFirst();
+        this.name_text_view.setText(menuItem[1]);
+        this.price_text_view.setText(menuItem[2] + " " + getOwnerActivity().getResources().getString(R.string.money));
+        this.description_text_view.setText(menuItem[3]);
 
-        this.name_text_view.setText(dataHelper.getName(c)+ ": ");
-        this.price_text_view.setText(dataHelper.getPrice(c) + " " + getOwnerActivity().getResources().getString(R.string.money));
-        this.description_text_view.setText(dataHelper.getDescription(c));
+        //this.imgView.setImageBitmap(menuItem[4]);
 
-        this.imgView.setImageBitmap(dataHelper.getImg(c));
-        this.typeView.setText(dataHelper.getType(c));
-
-        // Closes the Cursor
-        c.close();
+        this.typeView.setText(menuItem[5]);
 
         Button okbut = (Button) findViewById(R.id.button_item_deatils_done);
         okbut.setOnClickListener(this);

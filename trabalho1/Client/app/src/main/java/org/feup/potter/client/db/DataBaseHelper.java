@@ -23,7 +23,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        this.items.creatTable(db);
+        this.items.createTable(db);
     }
 
     @Override

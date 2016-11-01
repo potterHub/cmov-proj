@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.feup.potter.terminal">
 
+
+    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
+    <uses-permission android:name="android.permission.NFC" />
+
     <application
+        android:name=".nfc.NfcApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NfcReceive"
+            android:name=".nfc.NfcReceive"
             android:label="@string/title_activity_nfc_receive"
             android:launchMode="singleTop"
             android:parentActivityName=".MainActivity">

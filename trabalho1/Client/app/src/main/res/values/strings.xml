@@ -24,7 +24,7 @@
     <string name="title_activity_login_tab">Log in</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="label_button_add_to_order">Order</string>
+    <string name="label_button_add_to_order">Add</string>
 
     <string name="menu_menus">Menus</string>
     <string name="menus_empty">There are no menus available... please try again later.</string>

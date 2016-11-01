@@ -19,7 +19,6 @@ import (
 var visaRegex, _ = regexp.Compile("^4[0-9]{12}(?:[0-9]{3})?$")
 var masterCardRegex, _ = regexp.Compile("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$")
 
-// TODO: Missing credit card code checking and validation of credit card type
 func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	claims := helpers.GetAuth(r)
 	if claims != nil {

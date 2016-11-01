@@ -7,3 +7,11 @@ type Item struct {
 	Name		string		`json:"name"`
 	Description 	string		`json:"description"`
 }
+
+func NewItem() *Item{
+	return &Item{
+		IdItem: -1,
+		ItemType: AItemType(),
+		Price: -1,
+	}
+}

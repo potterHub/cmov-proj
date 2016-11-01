@@ -13,7 +13,11 @@ import (
 	"github.com/elithrar/simple-scrypt"
 	"unicode/utf8"
 	"time"
+	"regexp"
 )
+
+var visaRegex, _ = regexp.Compile("^4[0-9]{12}(?:[0-9]{3})?$")
+var masterCardRegex, _ = regexp.Compile("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$")
 
 // TODO: Missing credit card code checking and validation of credit card type
 func registerCustomer(w http.ResponseWriter, r *http.Request) {
@@ -48,14 +52,41 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 	year := time.Now().Year()
 	if !(newCustomer.CreditCard.Year >= year) {
-		error += "creditcard.year>=" + strconv.Itoa(year)
+		error += "creditcard.year>=" + strconv.Itoa(year) + " "
 	}
-
+	if newCustomer.CreditCard.IdCreditCardType == -1 {
+		error += "missingCreditCardType "
+	}
 
 	if error != "" {
 		http.Error(w, error, 400)
 		return
 	}
+
+	creditCardType, err := globals.DB.GetCreditCardType(newCustomer.CreditCard.IdCreditCardType)
+	if err == sql.ErrNoRows {
+		http.Error(w, "Invalid creditCardType", 400)
+		return
+	} else if err != nil {
+		http.Error(w, "Couldn't get creditCardType", 500)
+		return
+	}
+	switch (creditCardType.Description) {
+	case "Visa":
+		if !visaRegex.MatchString(newCustomer.CreditCard.Code) {
+			http.Error(w, "Invalid Visa card code", 400)
+			return
+		}
+	case "Mastercard":
+		if !masterCardRegex.MatchString(newCustomer.CreditCard.Code) {
+			http.Error(w, "Invalid Mastercard card code", 400)
+			return
+		}
+	default:
+		http.Error(w, "missing creditCard Validation", 500)
+		return
+	}
+
 
 	// Check if username is already registered
 	_, err = globals.DB.GetCustomer(newCustomer.Username)

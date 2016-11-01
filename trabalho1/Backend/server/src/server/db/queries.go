@@ -16,7 +16,7 @@ func (db *DB) GetItems() ([]*models.Item, error) {
 
 	items := make([]*models.Item, 0)
 	for rows.Next() {
-		item := new(models.Item)
+		item := models.NewItem()
 		err = rows.Scan(
 			&item.IdItem,
 			&item.ItemType.IdItemType,
@@ -44,7 +44,7 @@ func (db *DB) GetItem(id string) (*models.Item, error) {
 		JOIN itemtype on item.iditemtype = itemtype.iditemtype
 		WHERE item.idItem = $1`, id)
 
-	item := new(models.Item)
+	item := models.NewItem()
 	err := row.Scan(
 		&item.IdItem,
 		&item.ItemType.IdItemType,
@@ -85,4 +85,48 @@ func (db *DB) GetCustomer(username string) (*models.Customer, error) {
 	}
 
 	return customer, err
+}
+
+func (db *DB) GetCreditCardType(idCreditCardType int64) (*models.CreditCardType, error) {
+	row := db.raw.QueryRow(`
+		SELECT * FROM creditCardType
+		WHERE idCreditCardType = $1`, idCreditCardType)
+
+	creditCardType := models.NewCreditCardType()
+	err := row.Scan(
+		&creditCardType.IdCreditCardType,
+		&creditCardType.Description)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return creditCardType, err
+}
+
+func (db *DB) GetCreditCardTypes() ([]*models.CreditCardType, error) {
+	rows, err := db.raw.Query(`
+		SELECT * FROM creditCardType
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	creditCardTypes := make([]*models.CreditCardType, 0)
+	for rows.Next() {
+		creditCardType := models.NewCreditCardType()
+		err = rows.Scan(
+			&creditCardType.IdCreditCardType,
+			&creditCardType.Description)
+		if err != nil {
+			return nil, err
+		}
+		creditCardTypes = append(creditCardTypes, creditCardType)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return creditCardTypes, err
 }

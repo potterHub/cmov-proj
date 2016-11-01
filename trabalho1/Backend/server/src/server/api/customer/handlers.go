@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-// TODO: Missing credit card code checking
+// TODO: Missing credit card code checking and validation of credit card type
 func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	claims := helpers.GetAuth(r)
 	if claims != nil {
@@ -25,8 +25,8 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 
 	// Decoding Input
 	decoder := json.NewDecoder(r.Body)
-	var newCustomer models.Customer
-	err := decoder.Decode(&newCustomer)
+	newCustomer := models.NewCustomer()
+	err := decoder.Decode(newCustomer)
 	if err != nil {
 		http.Error(w, "Invalid JSON", 400)
 		return
@@ -50,6 +50,8 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	if !(newCustomer.CreditCard.Year >= year) {
 		error += "creditcard.year>=" + strconv.Itoa(year)
 	}
+
+
 	if error != "" {
 		http.Error(w, error, 400)
 		return
@@ -74,7 +76,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	newCustomer.PIN = rand.Intn(9000) + 1000
 
 	// Insert the new customer
-	err = globals.DB.InsertCustomer(&newCustomer)
+	err = globals.DB.InsertCustomer(newCustomer)
 	if err != nil {
 		http.Error(w, "Failed inserting new Customer", 400)
 		return
@@ -99,12 +101,53 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Already authenticated", 400)
 		return
 	}
+
+	// Decoding Input
+	decoder := json.NewDecoder(r.Body)
+	postCustomer := models.NewCustomer()
+	err := decoder.Decode(postCustomer)
+	if err != nil {
+		http.Error(w, "Invalid JSON", 400)
+		return
+	}
+
+	// Check if all fields are set and correct
+	error := ""
+	if !(utf8.RuneCountInString(postCustomer.Username) >= 4) {
+		error += "username>=4 "
+	}
+	if !(utf8.RuneCountInString(postCustomer.Password) >= 6) {
+		error += "password>=6 "
+	}
+	if error != "" {
+		http.Error(w, error, 400)
+		return
+	}
+
+	// Check if username is already registered
+	dbCustomer, err := globals.DB.GetCustomer(postCustomer.Username)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	err = scrypt.CompareHashAndPassword([]byte(dbCustomer.Password), []byte(postCustomer.Password))
+	if err != nil {
+		http.Error(w, "Bad credentials", 401)
+		return
+	}
+
+	// Create a token to be used in later authenticated requests
+	// Should come in the HTML Header, Authentication: Bearer <token>
+	tokenString, err := authentication.CreateToken(dbCustomer)
+	if err != nil {
+		http.Error(w, "Failed to create token", 500)
+		return
+	}
+
+	// Replies with JSON with token and PIN
+	response := []byte(`{"token":"` + tokenString + `","PIN":` + strconv.Itoa(dbCustomer.PIN) + "}")
+	w.Write(response)
 }
-
-func getCustomer(w http.ResponseWriter, r *http.Request) {
-
-}
-
 
 func getCustomerVouchers(w http.ResponseWriter, r *http.Request) {
 

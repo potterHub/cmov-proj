@@ -5,3 +5,14 @@ type CreditCardType struct {
 	description 	 string `json:"description"`
 }
 
+func NewCreditCardType() *CreditCardType {
+	return &CreditCardType{
+		idCreditCardType: -1,
+	}
+}
+
+func ACreditCardType() CreditCardType {
+	return CreditCardType{
+		idCreditCardType: -1,
+	}
+}

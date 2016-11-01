@@ -17,7 +17,7 @@ type MyClaims struct {
 	jwt.StandardClaims
 }
 
-func CreateToken(customer models.Customer) (string, error){
+func CreateToken(customer *models.Customer) (string, error){
 	claims := MyClaims {
 		customer.IdCustomer,
 		customer.Name,

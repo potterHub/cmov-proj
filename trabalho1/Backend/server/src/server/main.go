@@ -18,6 +18,7 @@ import (
 const sqlite3DbPath = "../../sqlite/app.sqlite3"
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	cdToBinary();
 
 	db := db.Connect(sqlite3DbPath);
@@ -30,8 +31,6 @@ func main() {
 	router.Route(customer.MainPath, customer.SubRoutes)
 	router.Route(terminal.MainPath, terminal.SubRoutes)
 	router.Route(item.MainPath, item.SubRoutes)
-
-	rand.NewSource(time.Now().UnixNano())
 
 	http.ListenAndServe(":8080", router)
 }

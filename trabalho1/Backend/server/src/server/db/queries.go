@@ -21,6 +21,7 @@ func (db *DB) GetItems() ([]*models.Item, error) {
 			&item.IdItem,
 			&item.ItemType.IdItemType,
 			&item.Price,
+			&item.Name,
 			&item.Description,
 			&item.ItemType.Description)
 		if err != nil {
@@ -48,6 +49,7 @@ func (db *DB) GetItem(id string) (*models.Item, error) {
 		&item.IdItem,
 		&item.ItemType.IdItemType,
 		&item.Price,
+		&item.Name,
 		&item.Description,
 		&item.ItemType.Description)
 
@@ -65,7 +67,7 @@ func (db *DB) GetCustomer(username string) (*models.Customer, error) {
 		JOIN creditCard on customer.idCreditCard = creditCard.idCreditCard
 		WHERE username = $1`, username)
 
-	customer := new(models.Customer)
+	customer := models.NewCustomer()
 	err := row.Scan(
 		&customer.IdCustomer,
 		&customer.CreditCard.IdCreditCard,
@@ -73,6 +75,7 @@ func (db *DB) GetCustomer(username string) (*models.Customer, error) {
 		&customer.Username,
 		&customer.Password,
 		&customer.PIN,
+		&customer.CreditCard.IdCreditCardType,
 		&customer.CreditCard.Code,
 		&customer.CreditCard.Year,
 		&customer.CreditCard.Month)

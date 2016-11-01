@@ -8,3 +8,11 @@ type Customer struct {
 	Password	string		`json:"password"`
 	PIN 		int		`json:"PIN"`
 }
+
+func NewCustomer() *Customer{
+	return &Customer{
+		IdCustomer: -1,
+		CreditCard: ACreditCard(),
+		PIN: -1,
+	}
+}

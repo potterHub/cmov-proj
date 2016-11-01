@@ -23,6 +23,7 @@ CREATE TABLE item (
   idItem INTEGER,
   idItemType INTEGER NOT NULL,
   price REAL CHECK (price IS NOT NULL AND price > 0),
+  name TEXT NOT NULL,
   description TEXT NOT NULL,
   FOREIGN KEY (idItemType) REFERENCES itemType(idItemType),
   PRIMARY KEY (idItem)

@@ -13,6 +13,7 @@ import (
 	"server/authentication"
 	"time"
 	"math/rand"
+	"server/api/cardTypes"
 )
 
 const sqlite3DbPath = "../../sqlite/app.sqlite3"
@@ -28,6 +29,7 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(authentication.GetToken())
 
+	router.Route(cardTypes.MainPath, cardTypes.SubRoutes)
 	router.Route(customer.MainPath, customer.SubRoutes)
 	router.Route(terminal.MainPath, terminal.SubRoutes)
 	router.Route(item.MainPath, item.SubRoutes)

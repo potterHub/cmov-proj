@@ -10,12 +10,12 @@ import (
 func getItems(w http.ResponseWriter, r *http.Request) {
 	items , err := globals.DB.GetItems()
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed retrieving items", 500)
 		return
 	}
 	itemsSlice, err := json.Marshal(items)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed converting items to JSON", 500)
 		return
 	}
 	w.Write(itemsSlice)
@@ -24,12 +24,12 @@ func getItems(w http.ResponseWriter, r *http.Request) {
 func getItem(w http.ResponseWriter, r *http.Request) {
 	item, err := globals.DB.GetItem(chi.URLParam(r, "id"))
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed retrieving item", 500)
 		return
 	}
 	itemSlice, err := json.Marshal(item)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed converting item to JSON", 500)
 		return
 	}
 	w.Write(itemSlice)

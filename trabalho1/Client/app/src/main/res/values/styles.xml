@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/GreenDefaultActionBar</item>
+    </style>
+
+    <style name="GreenDefaultActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#58972E</item>
+    </style>
+</resources>

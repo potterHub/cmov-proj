@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Terminal</string>
+
+    <string name="label_nfc">NFC</string>
+    <string name="title_activity_nfc_receive">Nfc</string>
+    <string name="nfc_receive_msg">Receiving Order...</string>
+
+    <string name="label_qr">QR code</string>
+</resources>

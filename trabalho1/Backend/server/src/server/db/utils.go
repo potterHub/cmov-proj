@@ -1,12 +1,12 @@
 package db
 
 import (
-	"os"
 	"bufio"
 	"encoding/base64"
+	"os"
 )
 
-func encodeFileToBase64(filePath string ) (string, error) {
+func encodeFileToBase64(filePath string) (string, error) {
 	imageFile, err := os.Open(filePath)
 	if err != nil {
 		return "", err

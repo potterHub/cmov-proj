@@ -1,14 +1,14 @@
 package item
 
 import (
-	"net/http"
-	"server/globals"
 	"encoding/json"
 	"github.com/pressly/chi"
+	"net/http"
+	"server/globals"
 )
 
 func getItems(w http.ResponseWriter, r *http.Request) {
-	items , err := globals.DB.GetItems()
+	items, err := globals.DB.GetItems()
 	if err != nil {
 		http.Error(w, "Failed retrieving items", 500)
 		return
@@ -19,7 +19,7 @@ func getItems(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(buildResponse(itemsSlice, r.URL.Query().Get("hash"),"items"))
+	w.Write(buildResponse(itemsSlice, r.URL.Query().Get("hash"), "items"))
 }
 
 func getItem(w http.ResponseWriter, r *http.Request) {
@@ -33,5 +33,5 @@ func getItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed converting item to JSON", 500)
 		return
 	}
-	w.Write(buildResponse(itemSlice, r.URL.Query().Get("hash"),"item"))
+	w.Write(buildResponse(itemSlice, r.URL.Query().Get("hash"), "item"))
 }

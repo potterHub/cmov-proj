@@ -1,8 +1,8 @@
 package models
 
 type ItemType struct {
-	IdItemType  	int64	`json:"idItemType"`
-	Description 	string	`json:"description"`
+	IdItemType  int64  `json:"idItemType"`
+	Description string `json:"description"`
 }
 
 func NewItemType() *ItemType {

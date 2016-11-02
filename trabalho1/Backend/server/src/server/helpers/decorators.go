@@ -23,7 +23,7 @@ func ReplyJson(f http.HandlerFunc) http.HandlerFunc {
 func Authenticated(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		claims := r.Context().Value("auth")
-		if (claims == nil) {
+		if claims == nil {
 			http.Error(w, "Not logged in", 403)
 			return
 		}

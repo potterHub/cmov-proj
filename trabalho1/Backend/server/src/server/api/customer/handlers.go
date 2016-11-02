@@ -1,19 +1,19 @@
 package customer
 
 import (
-	"net/http"
-	"server/helpers"
-	"encoding/json"
-	"server/models"
-	"server/globals"
-	"server/authentication"
-	"math/rand"
-	"strconv"
 	"database/sql"
+	"encoding/json"
 	"github.com/elithrar/simple-scrypt"
-	"unicode/utf8"
-	"time"
+	"math/rand"
+	"net/http"
 	"regexp"
+	"server/authentication"
+	"server/globals"
+	"server/helpers"
+	"server/models"
+	"strconv"
+	"time"
+	"unicode/utf8"
 )
 
 var visaRegex, _ = regexp.Compile("^4[0-9]{12}(?:[0-9]{3})?$")
@@ -70,7 +70,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Couldn't get creditCardType", 500)
 		return
 	}
-	switch (creditCardType.Description) {
+	switch creditCardType.Description {
 	case "Visa":
 		if !visaRegex.MatchString(newCustomer.CreditCard.Code) {
 			http.Error(w, "Invalid Visa card code", 400)
@@ -85,7 +85,6 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "missing creditCard Validation", 500)
 		return
 	}
-
 
 	// Check if username is already registered
 	_, err = globals.DB.GetCustomer(newCustomer.Username)

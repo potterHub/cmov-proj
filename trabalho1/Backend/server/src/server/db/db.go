@@ -14,10 +14,10 @@ func Connect(path string) *DB {
 	if err != nil {
 		panic(err)
 	}
-	return &DB{raw:raw_db}
+	return &DB{raw: raw_db}
 }
 
-func (db* DB) Close() {
+func (db *DB) Close() {
 	err := db.raw.Close()
 	if err != nil {
 		panic(err)

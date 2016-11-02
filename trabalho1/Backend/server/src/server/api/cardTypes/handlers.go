@@ -1,8 +1,8 @@
 package cardTypes
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 	"server/globals"
 )
 

@@ -1,8 +1,8 @@
 package models
 
 type CreditCardType struct {
-	IdCreditCardType int64	`json:"idCreditCardType"`
-	Description 	 string `json:"description"`
+	IdCreditCardType int64  `json:"idCreditCardType"`
+	Description      string `json:"description"`
 }
 
 func NewCreditCardType() *CreditCardType {

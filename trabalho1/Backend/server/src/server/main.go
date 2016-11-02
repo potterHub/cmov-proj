@@ -2,25 +2,25 @@ package main
 
 import (
 	"github.com/pressly/chi"
+	"math/rand"
 	"net/http"
 	"os"
 	"path/filepath"
+	"server/api/cardTypes"
+	"server/api/customer"
 	"server/api/item"
 	"server/api/terminal"
-	"server/api/customer"
+	"server/authentication"
 	"server/db"
 	"server/globals"
-	"server/authentication"
 	"time"
-	"math/rand"
-	"server/api/cardTypes"
 )
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	cdToBinary();
+	cdToBinary()
 
-	db := db.Connect(globals.Sqlite3DbPath);
+	db := db.Connect(globals.Sqlite3DbPath)
 	defer db.Close()
 	globals.DB = db
 

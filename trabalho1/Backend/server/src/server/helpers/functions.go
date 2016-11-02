@@ -1,8 +1,8 @@
 package helpers
 
 import (
-	"server/authentication"
 	"net/http"
+	"server/authentication"
 )
 
 func GetAuth(r *http.Request) *authentication.MyClaims {

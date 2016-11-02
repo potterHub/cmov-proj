@@ -18,7 +18,8 @@ func getItems(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed converting items to JSON", 500)
 		return
 	}
-	w.Write(itemsSlice)
+
+	w.Write(buildResponse(itemsSlice, r.URL.Query().Get("hash"),"items"))
 }
 
 func getItem(w http.ResponseWriter, r *http.Request) {
@@ -32,5 +33,5 @@ func getItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed converting item to JSON", 500)
 		return
 	}
-	w.Write(itemSlice)
+	w.Write(buildResponse(itemSlice, r.URL.Query().Get("hash"),"item"))
 }

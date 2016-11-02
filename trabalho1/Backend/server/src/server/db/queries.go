@@ -2,7 +2,11 @@ package db
 
 import (
 	"server/models"
+	"strconv"
 )
+
+const ImagePath = "../../sqlite/image/"
+const ImageItemPath = ImagePath + "item/"
 
 func (db *DB) GetItems() ([]*models.Item, error) {
 	rows, err := db.raw.Query(`
@@ -26,6 +30,10 @@ func (db *DB) GetItems() ([]*models.Item, error) {
 			&item.ItemType.Description)
 		if err != nil {
 			return nil, err
+		}
+		imageBase64Str, err := encodeFileToBase64(ImageItemPath + strconv.FormatInt(item.IdItem, 10))
+		if err == nil {
+			item.Image = imageBase64Str
 		}
 		items = append(items, item)
 	}
@@ -55,6 +63,11 @@ func (db *DB) GetItem(id string) (*models.Item, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	imageBase64Str, err := encodeFileToBase64(ImageItemPath + strconv.FormatInt(item.IdItem, 10))
+	if err == nil {
+		item.Image = imageBase64Str
 	}
 
 	return item, err

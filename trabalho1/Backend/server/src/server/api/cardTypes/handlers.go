@@ -2,8 +2,8 @@ package cardTypes
 
 import (
 	"net/http"
-	"server/globals"
 	"encoding/json"
+	"server/globals"
 )
 
 func getCreditCardTypes(w http.ResponseWriter, r *http.Request) {

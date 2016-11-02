@@ -16,13 +16,11 @@ import (
 	"server/api/cardTypes"
 )
 
-const sqlite3DbPath = "../../sqlite/app.sqlite3"
-
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	cdToBinary();
 
-	db := db.Connect(sqlite3DbPath);
+	db := db.Connect(globals.Sqlite3DbPath);
 	defer db.Close()
 	globals.DB = db
 

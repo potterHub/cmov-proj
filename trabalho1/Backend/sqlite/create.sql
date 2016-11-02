@@ -49,8 +49,8 @@ CREATE TABLE creditCard (
 CREATE TABLE customer (
   idCustomer INTEGER,
   idCreditCard INTEGER NOT NULL,
-  name TEXT CHECK (name IS NOT NULL AND length(name) >= 4),
-  username TEXT CHECK (username IS NOT NULL AND length(username) >= 4),
+  name TEXT CHECK (name IS NOT NULL AND length(name) >= 3),
+  username TEXT CHECK (username IS NOT NULL AND length(username) >= 3),
   password TEXT CHECK (password IS NOT NULL AND length(password) >= 6),
   PIN INTEGER CHECK (PIN IS NOT NULL AND length(PIN) = 4),
   FOREIGN KEY (idCreditCard) REFERENCES creditCard(idCreditCard),

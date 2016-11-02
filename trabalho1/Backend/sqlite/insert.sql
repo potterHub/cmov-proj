@@ -20,7 +20,7 @@ INSERT INTO item (idItem, idItemType, price, name, description) VALUES
   (6, 1, 0.50, "Compal Pêssego", "Compal Pêssego"),
   (7, 1, 0.45, "Compal Laranja", "Compal Laranja"),
   (8, 1, 0.55, "Compal Manga Laranja", "Compal Manga Laranja"),
-  (9, 1, 0.60, "Santal Classic", "Santal Classic"),
+  (9, 1, 0.60, "Santal Active Drink", "Santal Active Drink"),
   (10, 1, 0.65, "Nestea Lemon", "Nestea Lemon"),
   (11, 2, 0.60, "Tomato", "Tomato"),
   (12, 2, 0.75, "Apple", "Apple"),

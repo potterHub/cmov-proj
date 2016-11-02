@@ -38,10 +38,10 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	// Check if all fields are set and correct
 	error := ""
 	if !(utf8.RuneCountInString(newCustomer.Name) >= 3) {
-		error += "name>=4 "
+		error += "name>=3 "
 	}
 	if !(utf8.RuneCountInString(newCustomer.Username) >= 3) {
-		error += "username>=4 "
+		error += "username>=3 "
 	}
 	if !(utf8.RuneCountInString(newCustomer.Password) >= 6) {
 		error += "password>=6 "
@@ -144,7 +144,7 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 	// Check if all fields are set and correct
 	error := ""
 	if !(utf8.RuneCountInString(postCustomer.Username) >= 3) {
-		error += "username>=4 "
+		error += "username>=3 "
 	}
 	if !(utf8.RuneCountInString(postCustomer.Password) >= 6) {
 		error += "password>=6 "

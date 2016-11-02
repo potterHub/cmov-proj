@@ -1,13 +1,21 @@
 package org.feup.potter.client.Util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
+
+import org.feup.potter.client.db.User;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Util {
-
     public static String getStringFromBitmap(Bitmap bitmapPicture) {
         final int COMPRESSION_QUALITY = 100;
         String encodedImage;
@@ -23,5 +31,33 @@ public class Util {
         byte[] decodedString = Base64.decode(jsonString, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedByte;
+    }
+
+    public static void saveUser(User user, String path, Context context) {
+        try {
+            // creates a private file
+            FileOutputStream fileOut = context.openFileOutput(path, Context.MODE_PRIVATE);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(user);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            Log.d("saving user", e.getMessage());
+        }
+    }
+
+    public static User loadUser(String path, Context context) {
+        User user = null;
+        try {
+            FileInputStream fis = context.openFileInput(path);
+            ObjectInputStream is = new ObjectInputStream(fis);
+            user = (User) is.readObject();
+            is.close();
+            fis.close();
+
+        } catch (ClassNotFoundException | IOException e) {
+            Log.d("loading user", e.getMessage());
+        }
+        return user;
     }
 }

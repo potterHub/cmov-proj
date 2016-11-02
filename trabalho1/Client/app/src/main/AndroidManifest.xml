@@ -14,12 +14,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AutomaticLogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".log_in.ShowPin"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".log_in.SignUp"
             android:parentActivityName=".MainActivity"

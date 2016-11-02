@@ -8,8 +8,10 @@ import java.net.URL;
 public class GetItem extends ServerConnectionAPI implements Runnable {
 
     // serverURL + path
+    protected HttpResponse androidActivity;
     public GetItem(HttpResponse myclass) {
-        super(myclass);
+        super();
+        this.androidActivity = myclass;
     }
 
     @Override
@@ -34,10 +36,12 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
                 Log.d("GetItem","Server Response OK");
 
                 androidActivity.handleResponse(responseCode, response);
-            } else
+            } else {
+                Log.d("GetItem","Server Response ERROR");
                 androidActivity.handleResponse(responseCode, "");
+            }
         } catch (Exception e) {
-            androidActivity.handleResponse(0, e.toString());
+            //androidActivity.handleResponse(0, e.toString());
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();

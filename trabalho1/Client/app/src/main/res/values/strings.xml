@@ -42,7 +42,11 @@
     <string name="list_order_empty">No items picked to order...</string>
     <string name="list_voucher_empty">No Vauchers picked to discount...</string>
 
+    <string name="label_your_pin">Please take not of your pin!</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_confrim_password">Re-type pass:</string>
+    <string name="label_loging_in">logging in...</string>
+    <string name="label_button_continue">OK</string>
 </resources>

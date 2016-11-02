@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class ServerConnectionAPI {
 
@@ -14,21 +12,15 @@ public class ServerConnectionAPI {
     protected final int port = 8080;
 
     protected final String getItemsPath = "item";
-    protected final String register = "";
+    protected final String logInPath = "customer/login";
+    protected final String registerPath = "customer/register";
 
     // how to call it
     /*
         GetItems getItems = new GetItems(this); // this must implement HttpResponse interface
         Thread thr = new Thread(GetItems);
         thr.start();
-
-
      */
-    protected HttpResponse androidActivity;
-
-    protected ServerConnectionAPI(HttpResponse myclass) {
-        this.androidActivity = myclass;
-    }
 
     protected String readStream(InputStream in) {
         BufferedReader reader = null;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c000a3df-673c-4568-b427-07cb5fae9206" name="Default" comment="" />
+    <list default="true" id="165ec6e2-f8ce-4597-ba69-49548240b3ad" name="Default" comment="" />
     <ignored path="TestRestService.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,14 +29,9 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306">
-              <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="93" selection-end-column="7" />
-              <folding>
-                <element signature="e#2426#2546#0" expanded="true" />
-                <element signature="e#2545#2546#0" expanded="true" />
-                <element signature="e#2620#2718#0" expanded="true" />
-                <element signature="e#2717#2718#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="561">
+              <caret line="235" column="37" selection-start-line="235" selection-start-column="32" selection-end-line="235" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1571,7 +1566,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -1598,8 +1593,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1636,9 +1632,22 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TestRestService" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -1835,16 +1844,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c000a3df-673c-4568-b427-07cb5fae9206" name="Default" comment="" />
-      <created>1477877044310</created>
+      <changelist id="165ec6e2-f8ce-4597-ba69-49548240b3ad" name="Default" comment="" />
+      <created>1478094863829</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1477877044310</updated>
+      <updated>1478094863829</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1055" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1890,14 +1899,9 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="93" selection-end-column="7" />
-          <folding>
-            <element signature="e#2426#2546#0" expanded="true" />
-            <element signature="e#2545#2546#0" expanded="true" />
-            <element signature="e#2620#2718#0" expanded="true" />
-            <element signature="e#2717#2718#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="561">
+          <caret line="235" column="37" selection-start-line="235" selection-start-column="32" selection-end-line="235" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>

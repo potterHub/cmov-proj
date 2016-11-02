@@ -9,19 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-
 
 import org.feup.potter.client.DataStructures.CreditCard;
 import org.feup.potter.client.R;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class GetCreditCardDialog extends Dialog implements View.OnClickListener {
 
@@ -43,13 +42,18 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
 
     private Context context;
 
+    private CreditCard card;
 
-    public GetCreditCardDialog(Context context) {
+
+    public GetCreditCardDialog(Context context, CreditCard card) {
         super(context);
         this.context = context;
 
         setTitle(R.string.label_credit_card_title);
         setOwnerActivity((Activity) context);
+
+        Log.d("log", this.card == null ? "null" : "not null");
+        this.card = card;
     }
 
     @Override
@@ -58,10 +62,10 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
         setContentView(R.layout.dialog_credit_card);
 
         // handle the view
-        // create spinner
+        // spinner
         ArrayList<CreditCard> list = new ArrayList<>();
-        list.add(new CreditCard(CreditCard.CardType.MASTER, R.drawable.master_card_icon));
-        list.add(new CreditCard(CreditCard.CardType.VISA, R.drawable.visa_icon));
+        list.add(new CreditCard(CreditCard.CardType.MASTER, R.drawable.master_card_icon, card));
+        list.add(new CreditCard(CreditCard.CardType.VISA, R.drawable.visa_icon, card));
 
         this.mSpinnerCardType = (Spinner) findViewById(R.id.spinner_card_type);
 
@@ -70,25 +74,42 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
 
         mSpinnerCardType.setAdapter(adapter);
 
-        // text editors
+        // number
         this.edit_number = (EditText) findViewById(R.id.edit_card_number);
 
+        // month
         this.spinner_month = (Spinner) findViewById(R.id.spinner_month);
         Integer[] array_m = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         ArrayAdapter<Integer> spinnerMonthAdapter = new ArrayAdapter<Integer>
                 (context, R.layout.simple_spinner_item, array_m);
         this.spinner_month.setAdapter(spinnerMonthAdapter);
 
+        // year
         this.spinner_year = (Spinner) findViewById(R.id.spinner_year);
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         Integer[] array_y = new Integer[51];
-        for(int i = 0 ; i < array_y.length ; i++)
+        for (int i = 0; i < array_y.length; i++)
             array_y[i] = year + i;
 
         ArrayAdapter<Integer> spinnerYearAdapter = new ArrayAdapter<Integer>
                 (context, R.layout.simple_spinner_item, array_y);
         this.spinner_year.setAdapter(spinnerYearAdapter);
+
+
+        // set data
+        if (this.card != null) {
+            int spinnerPosition = adapter.getPosition(card);
+            mSpinnerCardType.setSelection(spinnerPosition);
+
+            edit_number.setText(card.getCardNumber());
+
+            int sP1 = spinnerMonthAdapter.getPosition(card.getMonthExpiration());
+            spinner_month.setSelection(sP1);
+
+            int sP2 = spinnerYearAdapter.getPosition(card.getYearExpiration());
+            spinner_year.setSelection(sP2);
+        }
 
         // button done
         Button doneBut = (Button) findViewById(R.id.button_done);
@@ -134,14 +155,10 @@ public class GetCreditCardDialog extends Dialog implements View.OnClickListener 
         CreditCard c = null;
         try {
             c = (CreditCard) this.mSpinnerCardType.getSelectedItem();
-            c.setCardNumber(this.edit_number.getText().toString());
-            try {
-                // change to data editText
-
-                //c.setMonthExpiration(this.edit_month.getText().toString());
-                //c.setYearExpiration(this.edit_year.getText().toString());
-            } catch (NumberFormatException e) {
-
+            if (c != null) {
+                c.setCardNumber(this.edit_number.getText().toString());
+                c.setMonthExpiration((Integer) this.spinner_month.getSelectedItem());
+                c.setYearExpiration((Integer) this.spinner_year.getSelectedItem());
             }
         } catch (ClassCastException e) {
             Log.d("error", "casting credit card");

@@ -13,6 +13,8 @@ public class User implements Serializable {
     private String pin;
     private String tokan;
 
+    private String itemsHash;
+
     private DataBaseHelper SQLDataBaseHelper;
 
     public User(String username, String password) {
@@ -22,22 +24,24 @@ public class User implements Serializable {
         this.tokan = "";
         this.id = "";
         this.pin = "";
+        this.itemsHash = "";
     }
 
-    public User(String id, String name, String username, String password,String pin, String tokan) {
+    public User(String id, String name, String username, String password, String pin, String tokan) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.tokan = tokan;
         this.id = id;
         this.pin = pin;
+        this.itemsHash = "";
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -57,11 +61,19 @@ public class User implements Serializable {
         this.tokan = tokan;
     }
 
+    public void setItemsHash(String itemsHash) {
+        this.itemsHash = itemsHash;
+    }
+
+    public String getItemsHash() {
+        return itemsHash;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 

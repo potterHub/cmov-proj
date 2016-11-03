@@ -29,10 +29,9 @@ public class LogIn extends ServerConnectionAPI implements Runnable {
         HttpURLConnection urlConnection = null;
 
         try {
-            url = new URL("http://" + address + ":" + port + "/" + logInPath);
+            url = new URL("http://" + address + ":" + port + "/" + LOG_IN_PATH);
 
             //writeText("GET " + url.toExternalForm());
-
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
@@ -51,17 +50,15 @@ public class LogIn extends ServerConnectionAPI implements Runnable {
 
 
             int responseCode = urlConnection.getResponseCode();
+            String response = readStream(urlConnection.getInputStream());
             if (responseCode == 200) {
-                String response = readStream(urlConnection.getInputStream());
-
                 Log.d("LogIn", "Server Response OK");
-                androidActivity.handleResponse(responseCode, response, password);
             } else {
                 Log.d("LogIn", "Server Response ERROR");
-                androidActivity.handleResponse(responseCode, "", "");
             }
+            androidActivity.handleResponse(responseCode, response, password);
         } catch (Exception e) {
-            Log.d("LogIn", "Server ERROR");
+            androidActivity.handleResponse(0, "Error connecting to server.", "");
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();

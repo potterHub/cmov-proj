@@ -91,16 +91,30 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
 
 
     @Override
-    public void handleResponse(int code, String response, String password) {
+    public void handleResponse(int code, final String response, String password) {
         if (code == 200) {
             try {
+                Log.d("response", response);
                 JSONObject obj = new JSONObject(response);
                 logUser(obj, password);
             } catch (JSONException e) {
-                logInFail("");
+                final String resp = response;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        logInFail(resp);
+                    }
+                });
             }
         } else {
-            logInFail(response);
+            final String resp = response;
+            runOnUiThread(
+                    new Runnable() {
+                @Override
+                public void run() {
+                    logInFail(resp);
+                }
+            });
         }
         this.connecting = false;
     }
@@ -131,7 +145,7 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
                         SignIn.this.data.user = new User(tokeObj.getString("IdCustomer"), tokeObj.getString("Name"), tokeObj.getString("Username"), password, pin, token);
 
                         // String id, String name, String username, String password,String pin, String tokan
-                        Util.saveUser(SignIn.this.data.user, SignIn.this.data.userPath, getApplicationContext());
+                        Util.saveData(SignIn.this.data.user, SignIn.this.data.userPath, getApplicationContext());
 
                         Toast.makeText(getApplicationContext(), "Log In was successful.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

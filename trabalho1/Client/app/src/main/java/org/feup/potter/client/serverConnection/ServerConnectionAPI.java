@@ -11,9 +11,11 @@ public class ServerConnectionAPI {
     protected final String address = "192.168.1.90";// path to server root
     protected final int port = 8080;
 
-    protected final String getItemsPath = "item";
-    protected final String logInPath = "customer/login";
-    protected final String registerPath = "customer/register";
+    protected final String HASH_GET_FIELD = "?hash=";
+
+    protected final String GET_ITEMS_PATH = "item";
+    protected final String LOG_IN_PATH = "customer/login";
+    protected final String REGISTER_PATH = "customer/register";
 
     // how to call it
     /*
@@ -29,7 +31,6 @@ public class ServerConnectionAPI {
             reader = new BufferedReader(new InputStreamReader(in));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                // nao se para converter para json preciso do \n (eu acho que precisa line + "\n")
                 response.append(line);
             }
         } catch (IOException e) {

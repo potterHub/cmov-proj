@@ -1,10 +1,17 @@
 package org.feup.potter.client.menus;
 
 import android.app.ListActivity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.feup.potter.client.LunchAppData;
+import org.feup.potter.client.Util.Util;
+import org.feup.potter.client.db.DataBaseHelper;
+import org.feup.potter.client.db.ItemInList;
 import org.feup.potter.client.serverConnection.GetItem;
 import org.feup.potter.client.serverConnection.HttpResponse;
 import org.json.JSONArray;
@@ -15,14 +22,32 @@ import java.util.ArrayList;
 
 public abstract class BaseItemMenuList extends ListActivity implements HttpResponse {
     // list that holds the data
-    protected ArrayList<String[]> menus;
+    protected ArrayList<ItemInList> menus;
     // adapter to sync the data list with the ListView
-    protected ArrayAdapter<String[]> listAdapter;
+    protected ArrayAdapter<ItemInList> listAdapter;
 
     protected GetItem connApi;
 
+    protected LunchAppData data;
+
+    protected DataBaseHelper DB;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.data = (LunchAppData) getApplicationContext();
+
+        this.DB = new DataBaseHelper(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DB.close();
+    }
+
     protected void connectToServer() {
-        this.connApi = new GetItem(this); // this must implement HttpResponse interface
+        this.connApi = new GetItem(this, this.data.hash); // this must implement HttpResponse interface
         Thread thr = new Thread(this.connApi);
         thr.start();
     }
@@ -35,17 +60,25 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
     public void handleResponse(int code, String response) {
         if (code == 200) {
             try {
-                JSONArray jsonArray = new JSONArray(response);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    final JSONObject obj = jsonArray.getJSONObject(i);
+                Log.d("response",response);
+                JSONObject obj = new JSONObject(response);
 
-                    // convert string image to bitmap
-                    // byte[] encodeByte = Base64.decode(obj.getString("img"), Base64.DEFAULT);
-                    // Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                String hash = obj.getString("hash");
 
-                    //Log.d("", obj.getInt("IdItem") + " | " + obj.getDouble("Price") + " | " + obj.getString("Description"));
-                    // {"IdItem":1,"name":"Pepsi","Price":1.35,"Description":"Pepsi","Img":"...","Type": }
-                    insertInListView(obj);
+                if (hash.equals(data.hash)) {
+                    // the local db is up to dated
+                    Log.d("getItem", "table updated");
+                    populateListWithLocalDb();
+                } else {
+
+
+                    JSONArray jsonArray = obj.getJSONArray("items");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        final JSONObject itemObj = jsonArray.getJSONObject(i);
+                        insertInListView(itemObj);
+                    }
+
+                    saveHash(hash);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -55,21 +88,47 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
         }
     }
 
+    private void saveHash(final String hash) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseItemMenuList.this.data.hash = hash;
+                Util.saveData(BaseItemMenuList.this.data.hash, BaseItemMenuList.this.data.itemHashPath, BaseItemMenuList.this);
+            }
+        });
+    }
+
+    private void populateListWithLocalDb() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Cursor c = DB.getAllItems();
+                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
+                    listAdapter.add(DB.getItemInList(c));
+            }
+        });
+    }
+
     private void insertInListView(final JSONObject obj) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //{"idItem":1,"itemType":{"idItemType":1,"description":"Beverage"},"price":1.35,"description":"Pepsi"}
+                    //{"idItem":1,"itemType":{"idItemType":1,"description":"Beverage"},"price":1.35,"name":"Pepsi","description":"Pepsi","image":
                     // ITEM_ID = 1; NAME = 2; PRICE = 3; DESCRIPTION = 4; IMG = 5; TYPE = 6;
+                    ItemInList data =
+                            new ItemInList(obj.getString("idItem"),
+                                    obj.getString("name"),
+                                    obj.getString("price"),
+                                    obj.getString("description"),
+                                    obj.getString("image"),
+                                    obj.getJSONObject("itemType").getString("description"));
 
-                    String[] data = new String[6];
-                    data[0] = obj.getString("idItem");
-                    data[1] = obj.getString("idItem");
-                    data[2] = obj.getString("price");
-                    data[3] = obj.getString("description");
-                    data[4] = "";
-                    data[5] = obj.getJSONObject("itemType").getString("description");
+                    long id = BaseItemMenuList.this.DB.insertItem(data);
+                    if(id < 0){
+                        // needs to be updated
+                        BaseItemMenuList.this.DB.updateItem(data);
+                    }
 
                     listAdapter.add(data);
                 } catch (JSONException e) {

@@ -3,19 +3,15 @@ package org.feup.potter.client.menus;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.feup.potter.client.R;
-import org.feup.potter.client.db.DataBaseHelper;
-import org.feup.potter.client.db.ItemTable;
+import org.feup.potter.client.db.ItemInList;
 
 public class DialogMenuDetails extends Dialog implements View.OnClickListener {
     // layout interface
@@ -27,15 +23,14 @@ public class DialogMenuDetails extends Dialog implements View.OnClickListener {
     private TextView typeView;
 
 
-    private String [] menuItem;
+    private ItemInList menuItem;
 
-    public DialogMenuDetails(Context context, String[] data) {
+    public DialogMenuDetails(Context context, ItemInList data) {
         super(context);
         setTitle(R.string.dialog_item_details);
         setOwnerActivity((Activity) context);
 
         this.menuItem = data;
-        Log.d("dialog",menuItem.length + "");
     }
 
     @Override
@@ -51,13 +46,13 @@ public class DialogMenuDetails extends Dialog implements View.OnClickListener {
         this.imgView = (ImageView) findViewById(R.id.img_item_details);
         this.typeView = (TextView) findViewById(R.id.text_view_item_type);
 
-        this.name_text_view.setText(menuItem[1]);
-        this.price_text_view.setText(menuItem[2] + " " + getOwnerActivity().getResources().getString(R.string.money));
-        this.description_text_view.setText(menuItem[3]);
+        this.name_text_view.setText(menuItem.getName());
+        this.price_text_view.setText(menuItem.getPrice() + " " + getOwnerActivity().getResources().getString(R.string.money));
+        this.description_text_view.setText(menuItem.getDescription());
 
-        //this.imgView.setImageBitmap(menuItem[4]);
+        this.imgView.setImageBitmap(menuItem.getImage());
 
-        this.typeView.setText(menuItem[5]);
+        this.typeView.setText(menuItem.getItemType());
 
         Button okbut = (Button) findViewById(R.id.button_item_deatils_done);
         okbut.setOnClickListener(this);

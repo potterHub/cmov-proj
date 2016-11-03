@@ -33,7 +33,7 @@ public class Register extends ServerConnectionAPI implements Runnable {
         HttpURLConnection urlConnection = null;
 
         try {
-            url = new URL("http://" + address + ":" + port + "/" + registerPath);
+            url = new URL("http://" + address + ":" + port + "/" + REGISTER_PATH);
 
             // writeText("POST " + url.toExternalForm());
 
@@ -65,18 +65,15 @@ public class Register extends ServerConnectionAPI implements Runnable {
             outputStream.close();
 
             int responseCode = urlConnection.getResponseCode();
+            String response = readStream(urlConnection.getInputStream());
             if (responseCode == 200) {
-                String response = readStream(urlConnection.getInputStream());
-
                 Log.d("Register", "Server Response OK");
-
-                androidActivity.handleResponse(responseCode, response, password);
             } else {
                 Log.d("Register", "Server Response ERROR");
-                androidActivity.handleResponse(responseCode, "", password);
             }
+            androidActivity.handleResponse(responseCode, response, password);
         } catch (Exception e) {
-            //androidActivity.handleResponse(0, e.toString());
+            androidActivity.handleResponse(0, "Error connecting to server.","");
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();

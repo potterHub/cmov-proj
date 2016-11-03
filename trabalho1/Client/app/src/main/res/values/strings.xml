@@ -27,7 +27,7 @@
     <string name="label_button_add_to_order">Add</string>
 
     <string name="menu_menus">Menus</string>
-    <string name="menus_empty">There are no menus available... please try again later.</string>
+    <string name="menus_empty">menus being updated...</string>
     <string name="dialog_item_details">Item details</string>
     <string name="label_price">price: </string>
 
@@ -49,4 +49,5 @@
     <string name="label_confrim_password">Re-type pass:</string>
     <string name="label_loging_in">logging in...</string>
     <string name="label_button_continue">OK</string>
+    <string name="label_order">Order</string>
 </resources>

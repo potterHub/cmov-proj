@@ -9,9 +9,15 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
 
     // serverURL + path
     protected HttpResponse androidActivity;
-    public GetItem(HttpResponse myclass) {
+    protected String hash;
+    public GetItem(HttpResponse myclass,String hash) {
         super();
         this.androidActivity = myclass;
+        if(hash == null || hash.isEmpty())
+            this.hash = "";
+        else{
+            this.hash = this.HASH_GET_FIELD + hash;
+        }
     }
 
     @Override
@@ -20,7 +26,8 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
         HttpURLConnection urlConnection = null;
 
         try {
-            url = new URL("http://" + address + ":" + port + "/" + getItemsPath);
+            Log.d("GetItem","Server request: " +this.hash);
+            url = new URL("http://" + address + ":" + port + "/" + GET_ITEMS_PATH + this.hash);
 
             //writeText("GET " + url.toExternalForm());
 
@@ -30,18 +37,15 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
             urlConnection.setUseCaches(false);
 
             int responseCode = urlConnection.getResponseCode();
+            String response = readStream(urlConnection.getInputStream());
             if (responseCode == 200) {
-                String response = readStream(urlConnection.getInputStream());
-
                 Log.d("GetItem","Server Response OK");
-
-                androidActivity.handleResponse(responseCode, response);
             } else {
                 Log.d("GetItem","Server Response ERROR");
-                androidActivity.handleResponse(responseCode, "");
             }
+            androidActivity.handleResponse(responseCode, response);
         } catch (Exception e) {
-            //androidActivity.handleResponse(0, e.toString());
+            androidActivity.handleResponse(0, "");
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();

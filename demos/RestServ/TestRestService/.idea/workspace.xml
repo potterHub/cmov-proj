@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="165ec6e2-f8ce-4597-ba69-49548240b3ad" name="Default" comment="" />
+    <list default="true" id="9be878e4-905e-4d93-9dbf-8ad900cfd712" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderNfcConnection.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/menu/order_option.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/ItemTable.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderSelectActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../NFCSendReceive/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../NFCSendReceive/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/AutomaticLogIn.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/AutomaticLogIn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/LunchAppData.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/LunchAppData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/DataBaseHelper.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/DataBaseHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/User.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/log_in/SignIn.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/log_in/SignIn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/log_in/SignUp.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/log_in/SignUp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/DialogMenuDetails.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/DialogMenuDetails.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/DialogMenuDetailsFrag.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/DialogMenuDetailsFrag.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/MenusActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/MenusActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/GetItem.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/GetItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/HttpResponse.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/HttpResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/LogIn.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/LogIn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/Register.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/Register.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/ServerConnectionAPI.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/ServerConnectionAPI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/row_list_menu.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/row_list_menu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/row_list_menu_to_order.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/row_list_menu_to_order.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/strings.xml" />
+    </list>
     <ignored path="TestRestService.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,14 +57,17 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="235" column="37" selection-start-line="235" selection-start-column="32" selection-end-line="235" selection-end-column="37" />
+            <state relative-caret-position="2989">
+              <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -1563,12 +1594,11 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1055" />
+    <option name="x" value="2880" />
+    <option name="width" value="960" />
+    <option name="height" value="1080" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -1593,9 +1623,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1632,22 +1660,10 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestRestService" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -1844,17 +1860,17 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="165ec6e2-f8ce-4597-ba69-49548240b3ad" name="Default" comment="" />
-      <created>1478094863829</created>
+      <changelist id="9be878e4-905e-4d93-9dbf-8ad900cfd712" name="Default" comment="" />
+      <created>1478175846082</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1478094863829</updated>
+      <updated>1478175846082</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1055" extended-state="0" />
-    <editor active="true" />
+    <frame x="2880" y="0" width="960" height="1080" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1873,7 +1889,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.023333333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1899,8 +1915,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="235" column="37" selection-start-line="235" selection-start-column="32" selection-end-line="235" selection-end-column="37" />
+        <state relative-caret-position="2989">
+          <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
           <folding />
         </state>
       </provider>

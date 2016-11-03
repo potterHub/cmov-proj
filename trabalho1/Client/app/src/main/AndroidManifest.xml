@@ -5,7 +5,10 @@
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="20" />
+
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -20,6 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".order.OrderNfcConnection"
+            android:parentActivityName=".order.OrderSelectActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".log_in.ShowPin"
             android:windowSoftInputMode="stateHidden|adjustResize" >
@@ -39,7 +46,7 @@
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
-        <activity android:name=".order.OrderActivity"
+        <activity android:name=".order.OrderSelectActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>

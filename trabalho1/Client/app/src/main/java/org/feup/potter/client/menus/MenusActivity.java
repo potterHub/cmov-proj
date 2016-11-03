@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.feup.potter.client.R;
+import org.feup.potter.client.db.ItemInList;
 
 import java.util.ArrayList;
 
@@ -29,7 +31,7 @@ public class MenusActivity extends BaseItemMenuList {
     }
 
     protected void initiateListAndListAdapter() {
-        this.menus = new ArrayList<String[]>();
+        this.menus = new ArrayList<ItemInList>();
         // instantiate the adapter
         this.listAdapter = new ListRowAdapter();
         //attach the adapter to the list
@@ -44,7 +46,7 @@ public class MenusActivity extends BaseItemMenuList {
     }
 
     // Cursor adapter (to implement the list row view)
-    public class ListRowAdapter extends ArrayAdapter<String[]> {
+    public class ListRowAdapter extends ArrayAdapter<ItemInList> {
         // receives the cursor model
         public ListRowAdapter() {
             super(MenusActivity.this, R.layout.row_list_menu, menus);
@@ -58,15 +60,15 @@ public class MenusActivity extends BaseItemMenuList {
                 row = inflater.inflate(R.layout.row_list_menu, parent, false); // get out the custom layout
             }
 
-            final String[] data = menus.get(position);
+            final ItemInList item = menus.get(position);
 
             // set the custom row view values
-            ((TextView) row.findViewById(R.id.title)).setText(data[1]);        // sets the restaurant name by the cursor from the selected line
-            ((TextView) row.findViewById(R.id.price)).setText(data[2] + " " + getResources().getString(R.string.money));   // sets the restaurant address by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.title)).setText(item.getName());        // sets the restaurant name by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.price)).setText(item.getPrice() + " " + getResources().getString(R.string.money));   // sets the restaurant address by the cursor from the selected line
 
             // set the symbol image by the restaurant type
-            // ImageView img = (ImageView) row.findViewById(R.id.img);
-            // img.setImageBitmap(dataHelper.getImg(cursor));
+            ImageView img = (ImageView) row.findViewById(R.id.img);
+            img.setImageBitmap(item.getImage());
 
             // return the changed row
             return (row);

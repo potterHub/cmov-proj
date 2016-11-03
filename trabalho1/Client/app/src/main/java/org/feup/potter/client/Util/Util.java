@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
-import org.feup.potter.client.db.User;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -33,31 +31,30 @@ public class Util {
         return decodedByte;
     }
 
-    public static void saveUser(User user, String path, Context context) {
+    public static synchronized void saveData(Object obj, String path, Context context) {
         try {
             // creates a private file
             FileOutputStream fileOut = context.openFileOutput(path, Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(user);
+            out.writeObject(obj);
             out.close();
             fileOut.close();
         } catch (IOException e) {
-            Log.d("saving user", e.getMessage());
+            Log.d("saving " + path, e.getMessage());
         }
     }
 
-    public static User loadUser(String path, Context context) {
-        User user = null;
+    public static synchronized Object loadData(String path, Context context) {
+        Object obj = null;
         try {
             FileInputStream fis = context.openFileInput(path);
             ObjectInputStream is = new ObjectInputStream(fis);
-            user = (User) is.readObject();
+            obj = is.readObject();
             is.close();
             fis.close();
-
         } catch (ClassNotFoundException | IOException e) {
             Log.d("loading user", e.getMessage());
         }
-        return user;
+        return obj;
     }
 }

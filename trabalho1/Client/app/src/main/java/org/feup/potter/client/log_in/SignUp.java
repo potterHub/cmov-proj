@@ -138,10 +138,22 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
                 JSONObject obj = new JSONObject(response);
                 RegisterUser(obj, password);
             } catch (JSONException e) {
-                RegisterFail();
+                final String resp = response;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        RegisterFail("");
+                    }
+                });
             }
         } else {
-            RegisterFail();
+            final String resp = response;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    RegisterFail(resp);
+                }
+            });
         }
         this.connecting = false;
     }
@@ -172,17 +184,17 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
                         SignUp.this.data.user = new User(tokeObj.getString("IdCustomer"), tokeObj.getString("Name"), tokeObj.getString("Username"), password, pin, token);
 
                         // String id, String name, String username, String password,String pin, String tokan
-                        Util.saveUser(SignUp.this.data.user, SignUp.this.data.userPath, getApplicationContext());
+                        Util.saveData(SignUp.this.data.user, SignUp.this.data.userPath, getApplicationContext());
 
                         Toast.makeText(getApplicationContext(), "Register was successful.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ShowPin.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
-                        RegisterFail();
+                        RegisterFail("");
                     }
                 } catch (JSONException | UnsupportedEncodingException e) {
-                    RegisterFail();
+                    RegisterFail("");
                 }
             }
         });
@@ -199,8 +211,8 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
         }
     }
 
-    private void RegisterFail() {
+    private void RegisterFail(String message) {
         this.connecting = false;
-        Toast.makeText(getApplicationContext(), "Register in Fail...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message.isEmpty() ? "Register in Fail..." : message, Toast.LENGTH_SHORT).show();
     }
 }

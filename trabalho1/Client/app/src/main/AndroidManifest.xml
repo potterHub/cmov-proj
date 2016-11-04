@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".order.ComfirmOrder"
+            android:parentActivityName=".order.OrderConfirmAndMake"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
         <activity android:name=".order.OrderConfirmAndMake"
             android:parentActivityName=".order.OrderSelectActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >

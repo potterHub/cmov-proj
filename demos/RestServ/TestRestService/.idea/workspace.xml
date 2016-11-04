@@ -2,22 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9be878e4-905e-4d93-9dbf-8ad900cfd712" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderTabActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/row_list_order.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderNfcConnection.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/modules.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/runConfigurations.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/app/src/main/java/org/feup/apm/qrcodezx/MainActivity.java" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/app/src/main/java/org/feup/apm/qrcodezx/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/build.gradle" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/build.gradle" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/AutomaticLogIn.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/AutomaticLogIn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/LunchAppData.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/LunchAppData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/ItemInList.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/db/ItemInList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/MenusActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/MenusActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderSelectActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderSelectActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/activity_order.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/layout/activity_order.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/menu/order_option.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/menu/order_option.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/colors.xml" />
     </list>
     <ignored path="TestRestService.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,6 +36,13 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="TestRestService" />
   </component>
@@ -46,15 +51,9 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="861">
-              <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
-              <folding>
-                <element signature="e#2250#2273#0" expanded="true" />
-                <element signature="e#2426#2546#0" expanded="true" />
-                <element signature="e#2545#2546#0" expanded="true" />
-                <element signature="e#2620#2718#0" expanded="true" />
-                <element signature="e#2717#2718#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1517">
+              <caret line="234" column="70" selection-start-line="234" selection-start-column="70" selection-end-line="234" selection-end-column="70" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1589,8 +1588,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="1926" />
+    <option name="y" value="51" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -1627,47 +1626,19 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestRestService" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestRestService" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testrestservice" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../trabalho1/Client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../QR/QRCodeZX" />
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -1868,7 +1839,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="1926" y="51" width="1936" height="1056" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1880,8 +1851,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1893,8 +1864,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1926,13 +1897,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2250#2273#0" expanded="true" />
-            <element signature="e#2426#2546#0" expanded="true" />
-            <element signature="e#2545#2546#0" expanded="true" />
-            <element signature="e#2620#2718#0" expanded="true" />
-            <element signature="e#2717#2718#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1940,27 +1905,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2250#2273#0" expanded="true" />
-            <element signature="e#2426#2546#0" expanded="true" />
-            <element signature="e#2545#2546#0" expanded="true" />
-            <element signature="e#2620#2718#0" expanded="true" />
-            <element signature="e#2717#2718#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
-          <folding>
-            <element signature="e#2250#2273#0" expanded="true" />
-            <element signature="e#2426#2546#0" expanded="true" />
-            <element signature="e#2545#2546#0" expanded="true" />
-            <element signature="e#2620#2718#0" expanded="true" />
-            <element signature="e#2717#2718#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1517">
+          <caret line="234" column="70" selection-start-line="234" selection-start-column="70" selection-end-line="234" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>

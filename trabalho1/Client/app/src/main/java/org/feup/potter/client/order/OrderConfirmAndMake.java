@@ -2,6 +2,7 @@ package org.feup.potter.client.order;
 
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,11 +52,16 @@ public class OrderConfirmAndMake extends ListActivity {
     // when the menu is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_icon) {
-            finish();
-            return (true);
+        switch (item.getItemId()) {
+            case R.id.menu_icon:
+                finish();
+                return (true);
+            case R.id.order_icon:
+                startActivity(new Intent(OrderConfirmAndMake.this, ComfirmOrder.class));
+                return (true);
+            default:
+                break;
         }
-
         return (super.onOptionsItemSelected(item));
     }
 

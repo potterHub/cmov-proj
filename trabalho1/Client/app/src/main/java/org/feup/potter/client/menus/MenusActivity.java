@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.feup.potter.client.R;
@@ -38,12 +37,6 @@ public class MenusActivity extends BaseItemMenuList {
         this.setListAdapter(this.listAdapter);
     }
 
-    @Override
-    //  method from the interface on listActivity that handles the user clicks in the items from the ListView the list with the restaurants
-    public void onListItemClick(ListView list, View view, int position, long id) {
-        DialogMenuDetailsFrag dialog = DialogMenuDetailsFrag.newInstance(menus.get(position));// enviamos o id do objecto na lista
-        dialog.show(getFragmentManager(), "item_details");
-    }
 
     // Cursor adapter (to implement the list row view)
     public class ListRowAdapter extends ArrayAdapter<ItemInList> {

@@ -24,8 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".order.OrderNfcConnection"
+        <activity android:name=".order.OrderConfirmAndMake"
             android:parentActivityName=".order.OrderSelectActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".order.OrderTabActivity"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".log_in.ShowPin"

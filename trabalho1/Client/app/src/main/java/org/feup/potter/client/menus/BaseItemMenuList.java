@@ -53,9 +53,13 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
     }
 
     @Override
-    public abstract void onListItemClick(ListView list, View view, int position, long id);
+    //  method from the interface on listActivity that handles the user clicks in the items from the ListView the list with the restaurants
+    public void onListItemClick(ListView list, View view, int position, long id) {
+        DialogMenuDetailsFrag dialog = DialogMenuDetailsFrag.newInstance(menus.get(position));// enviamos o id do objecto na lista
+        dialog.show(getFragmentManager(), "item_details");
+    }
 
-    // handle response from server
+    // handle response from server (don't here is exacly the same as oerder tab activity)
     @Override
     public void handleResponse(int code, String response) {
         if (code == 200) {

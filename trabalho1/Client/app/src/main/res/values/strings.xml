@@ -50,4 +50,8 @@
     <string name="label_loging_in">logging in...</string>
     <string name="label_button_continue">OK</string>
     <string name="label_order">Order</string>
+    <string name="quantity">Number:</string>
+    <string name="menus_order">No menus added...</string>
+    <string name="label_menu">menus</string>
+    <string name="label_button_delete_in_order">remove</string>
 </resources>

@@ -16,5 +16,5 @@ public class LunchAppData extends Application {
     public volatile String hash;
 
     // list with item id
-    public ArrayList<ItemInList> orderItemIdList;
+    public ArrayList<ItemInList> orderItemList;
 }

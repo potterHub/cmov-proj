@@ -33,7 +33,7 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
 
         this.data.user = (User) Util.loadData(this.data.userPath, this);
 
-        this.data.orderItemIdList = new ArrayList<ItemInList>();
+        this.data.orderItemList = new ArrayList<ItemInList>();
         this.data.hash = (String) Util.loadData(this.data.itemHashPath, this);
         if (this.data.hash == null)
             Log.d("hash", "null");

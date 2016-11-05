@@ -27,7 +27,7 @@
     <string name="label_button_add_to_order">Add</string>
 
     <string name="menu_menus">Menus</string>
-    <string name="menus_empty">There are no menus available... please try again later.</string>
+    <string name="menus_empty">menus being updated...</string>
     <string name="dialog_item_details">Item details</string>
     <string name="label_price">price: </string>
 
@@ -42,7 +42,16 @@
     <string name="list_order_empty">No items picked to order...</string>
     <string name="list_voucher_empty">No Vauchers picked to discount...</string>
 
+    <string name="label_your_pin">Please take not of your pin!</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_confrim_password">Re-type pass:</string>
+    <string name="label_loging_in">logging in...</string>
+    <string name="label_button_continue">OK</string>
+    <string name="label_order">Order</string>
+    <string name="quantity">Number:</string>
+    <string name="menus_order">No menus added...</string>
+    <string name="label_menu">menus</string>
+    <string name="label_button_delete_in_order">remove</string>
 </resources>

@@ -4,24 +4,44 @@ import org.feup.potter.client.DataStructures.CreditCard;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
+    private String id;
     private String name;
     private String username;
     private String password;
     private CreditCard creditCard;
+    private String pin;
+    private String tokan;
+
+    private String itemsHash;
 
     private DataBaseHelper SQLDataBaseHelper;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.name = "";
+        this.tokan = "";
+        this.id = "";
+        this.pin = "";
+        this.itemsHash = "";
+    }
+
+    public User(String id, String name, String username, String password, String pin, String tokan) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.tokan = tokan;
+        this.id = id;
+        this.pin = pin;
+        this.itemsHash = "";
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -33,11 +53,27 @@ public class User implements Serializable{
         creditCard = card;
     }
 
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public void setTokan(String tokan) {
+        this.tokan = tokan;
+    }
+
+    public void setItemsHash(String itemsHash) {
+        this.itemsHash = itemsHash;
+    }
+
+    public String getItemsHash() {
+        return itemsHash;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
@@ -48,4 +84,13 @@ public class User implements Serializable{
     public CreditCard getCreditCard() {
         return creditCard;
     }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public String getTokan() {
+        return tokan;
+    }
+
 }

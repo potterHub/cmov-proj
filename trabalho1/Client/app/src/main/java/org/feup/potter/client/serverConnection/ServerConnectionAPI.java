@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class ServerConnectionAPI {
 
@@ -13,22 +11,18 @@ public class ServerConnectionAPI {
     protected final String address = "192.168.1.90";// path to server root
     protected final int port = 8080;
 
-    protected final String getItemsPath = "item";
-    protected final String register = "";
+    protected final String HASH_GET_FIELD = "?hash=";
+
+    protected final String GET_ITEMS_PATH = "item";
+    protected final String LOG_IN_PATH = "customer/login";
+    protected final String REGISTER_PATH = "customer/register";
 
     // how to call it
     /*
         GetItems getItems = new GetItems(this); // this must implement HttpResponse interface
         Thread thr = new Thread(GetItems);
         thr.start();
-
-
      */
-    protected HttpResponse androidActivity;
-
-    protected ServerConnectionAPI(HttpResponse myclass) {
-        this.androidActivity = myclass;
-    }
 
     protected String readStream(InputStream in) {
         BufferedReader reader = null;
@@ -37,7 +31,6 @@ public class ServerConnectionAPI {
             reader = new BufferedReader(new InputStreamReader(in));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                // nao se para converter para json preciso do \n (eu acho que precisa line + "\n")
                 response.append(line);
             }
         } catch (IOException e) {

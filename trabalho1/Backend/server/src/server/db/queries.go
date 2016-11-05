@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"server/models"
 	"strconv"
 )
@@ -142,4 +143,178 @@ func (db *DB) GetCreditCardTypes() ([]*models.CreditCardType, error) {
 	}
 
 	return creditCardTypes, err
+}
+
+func (db *DB) GetVouchers(customerId int64, saleId int64) ([]*models.Voucher, error) {
+
+	var voucherRows *sql.Rows
+	var err error
+	if (saleId > 0) {
+		voucherRows, err = db.raw.Query(`
+		SELECT
+		voucher.idVoucher, voucher.code, voucher.gotVoucher,
+		voucherTemplate.idVoucherTemplate, voucherTemplate.description,
+		voucherTemplate.value, voucherTemplateType.idVoucherTemplateType,
+		voucherTemplateType.description, itemType.idItemType, itemType.description
+		FROM voucher
+		JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
+		JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
+		LEFT JOIN itemType on itemType.idItemType = voucherTemplate.idItemType
+		WHERE voucher.idCustomer = $1 AND voucher.idSale = $2
+	`, customerId, saleId)
+	} else {
+		voucherRows, err = db.raw.Query(`
+		SELECT
+		voucher.idVoucher, voucher.code, voucher.gotVoucher,
+		voucherTemplate.idVoucherTemplate, voucherTemplate.description,
+		voucherTemplate.value, voucherTemplateType.idVoucherTemplateType,
+		voucherTemplateType.description, itemType.idItemType, itemType.description
+		FROM voucher
+		JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
+		JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
+		LEFT JOIN itemType on itemType.idItemType = voucherTemplate.idItemType
+		WHERE voucher.idSale IS NULL AND voucher.usedVoucher IS NULL AND voucher.idCustomer = $1
+	`, customerId)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+	defer voucherRows.Close()
+
+	type itemTypeNullable struct {
+		IdItemType  sql.NullInt64
+		Description sql.NullString
+	}
+
+	vouchers := make([]*models.Voucher, 0)
+	for voucherRows.Next() {
+		tempItemType := itemTypeNullable{}
+		voucher := new(models.Voucher)
+		err := voucherRows.Scan(
+			&voucher.IdVoucher,
+			&voucher.Code,
+			&voucher.GotVoucher,
+			&voucher.VoucherTemplate.IdVoucherTemplate,
+			&voucher.VoucherTemplate.Description,
+			&voucher.VoucherTemplate.Value,
+			&voucher.VoucherTemplate.VoucherTemplateType.IdVoucherTemplateType,
+			&voucher.VoucherTemplate.VoucherTemplateType.Description,
+			&tempItemType.IdItemType,
+			&tempItemType.Description)
+
+		if err != nil {
+			return nil, err
+		}
+
+		if tempItemType.IdItemType.Valid && tempItemType.Description.Valid {
+			idItemType, err := tempItemType.IdItemType.Value()
+			if err != nil {
+				return nil, err
+			}
+			description, err := tempItemType.Description.Value()
+			if err != nil {
+				return nil, err
+			}
+			voucher.VoucherTemplate.ItemType = new(models.ItemType)
+			voucher.VoucherTemplate.ItemType.IdItemType = idItemType.(int64)
+			voucher.VoucherTemplate.ItemType.Description = description.(string)
+		}
+
+		voucherTemplateItemRows, err := db.raw.Query(`
+		SELECT idItem
+		FROM voucherTemplateItem
+		WHERE idVoucherTemplate = $1`, voucher.VoucherTemplate.IdVoucherTemplate)
+		itemsIds := make([]int64, 0)
+		for voucherTemplateItemRows.Next() {
+			var itemId int64
+			err = voucherTemplateItemRows.Scan(&itemId)
+			if err != nil {
+				voucherTemplateItemRows.Close()
+				return nil, err
+			}
+			itemsIds = append(itemsIds, itemId)
+		}
+
+		err = voucherTemplateItemRows.Err()
+		if err == nil {
+			voucher.VoucherTemplate.ItemsIds = itemsIds
+		} else if err != sql.ErrNoRows {
+			voucherTemplateItemRows.Close()
+			return nil, err
+		}
+		voucherTemplateItemRows.Close()
+
+		vouchers = append(vouchers, voucher)
+	}
+
+	if err = voucherRows.Err(); err != nil {
+		return nil, err
+	}
+
+	return vouchers, err
+}
+
+func (db *DB) GetOrders(idCustomer int64) ([]*models.Sale, error) {
+	saleRows, err := db.raw.Query(`
+		SELECT idSale, myDateTime
+		FROM sale
+		WHERE idCustomer = $1`, idCustomer)
+
+	if err != nil {
+		return nil, err
+	}
+	defer saleRows.Close()
+
+	sales := make([]*models.Sale, 0)
+	for saleRows.Next() {
+		sale := new(models.Sale)
+		err := saleRows.Scan(
+			&sale.IdSale,
+			&sale.MyDateTime)
+
+		if err != nil {
+			return nil, err
+		}
+
+		// Get items
+		saleItemsRows, err := db.raw.Query(`
+		SELECT idItem, quantity
+		FROM saleItem
+		WHERE idSale = $1`, sale.IdSale)
+		saleItems := make([]*models.SaleItem, 0)
+		for saleItemsRows.Next() {
+			saleItem := new(models.SaleItem)
+			err = saleItemsRows.Scan(&saleItem.IdItem, &saleItem.Quantity)
+			if err != nil {
+				saleItemsRows.Close()
+				return nil, err
+			}
+			saleItems = append(saleItems, saleItem)
+		}
+
+		err = saleItemsRows.Err()
+		if err == nil {
+			sale.Items = saleItems
+		} else if err != sql.ErrNoRows {
+			saleItemsRows.Close()
+			return nil, err
+		}
+		saleItemsRows.Close()
+
+		// Get vouchers
+		vouchers, err := db.GetVouchers(idCustomer, sale.IdSale)
+		if err != nil {
+			return nil, err
+		}
+		sale.Vouchers = vouchers
+
+		sales = append(sales, sale)
+	}
+
+	if err = saleRows.Err(); err != nil {
+		return nil, err
+	}
+
+	return sales, err
 }

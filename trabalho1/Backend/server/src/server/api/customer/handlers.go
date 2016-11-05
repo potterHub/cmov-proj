@@ -156,7 +156,7 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 	// Check if username is already registered
 	dbCustomer, err := globals.DB.GetCustomer(postCustomer.Username)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed querying customer by username", 500)
 		return
 	}
 	err = scrypt.CompareHashAndPassword([]byte(dbCustomer.Password), []byte(postCustomer.Password))
@@ -179,9 +179,35 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 }
 
 func getCustomerVouchers(w http.ResponseWriter, r *http.Request) {
+	claims := helpers.GetAuth(r)
 
+	vouchers, err := globals.DB.GetVouchers(claims.IdCustomer, -1)
+	if err != nil {
+		http.Error(w, "Failed retrieving vouchers", 500)
+		return
+	}
+	vouchersSlice, err := json.Marshal(vouchers)
+	if err != nil {
+		http.Error(w, "Failed converting vouchers to JSON", 500)
+		return
+	}
+
+	w.Write(vouchersSlice)
 }
 
 func getCustomerOrders(w http.ResponseWriter, r *http.Request) {
+	claims := helpers.GetAuth(r)
 
+	orders, err := globals.DB.GetOrders(claims.IdCustomer)
+	if err != nil {
+		http.Error(w, "Failed retrieving orders", 500)
+		return
+	}
+	ordersSlice, err := json.Marshal(orders)
+	if err != nil {
+		http.Error(w, "Failed converting orders to JSON", 500)
+		return
+	}
+
+	w.Write(ordersSlice)
 }

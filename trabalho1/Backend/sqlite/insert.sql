@@ -79,8 +79,7 @@ INSERT INTO voucherTemplateItem (idVoucherTemplate, idItem) VALUES
   (2, 41);
 
 -- INSERT INTO voucher (idVoucher, idVoucherTemplate, idCustomer, idSale, code, gotVoucher, usedVoucher) VALUES
-
 -- INSERT INTO creditCard (idCreditCard, idCreditCardType, code, year, month) VALUES
 -- INSERT INTO customer (idCustomer, idCreditCard, name, username, password, PIN) VALUES
--- INSERT INTO sale (idSale, idCustomer, total, myDateTime) VALUES
+-- INSERT INTO sale (idSale, idCustomer, myDateTime) VALUES
 -- INSERT INTO saleItem (idSale, idItem, quantity) VALUES

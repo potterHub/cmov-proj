@@ -5,7 +5,7 @@ type Customer struct {
 	CreditCard CreditCard `json:"creditCard"`
 	Name       string     `json:"name"`
 	Username   string     `json:"username"`
-	Password   string     `json:"password"`
+	Password   string     `json:"password,omitempty"`
 	PIN        int        `json:"PIN"`
 }
 

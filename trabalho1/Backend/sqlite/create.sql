@@ -103,7 +103,6 @@ CREATE TABLE voucher (
 CREATE TABLE sale (
   idSale INTEGER,
   idCustomer INTEGER NOT NULL,
-  total INTEGER CHECK (total IS NOT NULL AND total > 0),
   myDateTime DATETIME NOT NULL,
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
   PRIMARY KEY (idSale)

@@ -51,11 +51,16 @@ public class OrderSelectActivity extends BaseItemMenuList {
     // when the menu is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.order_icon) {
+        switch (item.getItemId()){
+            case R.id.next_icon:
             // if add button pressed a new activity (details activity) to add the restaurant is going to start
             startActivity(new Intent(OrderSelectActivity.this, OrderConfirmAndMake.class));
             return (true);
+            case R.id.back_icon:
+                finish();
+                return true;
         }
+
         return (super.onOptionsItemSelected(item));
     }
 

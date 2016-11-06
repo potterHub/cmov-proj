@@ -16,6 +16,7 @@ public class ServerConnectionAPI {
     protected final String GET_ITEMS_PATH = "item";
     protected final String LOG_IN_PATH = "customer/login";
     protected final String REGISTER_PATH = "customer/register";
+    protected final String GET_VOUCHER_PATH = "customer/voucher";
 
     // how to call it
     /*

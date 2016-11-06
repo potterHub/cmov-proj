@@ -50,15 +50,18 @@ public class LogIn extends ServerConnectionAPI implements Runnable {
 
 
             int responseCode = urlConnection.getResponseCode();
-            String response = readStream(urlConnection.getInputStream());
+
+            String response = "";
             if (responseCode == 200) {
-                Log.d("LogIn", "Server Response OK");
+                response = readStream(urlConnection.getInputStream());
+                Log.d("GetItem","Server Response OK");
             } else {
-                Log.d("LogIn", "Server Response ERROR");
+                response = readStream(urlConnection.getErrorStream());
+                Log.d("GetItem","Server Response ERROR");
             }
             androidActivity.handleResponse(responseCode, response, password);
         } catch (Exception e) {
-            androidActivity.handleResponse(0, "Error connecting to server.", "");
+            androidActivity.handleResponse(0, e.toString(), "");
         } finally {
             if (urlConnection != null)
                 urlConnection.disconnect();

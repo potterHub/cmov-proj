@@ -54,4 +54,14 @@
     <string name="menus_order">No menus added...</string>
     <string name="label_menu">menus</string>
     <string name="label_button_delete_in_order">remove</string>
+    <string name="dialog_voucher_details">Voucher details</string>
+    <string name="vouchers_empty">You have no vouchers...</string>
+    <string name="nfc_send_msg">Touch and tap to send</string>
+    <string name="label_next">next</string>
+    <string name="label_back">back</string>
+    <string name="label_button_nfc_send">NFC</string>
+    <string name="label_button_qr_code">QR code</string>
+    <string name="label_write_pin">Please introduce your pin code.</string>
+    <string name="label_button_ok">OK</string>
+    <string name="label_select_send_method">Select the send method</string>
 </resources>

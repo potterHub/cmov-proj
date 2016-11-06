@@ -42,6 +42,6 @@ public class NfcReceive extends Activity {
         NdefMessage msg = (NdefMessage) rawMsgs[0];
 
         app.reply = new String(msg.getRecords()[0].getPayload());
-        tv.setText(app.reply);
+        //tv.setText(app.reply);
     }
 }

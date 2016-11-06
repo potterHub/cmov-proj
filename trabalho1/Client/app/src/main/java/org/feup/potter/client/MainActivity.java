@@ -13,6 +13,7 @@ import org.feup.potter.client.main_menu.GridViewAdapter;
 import org.feup.potter.client.main_menu.Item;
 import org.feup.potter.client.menus.MenusActivity;
 import org.feup.potter.client.order.OrderSelectActivity;
+import org.feup.potter.client.vouchers.VoucherActivity;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
             case 2: // transactions
                 break;
             case 3: // vouchers
+                Intent i3 = new Intent(MainActivity.this, VoucherActivity.class);
+                startActivity(i3);
                 break;
             case 4: // settings
                 break;

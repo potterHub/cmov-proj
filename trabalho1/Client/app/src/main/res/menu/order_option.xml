@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_icon"
-        android:title="@string/label_menu"
-        android:icon="@drawable/menus_icon"
+    <item android:id="@+id/back_icon"
+        android:title="@string/label_back"
+        android:icon="@drawable/back_arrow"
         android:showAsAction="ifRoom" />
-    <item android:id="@+id/order_icon"
-        android:title="@string/label_order"
-        android:icon="@drawable/order_icon"
+    <item android:id="@+id/next_icon"
+        android:title="@string/label_next"
+        android:icon="@drawable/next_arrow"
         android:showAsAction="ifRoom" />
 </menu>

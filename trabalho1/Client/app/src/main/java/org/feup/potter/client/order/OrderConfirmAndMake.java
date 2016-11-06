@@ -53,11 +53,15 @@ public class OrderConfirmAndMake extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_icon:
+            case R.id.back_icon:
                 finish();
                 return (true);
-            case R.id.order_icon:
-                startActivity(new Intent(OrderConfirmAndMake.this, ComfirmOrder.class));
+            case R.id.next_icon:
+                if (this.data.orderItemList.size() > 0) {
+                    startActivity(new Intent(OrderConfirmAndMake.this, EnterPinActivity.class));
+                } else {
+                    Toast.makeText(OrderConfirmAndMake.this, "You must select at least one item to place an order.", Toast.LENGTH_SHORT).show();
+                }
                 return (true);
             default:
                 break;

@@ -64,7 +64,7 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
     public void handleResponse(int code, String response) {
         if (code == 200) {
             try {
-                Log.d("response",response);
+                Log.d("BaseItemMenuList","response OK : " + response);
                 JSONObject obj = new JSONObject(response);
 
                 String hash = obj.getString("hash");
@@ -85,10 +85,12 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
                     saveHash(hash);
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("BaseItemMenuList","Json format error");
+                populateListWithLocalDb();
             }
         } else {
-            // maybe toast with error user friendly
+            Log.d("BaseItemMenuList","Response code: " + code);
+            populateListWithLocalDb();
         }
     }
 

@@ -6,7 +6,41 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a265c2e-79fb-4e12-91f2-3bc2acb7c6e7" name="Default" comment="" />
+    <list default="true" id="8f2734ff-91f1-435e-bcc2-d304065a3847" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/drawable-mdpi/back_arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/drawable-mdpi/next_arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/res/drawable/rest_img.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/qr_nfc/NFCtranmitor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/layout/activity_nfc_send.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/ComfirmOrder.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/qr_nfc/GenerateQRCodeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/misc.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/modules.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/../CryptoServices/.idea/runConfigurations.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/app/src/main/java/org/feup/apm/cryptoservices/MainActivity.java" afterPath="$PROJECT_DIR$/../CryptoServices/app/src/main/java/org/feup/apm/cryptoservices/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CryptoServices/build.gradle" afterPath="$PROJECT_DIR$/../CryptoServices/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../RestServ/TestRestService/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../RestServ/TestRestService/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/menus/BaseItemMenuList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/GetItem.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/GetItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/LogIn.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/LogIn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/Register.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/Register.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/ServerConnectionAPI.java" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/java/org/feup/potter/client/serverConnection/ServerConnectionAPI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/menu/order_option.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/menu/order_option.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Client/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Terminal/app/build.gradle" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/MainActivity.java" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/nfc/NfcReceive.java" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/nfc/NfcReceive.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../../trabalho1/Terminal/app/src/main/res/values/styles.xml" />
+    </list>
     <ignored path="NFCSendReceive.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,12 +65,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NfcReceive.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcReceive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#810#811#0" expanded="false" />
+                <element signature="e#837#838#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="38" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="37" column="0" selection-start-line="9" selection-start-column="13" selection-end-line="37" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="408">
+              <caret line="29" column="66" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NfcSend.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="55" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1617#1783#0" expanded="false" />
+                <element signature="e#1782#1783#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,40 +128,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NfcReceive.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcReceive.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NfcSend.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="7" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -1611,11 +1658,12 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2880" />
-    <option name="width" value="960" />
-    <option name="height" value="1080" />
+    <option name="x" value="2226" />
+    <option name="y" value="137" />
+    <option name="width" value="1390" />
+    <option name="height" value="1040" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -1641,8 +1689,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -1652,50 +1698,10 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NFCSendReceive" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NFCSendReceive" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nfcsendreceive" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NFCSendReceive" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1703,8 +1709,7 @@
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../trabalho1/Client" />
-    <property name="device.picker.selection" value="015d262e76140e00" />
-    <property name="AndroidTargetDevices" value="015d262e76140e00" />
+    <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -1827,7 +1832,7 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
@@ -1862,7 +1867,7 @@
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
       </Native>
       <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="false" />
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
         <option name="GAPID_ENABLED" value="false" />
         <option name="GAPID_DISABLE_PCS" value="false" />
         <option name="SUPPORT_LIB_ENABLED" value="true" />
@@ -1872,54 +1877,8 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method />
     </configuration>
-    <configuration default="false" name="Aninhas" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="app" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-      </Native>
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="false" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <list size="2">
+    <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
-      <item index="1" class="java.lang.String" itemvalue="Android App.Aninhas" />
     </list>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -1942,16 +1901,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2a265c2e-79fb-4e12-91f2-3bc2acb7c6e7" name="Default" comment="" />
-      <created>1478132384684</created>
+      <changelist id="8f2734ff-91f1-435e-bcc2-d304065a3847" name="Default" comment="" />
+      <created>1478389759370</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1478132384684</updated>
+      <updated>1478389759370</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2880" y="0" width="960" height="1080" extended-state="0" />
+    <frame x="2226" y="137" width="1390" height="1040" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1971,7 +1930,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17293233" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1984,6 +1943,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2003,7 +1963,19 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcReceive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#810#811#0" expanded="false" />
+            <element signature="e#837#838#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -2011,6 +1983,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="66" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="55" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1617#1783#0" expanded="false" />
+            <element signature="e#1782#1783#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -2021,67 +2015,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcReceive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="374">
+          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#810#811#0" expanded="false" />
+            <element signature="e#837#838#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="7" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcReceive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="7" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_nfc_send.xml">
+      <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/NfcSend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="55" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1617#1783#0" expanded="false" />
+            <element signature="e#1782#1783#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/nfcsendreceive/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="37" column="0" selection-start-line="9" selection-start-column="13" selection-end-line="37" selection-end-column="0" />
+        <state relative-caret-position="408">
+          <caret line="29" column="66" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="38" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="38" />
           <folding />
         </state>
       </provider>

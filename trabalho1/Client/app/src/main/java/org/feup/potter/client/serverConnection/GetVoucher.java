@@ -1,23 +1,19 @@
 package org.feup.potter.client.serverConnection;
 
+
 import android.util.Log;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GetItem extends ServerConnectionAPI implements Runnable {
-
-    // serverURL + path
+public class GetVoucher extends ServerConnectionAPI implements Runnable {
     protected HttpResponse androidActivity;
-    protected String hash;
-    public GetItem(HttpResponse myclass,String hash) {
+    protected String tokan;
+
+    public GetVoucher(HttpResponse myclass, String tokan) {
         super();
         this.androidActivity = myclass;
-        if(hash == null || hash.isEmpty())
-            this.hash = "";
-        else{
-            this.hash = this.HASH_GET_FIELD + hash;
-        }
+        this.tokan = tokan;
     }
 
     @Override
@@ -26,19 +22,19 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
         HttpURLConnection urlConnection = null;
 
         try {
-            Log.d("GetItem","Server request: " +this.hash);
-            url = new URL("http://" + address + ":" + port + "/" + GET_ITEMS_PATH + this.hash);
+            url = new URL("http://" + address + ":" + port + "/" + GET_VOUCHER_PATH);
 
             //writeText("GET " + url.toExternalForm());
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoInput(true);
-            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Authorization", "Bearer " + this.tokan);
             urlConnection.setUseCaches(false);
 
             int responseCode = urlConnection.getResponseCode();
 
             String response = "";
+            Log.d("GetItem","Server request: " + tokan);
             if (responseCode == 200) {
                 response = readStream(urlConnection.getInputStream());
                 Log.d("GetItem","Server Response OK");

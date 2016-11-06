@@ -6,12 +6,19 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
+import org.feup.potter.client.db.ItemInList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class Util {
 
@@ -57,5 +64,21 @@ public class Util {
             Log.d("loading user", e.getMessage());
         }
         return obj;
+    }
+
+    public static byte[] getBytesForOrder(String username,ArrayList<ItemInList> orderList) throws JSONException, UnsupportedEncodingException {
+        JSONObject jsonOrder = new JSONObject();
+        jsonOrder.put("idUser", username);
+        JSONArray itemJsonArray = new JSONArray();
+        for (ItemInList item : orderList) {
+            JSONObject itemJson = new JSONObject();
+            itemJson.put("idItem", item.getIdItem());
+            itemJson.put("quantity", item.getQuantity());
+            itemJsonArray.put(itemJson);
+        }
+        jsonOrder.put("items", itemJsonArray);
+
+        Log.d("QR code","Json: " + jsonOrder.toString());
+        return jsonOrder.toString().getBytes("ISO-8859-1");
     }
 }

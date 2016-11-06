@@ -24,15 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".order.ComfirmOrder"
-            android:parentActivityName=".order.OrderConfirmAndMake"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
-        <activity android:name=".order.OrderConfirmAndMake"
-            android:parentActivityName=".order.OrderSelectActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
-        <activity android:name=".order.OrderTabActivity"
+        <activity android:name=".vouchers.VoucherActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
@@ -56,6 +48,22 @@
         </activity>
         <activity android:name=".order.OrderSelectActivity"
             android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".order.OrderConfirmAndMake"
+            android:parentActivityName=".order.OrderSelectActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".order.EnterPinActivity"
+            android:parentActivityName=".order.OrderConfirmAndMake"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".order.qr_nfc.GenerateQRCodeActivity"
+            android:parentActivityName=".order.EnterPinActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".order.qr_nfc.NFCtranmitor"
+            android:parentActivityName=".order.EnterPinActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>

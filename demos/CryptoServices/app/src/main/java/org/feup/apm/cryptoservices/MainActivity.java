@@ -7,11 +7,8 @@ import android.widget.TextView;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
-import java.security.Provider;
 import java.security.PublicKey;
-import java.security.Security;
 import java.security.Signature;
-import java.util.Set;
 
 public class MainActivity extends Activity {
   TextView tv;
@@ -72,6 +69,7 @@ public class MainActivity extends Activity {
     catch (Exception ex) {
       res += ex.toString();
     }
+
     tv.setText(res);
   }
 }

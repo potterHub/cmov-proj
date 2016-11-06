@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9be878e4-905e-4d93-9dbf-8ad900cfd712" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/modules.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/.idea/runConfigurations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/app/src/main/java/org/feup/apm/qrcodezx/MainActivity.java" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/app/src/main/java/org/feup/apm/qrcodezx/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../QR/QRCodeZX/build.gradle" afterPath="$PROJECT_DIR$/../../QR/QRCodeZX/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/res/drawable/rest_img.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/build.gradle" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/Util/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/java/org/feup/potter/client/order/OrderConfirmAndMake.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Client/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/build.gradle" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/MainActivity.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/nfc/NfcReceive.java" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/java/org/feup/potter/terminal/nfc/NfcReceive.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../../../trabalho1/Terminal/app/src/main/res/values/styles.xml" />
     </list>
     <ignored path="TestRestService.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +45,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1517">
-              <caret line="234" column="70" selection-start-line="234" selection-start-column="70" selection-end-line="234" selection-end-column="70" />
+            <state relative-caret-position="299">
+              <caret line="200" column="15" selection-start-line="200" selection-start-column="15" selection-end-line="200" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -1587,9 +1581,16 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1926" />
-    <option name="y" value="51" />
+    <option name="x" value="1951" />
+    <option name="y" value="23" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -1618,6 +1619,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1628,17 +1630,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../QR/QRCodeZX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../QR/ScanQR" />
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -1839,8 +1840,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1926" y="51" width="1936" height="1056" extended-state="1" />
-    <editor active="false" />
+    <frame x="1951" y="23" width="1936" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1919,8 +1920,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1517">
-          <caret line="234" column="70" selection-start-line="234" selection-start-column="70" selection-end-line="234" selection-end-column="70" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/feup/apm/testrestservice/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="200" column="15" selection-start-line="200" selection-start-column="15" selection-end-line="200" selection-end-column="15" />
           <folding />
         </state>
       </provider>

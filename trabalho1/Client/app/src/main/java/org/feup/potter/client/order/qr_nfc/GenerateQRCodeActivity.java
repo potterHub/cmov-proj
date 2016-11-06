@@ -1,9 +1,11 @@
-package org.feup.potter.client.order;
+package org.feup.potter.client.order.qr_nfc;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,15 +15,14 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import org.feup.potter.client.LunchAppData;
+import org.feup.potter.client.MainActivity;
 import org.feup.potter.client.R;
-import org.feup.potter.client.db.ItemInList;
-import org.json.JSONArray;
+import org.feup.potter.client.Util.Util;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
-public class ComfirmOrder extends Activity {
+public class GenerateQRCodeActivity extends Activity implements View.OnClickListener {
     private LunchAppData data;
 
     private ImageView qrCodeImageview;
@@ -47,23 +48,8 @@ public class ComfirmOrder extends Activity {
         errorTv = (TextView) findViewById(R.id.error);
 
         this.invalidQrCode = "";
-        String content = "";
         try {
-            JSONObject jsonOrder = new JSONObject();
-            jsonOrder.put("idUser", data.user.getUsername());
-            JSONArray itemJsonArray = new JSONArray();
-            for (ItemInList item : data.orderItemList) {
-                JSONObject itemJson = new JSONObject();
-                itemJson.put("idItem", item.getIdItem());
-                itemJson.put("quantity", item.getQuantity());
-                itemJsonArray.put(itemJson);
-            }
-            jsonOrder.put("items", itemJsonArray);
-
-            Log.d("QR code","Json: " + jsonOrder.toString());
-            byte[] contentBytes = jsonOrder.toString().getBytes("ISO-8859-1");
-
-            contentStr = new String(contentBytes, "ISO-8859-1");
+            contentStr = new String(Util.getBytesForOrder(this.data.user.getUsername(),this.data.orderItemList), "ISO-8859-1");
         } catch (UnsupportedEncodingException | JSONException e) {
             errorTv.setText(e.getMessage());
         }
@@ -104,5 +90,15 @@ public class ComfirmOrder extends Activity {
             }
         });
         t.start();
+
+        Button btn = (Button) findViewById(R.id.ok_button);
+        btn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

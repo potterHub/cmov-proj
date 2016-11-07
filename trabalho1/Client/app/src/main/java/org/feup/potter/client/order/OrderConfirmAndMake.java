@@ -141,7 +141,7 @@ public class OrderConfirmAndMake extends ListActivity {
                                 }
                             });
                         }
-                    }, 500);
+                    }, 250);
                 }
             });
             button.setFocusable(false);

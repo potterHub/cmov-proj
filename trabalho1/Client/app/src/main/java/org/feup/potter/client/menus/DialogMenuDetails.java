@@ -47,7 +47,7 @@ public class DialogMenuDetails extends Dialog implements View.OnClickListener {
         this.typeView = (TextView) findViewById(R.id.text_view_item_type);
 
         this.name_text_view.setText(menuItem.getName());
-        this.price_text_view.setText(menuItem.getPrice() + " " + getOwnerActivity().getResources().getString(R.string.money));
+        this.price_text_view.setText(menuItem.getPrice() + " " + getContext().getResources().getString(R.string.money));
         this.description_text_view.setText(menuItem.getDescription());
 
         this.imgView.setImageBitmap(menuItem.getImage());

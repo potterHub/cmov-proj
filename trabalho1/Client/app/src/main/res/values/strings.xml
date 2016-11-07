@@ -64,4 +64,6 @@
     <string name="label_write_pin">Please introduce your pin code.</string>
     <string name="label_button_ok">OK</string>
     <string name="label_select_send_method">Select the send method</string>
+    <string name="label_description">Description: </string>
+    <string name="label_type">Type:</string>
 </resources>

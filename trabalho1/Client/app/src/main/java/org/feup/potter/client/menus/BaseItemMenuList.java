@@ -38,6 +38,7 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
         this.data = (LunchAppData) getApplicationContext();
 
         this.DB = new DataBaseHelper(this);
+
     }
 
     @Override

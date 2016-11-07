@@ -131,7 +131,7 @@ public class OrderSelectActivity extends BaseItemMenuList {
                                 }
                             });
                         }
-                    }, 500);
+                    }, 250);
                 }
             });
             button.setFocusable(false);

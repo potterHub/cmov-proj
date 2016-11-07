@@ -28,7 +28,7 @@ public class GetVoucher extends ServerConnectionAPI implements Runnable {
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoInput(true);
-            urlConnection.setRequestProperty("Authorization", "Bearer " + this.tokan);
+            urlConnection.setRequestProperty("Authentication", "Bearer " + this.tokan);
             urlConnection.setUseCaches(false);
 
             int responseCode = urlConnection.getResponseCode();

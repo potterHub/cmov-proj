@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.R;
@@ -15,6 +16,9 @@ import org.feup.potter.client.db.DataBaseHelper;
 import org.feup.potter.client.db.VouchersInList;
 import org.feup.potter.client.serverConnection.GetVoucher;
 import org.feup.potter.client.serverConnection.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -68,40 +72,87 @@ public class VoucherActivity extends ListActivity implements HttpResponse {
     @Override
     public void handleResponse(int code, String response) {
         if (code == 200) {
-            Log.d("response",response);
-            /*try {
-
-                JSONObject obj = new JSONObject(response);
-
-                String hash = obj.getString("hash");
-
-                if (hash.equals(data.hash)) {
-                    // the local db is up to dated
-                    Log.d("getItem", "table updated");
-                    populateListWithLocalDb();
-                } else {
-
-                    JSONArray jsonArray = obj.getJSONArray("items");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        final JSONObject itemObj = jsonArray.getJSONObject(i);
-                        insertInListView(itemObj);
-                    }
-
-                    saveHash(hash);
-                }
+            try {
+                JSONArray jsonArray = new JSONArray(response);
+                insertInListView(jsonArray);
             } catch (JSONException e) {
                 e.printStackTrace();
-            }*/
+            }
         } else {
-            Log.d("response",response);
+            Log.d("response", response);
             // maybe toast with error user friendly
         }
     }
+
+    private void insertInListView(final JSONArray jsonArray) {
+        runOnUiThread(new Runnable() {
+                          @Override
+                          public void run() {
+                              try {
+                                  // {"idVoucher":3,"voucherTemplate":{"idVoucherTemplate":1,"voucherTemplateType":{"idVoucherTemplateType":1,"description":"Global discount"},"description":"5% Discount","value":0.05},"code":"111111111111111111111111111111111111111111111","gotVoucher":"0001-01-01T00:00:00Z"}
+                                  // {"idVoucher":4,"voucherTemplate":{"idVoucherTemplate":2,"voucherTemplateType":{"idVoucherTemplateType":5,"description":"Free Item"},"items":[41],"description":"Free popcorn","value":1},"code":"999999999999999999999999999999999999999999999","gotVoucher":"0001-01-01T00:00:00Z"}
+                                  // {"idVoucher":5,"voucherTemplate":{"idVoucherTemplate":3,"voucherTemplateType":{"idVoucherTemplateType":6,"description":"Free Item type"},"itemType":{"idItemType":8,"description":"Coffee"},"description":"Free coffee","value":1},"code":"555555555555555555555555555555555555555555555","gotVoucher":"0001-01-01T00:00:00Z"}
+
+                                  for (int i = 0; i < jsonArray.length(); i++) {
+                                      JSONObject voucherObj = jsonArray.getJSONObject(i);
+                                      System.out.println(voucherObj.toString());
+
+                                      String idVoucher = voucherObj.getString("idVoucher");
+                                      String codeVoucher = voucherObj.getString("code");
+                                      String dateVoucher = voucherObj.getString("gotVoucher");
+
+                                      JSONObject voucherTemplate = voucherObj.getJSONObject("voucherTemplate");
+                                      String descriptionofVoucher = voucherTemplate.getString("description");
+                                      String valueOfdiscontOrNumberOfItems = voucherTemplate.getString("value");
+
+                                      JSONObject voucherTemplateType = voucherTemplate.getJSONObject("voucherTemplateType");
+
+                                      VouchersInList data =
+                                              new VouchersInList(idVoucher,
+                                                      codeVoucher,
+                                                      dateVoucher,
+                                                      descriptionofVoucher,
+                                                      valueOfdiscontOrNumberOfItems);
+
+                                      String voucherType = voucherTemplateType.getString("description");
+                                      ArrayList<String> itemIdList = new ArrayList<String>();
+                                      if (voucherType.equals("Free Item")) {
+                                          JSONArray strArr = voucherTemplate.getJSONArray("items");
+                                          for (int j = 0; j < strArr.length(); j++)
+                                              itemIdList.add(strArr.getString(j));
+                                          data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM);
+                                          data.setItemIdList(itemIdList);
+                                      } else if (voucherType.equals("Free Item type")) {
+                                          JSONObject ItemIdFreeType = voucherTemplate.getJSONObject("itemType");
+                                          String typeItem = ItemIdFreeType.getString("description");
+                                          data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM_TYPE);
+                                          data.setTypeItem(typeItem);
+                                      } else {// "Global discount"
+                                          data.setVoucherType(VouchersInList.VOUCHER_TYPE.GLOBAL_DISCOUNT);
+                                      }
+
+                                      //long id = BaseItemMenuList.this.DB.insertItem(data);
+                                      //if(id < 0){
+                                      //    // needs to be updated
+                                      //    BaseItemMenuList.this.DB.updateItem(data);
+                                      //}
+
+                                      listAdapter.add(data);
+                                  }
+                              } catch (JSONException e) {
+                                  e.printStackTrace();
+                              }
+                          }
+                      }
+
+        );
+    }
+
     // Cursor adapter (to implement the list row view)
     public class ListRowAdapter extends ArrayAdapter<VouchersInList> {
         // receives the cursor model
         public ListRowAdapter() {
-            super(VoucherActivity.this, R.layout.row_list_menu, vouchers);
+            super(VoucherActivity.this, R.layout.row_list_vauchers, vouchers);
         }
 
         @Override // to make our custom adapter build each row according with our list layout
@@ -109,22 +160,14 @@ public class VoucherActivity extends ListActivity implements HttpResponse {
             View row = convertView;
             if (row == null) {
                 LayoutInflater inflater = VoucherActivity.this.getLayoutInflater();
-                row = inflater.inflate(R.layout.row_list_menu, parent, false); // get out the custom layout
+                row = inflater.inflate(R.layout.row_list_vauchers, parent, false); // get out the custom layout
             }
+            final VouchersInList voucher = vouchers.get(position);
 
-            final VouchersInList item = vouchers.get(position);
-
-            /*
+            ((TextView) row.findViewById(R.id.text_description_voucher)).setText(voucher.getDescriptionOfVoucher());   // sets the restaurant address by the cursor from the selected line
             // set the custom row view values
-            ((TextView) row.findViewById(R.id.title)).setText(item.getName());        // sets the restaurant name by the cursor from the selected line
-            ((TextView) row.findViewById(R.id.price)).setText(item.getPrice() + " " + getResources().getString(R.string.money));   // sets the restaurant address by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.code_voucher)).setText(voucher.getCodeVoucher().toString());        // sets the restaurant name by the cursor from the selected line
 
-            // set the symbol image by the restaurant type
-            ImageView img = (ImageView) row.findViewById(R.id.img);
-            img.setImageBitmap(item.getImage());
-            */
-
-            // return the changed row
             return (row);
         }
     }

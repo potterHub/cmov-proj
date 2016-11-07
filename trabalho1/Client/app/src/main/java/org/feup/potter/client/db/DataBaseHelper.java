@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 // data base bridge
 public class DataBaseHelper extends SQLiteOpenHelper {
     // data base file name
@@ -20,6 +23,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private final int ITEM_IMG = 4;
     private final int ITEM_TYPE = 5;
 
+    private final int VOUCHER_ID = 0;
+    private final int VOUCHER_CODE = 1;
+    private final int VOUCHER_DATE = 2;
+    private final int VOUCHER_DESCRIPTION = 3;
+    private final int VOUCHER_TYPE = 4;
+    private final int VOUCHER_VALUEDISCONTE_OR_NUM_ITEMS = 5;
+    private final int VOUCHER_ITEM_LIST = 6;
+    private final int VOUCHER_TYPE_ITEM = 7;
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
     }
@@ -27,27 +39,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE items (id TEXT unique, name TEXT, price TEXT, description TEXT, image TEXT, type TEXT);");
+        db.execSQL("CREATE TABLE voucher (id TEXT, code TEXT unique, date TEXT, description TEXT, type TEXT, value_disc_or_num_items TEXT, item_list TEXT, type_item TEXT);");
     }
 
     public void dropAllTables() {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("items", null, null);
+        db.delete("voucher", null, null);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-    // insert data into the data base
-    public long insertItem(String id, String name, String price, String description, String img, String type) {
-        ContentValues row = new ContentValues();
-        row.put("id", id);
-        row.put("name", name);
-        row.put("price", price);
-        row.put("description", description);
-        row.put("image", img);
-        row.put("type", type);
-        return this.getWritableDatabase().insert("items", null, row);
-    }
+    // **********************************************
+    // ***************** ITEM ***********************
+    // **********************************************
+
     // insert data into the data base
     public synchronized long insertItem(ItemInList data) {
         ContentValues row = new ContentValues();
@@ -60,21 +67,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return this.getWritableDatabase().insert("items", null, row);
     }
 
-    // update data in the data base
-    public void updateItem(String idItem, String name, String price, String description, String img, String type) {
-        ContentValues row = new ContentValues();
-        row.put("id", idItem);
-        row.put("name", name);
-        row.put("price", price);
-        row.put("description", description);
-        row.put("image", img);
-        row.put("type", type);
-
-        String[] args = {idItem};
-
-        this.getWritableDatabase().update("items", row, "id=?", args);
-    }
-    public void updateItem(ItemInList data) {
+    public synchronized void updateItem(ItemInList data) {
         ContentValues row = new ContentValues();
         row.put("id", data.getIdItem());
         row.put("name", data.getName());
@@ -87,22 +80,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().update("items", row, "id=?", args);
     }
 
-    // gets all data base values
+    // gets all data base item values
     public Cursor getAllItems() {
         return (this.getReadableDatabase().rawQuery("SELECT id, name, price, description, image, type FROM items", null));
-    }
-
-    // gets all data base values
-    public Cursor getByItemName(String UserName) {
-        String[] args = {UserName};
-        return (this.getReadableDatabase().rawQuery("SELECT id, name, price, description, image, type FROM items WHERE name=?", args));
-    }
-
-
-    // gets items by id (this string id is the row id(long) received when inserting the value)
-    public Cursor getByIdItem(String id) {
-        String[] args = {id};
-        return (this.getReadableDatabase().rawQuery("SELECT id, name, price, description, image, type FROM items WHERE id=?", args));
     }
 
     public String getIdItem(Cursor c) {
@@ -121,8 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return (c.getString(this.ITEM_DESCRIPTION));
     }
 
-    public String getImgItem(Cursor c) {return (c.getString(this.ITEM_IMG));
-    }
+    public String getImgItem(Cursor c) {return (c.getString(this.ITEM_IMG)); }
 
     public String getTypeItem(Cursor c) {
         return (c.getString(this.ITEM_TYPE));
@@ -130,5 +109,84 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public ItemInList getItemInList(Cursor c){
         return new ItemInList(getIdItem(c),getNameItem(c),getPriceItem(c),getDescriptionItem(c),getImgItem(c),getTypeItem(c));
+    }
+
+    // ****************************************************
+    // ****************** vouchers ************************
+    // ****************************************************
+    // insert data into the data base
+    public synchronized long insertVoucher(VouchersInList data) {
+        ContentValues row = new ContentValues();
+        row.put("id", data.getIdVoucher());
+        row.put("code", data.getCodeVoucher());
+        row.put("date", data.getDateVoucherEmition());
+        row.put("description", data.getDescriptionOfVoucher());
+        row.put("type", data.getVoucherType().toString());
+        row.put("value_disc_or_num_items", data.getValueOfdiscontOrNumberOfItems());
+        row.put("item_list", data.getItemIdListString());
+        row.put("type_item", data.getTypeItem());
+        return this.getWritableDatabase().insert("voucher", null, row);
+    }
+
+    public synchronized void updateVoucher(VouchersInList data) {
+        ContentValues row = new ContentValues();
+        row.put("id", data.getIdVoucher());
+        row.put("code", data.getCodeVoucher());
+        row.put("date", data.getDateVoucherEmition());
+        row.put("description", data.getDescriptionOfVoucher());
+        row.put("type", data.getVoucherType().toString());
+        row.put("value_disc_or_num_items", data.getValueOfdiscontOrNumberOfItems());
+        row.put("item_list", data.getItemIdListString());
+        row.put("type_item", data.getTypeItem());
+
+        String[] args = {data.getCodeVoucher()};
+        this.getWritableDatabase().update("voucher", row, "code=?", args);
+    }
+
+    // gets all data base voucher rows
+    public Cursor getAllVouchers() {
+        return (this.getReadableDatabase().rawQuery("SELECT id, code, date, description , type, value_disc_or_num_items, item_list, type_item FROM voucher", null));
+    }
+
+    public String getIdVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_ID));
+    }
+
+    public String getCodeVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_CODE));
+    }
+
+    public String getDateVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_DATE));
+    }
+
+    public String getDescriptionVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_DESCRIPTION));
+    }
+
+    public String getTypeVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_TYPE));
+    }
+
+    public String getValueDiscOrNumItemsVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_VALUEDISCONTE_OR_NUM_ITEMS));
+    }
+
+    public ArrayList<String> getItemListVoucher(Cursor c) {
+        String itemIdArray = c.getString(this.VOUCHER_ITEM_LIST);
+        return new ArrayList<String>(Arrays.asList(itemIdArray.split(",")));
+    }
+
+    public String getTypeItemVoucher(Cursor c) {
+        return (c.getString(this.VOUCHER_TYPE_ITEM));
+    }
+
+    public VouchersInList getVoucherInList(Cursor c){
+        VouchersInList data = new VouchersInList(getIdVoucher(c),getCodeVoucher(c),getDateVoucher(c),getDescriptionVoucher(c),
+                getValueDiscOrNumItemsVoucher(c));
+        data.setVoucherType(VouchersInList.VOUCHER_TYPE.valueOf(getTypeVoucher(c)));
+        data.setTypeItem(getTypeItemVoucher(c));
+        data.setItemIdList(getItemListVoucher(c));
+        return data;
     }
 }

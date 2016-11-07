@@ -1,5 +1,7 @@
 package org.feup.potter.client.db;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class VouchersInList implements Serializable {
             public String toString() {
                 return "Free Item type";
             }
-        };
+        }
     }
 
     private String idVoucher;
@@ -79,6 +81,10 @@ public class VouchersInList implements Serializable {
 
     public ArrayList<String> getItemIdList() {
         return itemIdList;
+    }
+
+    public String getItemIdListString() {
+        return TextUtils.join(",", this.itemIdList);
     }
 
     public String getTypeItem() {

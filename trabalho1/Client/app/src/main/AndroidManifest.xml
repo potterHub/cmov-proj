@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".pastTranfer.PastTransferActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
         <activity android:name=".vouchers.VoucherActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >

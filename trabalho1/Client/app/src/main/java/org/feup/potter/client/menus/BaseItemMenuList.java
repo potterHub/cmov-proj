@@ -69,14 +69,11 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
                 JSONObject obj = new JSONObject(response);
 
                 String hash = obj.getString("hash");
-
                 if (hash.equals(data.hash)) {
                     // the local db is up to dated
                     Log.d("getItem", "table updated");
                     populateListWithLocalDb();
                 } else {
-
-
                     JSONArray jsonArray = obj.getJSONArray("items");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         final JSONObject itemObj = jsonArray.getJSONObject(i);

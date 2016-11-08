@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class ServerConnectionAPI {
 
     // http://127.0.0.1:8080/item
-    protected final String address = "172.30.9.64";// path to server root
+    protected final String address = "192.168.1.90";//"172.30.9.64";// path to server root
     protected final int port = 8080;
 
     protected final String HASH_GET_FIELD = "?hash=";

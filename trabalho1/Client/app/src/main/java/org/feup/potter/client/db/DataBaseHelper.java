@@ -23,8 +23,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private final int ITEM_IMG = 4;
     private final int ITEM_TYPE = 5;
 
-    private final int VOUCHER_ID = 0;
-    private final int VOUCHER_CODE = 1;
+    private final int VOUCHER_CODE = 0;
+    private final int VOUCHER_ID = 1;
     private final int VOUCHER_DATE = 2;
     private final int VOUCHER_DESCRIPTION = 3;
     private final int VOUCHER_TYPE = 4;
@@ -39,7 +39,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE items (id TEXT unique, name TEXT, price TEXT, description TEXT, image TEXT, type TEXT);");
-        db.execSQL("CREATE TABLE voucher (id TEXT, code TEXT unique, date TEXT, description TEXT, type TEXT, value_disc_or_num_items TEXT, item_list TEXT, type_item TEXT);");
+        db.execSQL("CREATE TABLE voucher (code TEXT unique, id TEXT, date TEXT, description TEXT, type TEXT, value_disc_or_num_items TEXT, item_list TEXT, type_item TEXT);");
     }
 
     public void dropAllTables() {
@@ -49,7 +49,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
 
     // **********************************************
     // ***************** ITEM ***********************
@@ -64,7 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         row.put("description", data.getDescription());
         row.put("image", data.getImageString());
         row.put("type", data.getItemType());
-        return this.getWritableDatabase().insert("items", null, row);
+        return this.getWritableDatabase().insertWithOnConflict("items", null, row, SQLiteDatabase.CONFLICT_IGNORE);
     }
 
     public synchronized void updateItem(ItemInList data) {
@@ -101,14 +102,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return (c.getString(this.ITEM_DESCRIPTION));
     }
 
-    public String getImgItem(Cursor c) {return (c.getString(this.ITEM_IMG)); }
+    public String getImgItem(Cursor c) {
+        return (c.getString(this.ITEM_IMG));
+    }
 
     public String getTypeItem(Cursor c) {
         return (c.getString(this.ITEM_TYPE));
     }
 
-    public ItemInList getItemInList(Cursor c){
-        return new ItemInList(getIdItem(c),getNameItem(c),getPriceItem(c),getDescriptionItem(c),getImgItem(c),getTypeItem(c));
+    public ItemInList getItemInList(Cursor c) {
+        return new ItemInList(getIdItem(c), getNameItem(c), getPriceItem(c), getDescriptionItem(c), getImgItem(c), getTypeItem(c));
     }
 
     // ****************************************************
@@ -117,21 +120,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // insert data into the data base
     public synchronized long insertVoucher(VouchersInList data) {
         ContentValues row = new ContentValues();
-        row.put("id", data.getIdVoucher());
         row.put("code", data.getCodeVoucher());
+        row.put("id", data.getIdVoucher());
         row.put("date", data.getDateVoucherEmition());
         row.put("description", data.getDescriptionOfVoucher());
         row.put("type", data.getVoucherType().toString());
         row.put("value_disc_or_num_items", data.getValueOfdiscontOrNumberOfItems());
         row.put("item_list", data.getItemIdListString());
         row.put("type_item", data.getTypeItem());
-        return this.getWritableDatabase().insert("voucher", null, row);
+        return this.getWritableDatabase().insertWithOnConflict("voucher", null, row, SQLiteDatabase.CONFLICT_IGNORE);
     }
 
     public synchronized void updateVoucher(VouchersInList data) {
         ContentValues row = new ContentValues();
-        row.put("id", data.getIdVoucher());
         row.put("code", data.getCodeVoucher());
+        row.put("id", data.getIdVoucher());
         row.put("date", data.getDateVoucherEmition());
         row.put("description", data.getDescriptionOfVoucher());
         row.put("type", data.getVoucherType().toString());
@@ -145,7 +148,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // gets all data base voucher rows
     public Cursor getAllVouchers() {
-        return (this.getReadableDatabase().rawQuery("SELECT id, code, date, description , type, value_disc_or_num_items, item_list, type_item FROM voucher", null));
+        return (this.getReadableDatabase().rawQuery("SELECT code, id, date, description , type, value_disc_or_num_items, item_list, type_item FROM voucher", null));
     }
 
     public String getIdVoucher(Cursor c) {
@@ -181,8 +184,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return (c.getString(this.VOUCHER_TYPE_ITEM));
     }
 
-    public VouchersInList getVoucherInList(Cursor c){
-        VouchersInList data = new VouchersInList(getIdVoucher(c),getCodeVoucher(c),getDateVoucher(c),getDescriptionVoucher(c),
+    public VouchersInList getVoucherInList(Cursor c) {
+        VouchersInList data = new VouchersInList(getIdVoucher(c), getCodeVoucher(c), getDateVoucher(c), getDescriptionVoucher(c),
                 getValueDiscOrNumItemsVoucher(c));
         data.setVoucherType(VouchersInList.VOUCHER_TYPE.valueOf(getTypeVoucher(c)));
         data.setTypeItem(getTypeItemVoucher(c));

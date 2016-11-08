@@ -2,6 +2,7 @@ package org.feup.potter.client.vouchers;
 
 
 import android.app.ListActivity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,15 +74,29 @@ public class VoucherActivity extends ListActivity implements HttpResponse {
     public void handleResponse(int code, String response) {
         if (code == 200) {
             try {
+                Log.d("VoucherActivity", "response OK : " + response);
+
                 JSONArray jsonArray = new JSONArray(response);
                 insertInListView(jsonArray);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("VoucherActivity", "Json format error");
+                populateListWithLocalDb();
             }
         } else {
-            Log.d("response", response);
-            // maybe toast with error user friendly
+            Log.d("VoucherActivity", "Response code: " + code);
+            populateListWithLocalDb();
         }
+    }
+
+    private void populateListWithLocalDb() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Cursor c = DB.getAllItems();
+                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
+                    listAdapter.add(DB.getVoucherInList(c));
+            }
+        });
     }
 
     private void insertInListView(final JSONArray jsonArray) {
@@ -131,12 +146,11 @@ public class VoucherActivity extends ListActivity implements HttpResponse {
                                           data.setVoucherType(VouchersInList.VOUCHER_TYPE.GLOBAL_DISCOUNT);
                                       }
 
-                                      //long id = BaseItemMenuList.this.DB.insertItem(data);
-                                      //if(id < 0){
-                                      //    // needs to be updated
-                                      //    BaseItemMenuList.this.DB.updateItem(data);
-                                      //}
-
+                                      long id = VoucherActivity.this.DB.insertVoucher(data);
+                                      if (id < 0) {
+                                          // needs to be updated
+                                          VoucherActivity.this.DB.updateVoucher(data);
+                                      }
                                       listAdapter.add(data);
                                   }
                               } catch (JSONException e) {

@@ -78,7 +78,7 @@ public class Util {
         }
         jsonOrder.put("items", itemJsonArray);
 
-        Log.d("QR code","Json: " + jsonOrder.toString());
+        Log.d("Json Of Order", jsonOrder.toString());
         return jsonOrder.toString().getBytes("ISO-8859-1");
     }
 }

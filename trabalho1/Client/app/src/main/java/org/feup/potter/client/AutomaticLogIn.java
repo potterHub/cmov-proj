@@ -40,7 +40,7 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
 
 
         // to skip automatic login
-        //this.data.user = null;
+        // this.data.user = null;
 
         // test no data in table
         // this.data.hash = null;
@@ -48,7 +48,6 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
         // drop all tables
         // DataBaseHelper DB = new DataBaseHelper(this);
         // DB.dropAllTables();
-
         // this.deleteDatabase(DB.DATABASE_NAME);
 
         // connection api

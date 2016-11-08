@@ -59,6 +59,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     // Stop here, we definitely need NFC
                     Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
                     break;
+                }else{
+
                 }
                 break;
             default:

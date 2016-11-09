@@ -1,5 +1,11 @@
 package org.feup.potter.terminal;
 
-public class LunchAppData {
+import android.app.Application;
+
+import org.feup.potter.terminal.db.Order;
+
+public class LunchAppData extends Application {
+
+    public Order currentOrder;
 
 }

@@ -60,14 +60,14 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
 
             String username = this.text_user_name.getText().toString();
             if (username.isEmpty()) {
-                isValid += "Choose a username...\n";
+                isValid += "Put a username...\n";
             } else if (username.length() < 3) {
                 isValid += "Your user name must have 3 at least...\n";
             }
 
             String password = this.text_password.getText().toString();
             if (password.isEmpty()) {
-                isValid += "Choose a password...\n";
+                isValid += "Put a password...\n";
             } else if (password.length() < 6) {
                 isValid += "Password must have a length bigger than 6...\n";
             }
@@ -77,7 +77,7 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
             else
                 Toast.makeText(getApplicationContext(), isValid, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Connecting To server.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connecting To server...", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -122,4 +122,14 @@ public class VouchersInList implements Serializable {
     public void setIdVoucher(String idVoucher) {
         this.idVoucher = idVoucher;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof VouchersInList)) return false;
+        VouchersInList otherMyClass = (VouchersInList) other;
+        return this.codeVoucher.equals(otherMyClass.getCodeVoucher());
+    }
+
 }

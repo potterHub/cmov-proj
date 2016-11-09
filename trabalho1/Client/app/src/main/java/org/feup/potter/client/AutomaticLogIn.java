@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.feup.potter.client.Util.Util;
 import org.feup.potter.client.db.ItemInList;
 import org.feup.potter.client.db.User;
+import org.feup.potter.client.db.VouchersInList;
 import org.feup.potter.client.log_in.SignUp;
 import org.feup.potter.client.serverConnection.HttpResponsePassword;
 import org.feup.potter.client.serverConnection.LogIn;
@@ -34,6 +35,9 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
         this.data.user = (User) Util.loadData(this.data.userPath, this);
 
         this.data.orderItemList = new ArrayList<ItemInList>();
+        this.data.orderVoucherList = new ArrayList<VouchersInList>();
+        this.data.alreadyHasGlobalDiscont = false;
+
         this.data.hash = (String) Util.loadData(this.data.itemHashPath, this);
         if (this.data.hash == null)
             Log.d("hash", "null");

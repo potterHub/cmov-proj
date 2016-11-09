@@ -8,17 +8,22 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TextView;
 
+import org.feup.potter.terminal.LunchAppData;
 import org.feup.potter.terminal.R;
+import org.feup.potter.terminal.db.Order;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NfcReceive extends Activity {
     private TextView waitting_view_message;
 
+    private LunchAppData data;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_receive);
+
+        this.data = (LunchAppData) getApplicationContext();
 
         this.waitting_view_message = (TextView) findViewById(R.id.text_view_message);
     }
@@ -43,14 +48,10 @@ public class NfcReceive extends Activity {
 
         try {
             JSONObject obj = new JSONObject(message);
-            // chamar a api de conneccao ao server
+            this.data.currentOrder = new Order(obj);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-        //tv.setText(app.reply);
     }
 }

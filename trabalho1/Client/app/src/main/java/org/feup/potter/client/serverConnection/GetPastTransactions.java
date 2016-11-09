@@ -1,16 +1,15 @@
 package org.feup.potter.client.serverConnection;
 
-
 import android.util.Log;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GetVoucher extends ServerConnectionAPI implements Runnable {
+public class GetPastTransactions extends ServerConnectionAPI implements Runnable {
     protected HttpResponse androidActivity;
     protected String tokan;
 
-    public GetVoucher(HttpResponse myclass, String tokan) {
+    public GetPastTransactions(HttpResponse myclass, String tokan) {
         super();
         this.androidActivity = myclass;
         this.tokan = tokan;
@@ -22,7 +21,7 @@ public class GetVoucher extends ServerConnectionAPI implements Runnable {
         HttpURLConnection urlConnection = null;
 
         try {
-            url = new URL("http://" + address + ":" + port + "/" + GET_VOUCHER_PATH);
+            url = new URL("http://" + address + ":" + port + "/" + GET_PAST_TRANSACTIONS_PATH);
 
             //writeText("GET " + url.toExternalForm());
 
@@ -34,13 +33,13 @@ public class GetVoucher extends ServerConnectionAPI implements Runnable {
             int responseCode = urlConnection.getResponseCode();
 
             String response;
-            Log.d("GetVoucher","Server request: " + tokan);
+            Log.d("GetPastTransactions","Server request: " + tokan);
             if (responseCode == 200) {
                 response = readStream(urlConnection.getInputStream());
-                Log.d("GetVoucher","Server Response OK");
+                Log.d("GetPastTransactions","Server Response OK");
             } else {
                 response = readStream(urlConnection.getErrorStream());
-                Log.d("GetVoucher","Server Response ERROR");
+                Log.d("GetPastTransactions","Server Response ERROR");
             }
             androidActivity.handleResponse(responseCode, response);
         } catch (Exception e) {

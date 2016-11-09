@@ -42,6 +42,12 @@ public class OrderConfirmAndMake extends ListActivity {
         initiateListAndListAdapter();
     }
 
+    protected void initiateListAndListAdapter() {
+        this.listAdapter = new OrderConfirmAndMake.ListRowAdapter();
+        //attach the adapter to the list
+        this.setListAdapter(this.listAdapter);
+    }
+
     // create the option toast menu (main.xml)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +64,7 @@ public class OrderConfirmAndMake extends ListActivity {
                 return (true);
             case R.id.next_icon:
                 if (this.data.orderItemList.size() > 0) {
-                    startActivity(new Intent(OrderConfirmAndMake.this, EnterPinActivity.class));
+                    startActivity(new Intent(OrderConfirmAndMake.this, SelectOrderVouchers.class));
                 } else {
                     Toast.makeText(OrderConfirmAndMake.this, "You must select at least one item to place an order.", Toast.LENGTH_SHORT).show();
                 }
@@ -67,12 +73,6 @@ public class OrderConfirmAndMake extends ListActivity {
                 break;
         }
         return (super.onOptionsItemSelected(item));
-    }
-
-    protected void initiateListAndListAdapter() {
-        this.listAdapter = new OrderConfirmAndMake.ListRowAdapter();
-        //attach the adapter to the list
-        this.setListAdapter(this.listAdapter);
     }
 
     @Override

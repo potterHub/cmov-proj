@@ -20,6 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HandleOrder"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
         <activity
             android:name=".nfc.NfcReceive"
             android:label="@string/title_activity_nfc_receive"
@@ -32,5 +36,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

@@ -17,13 +17,7 @@ public class ServerConnectionAPI {
     protected final String LOG_IN_PATH = "customer/login";
     protected final String REGISTER_PATH = "customer/register";
     protected final String GET_VOUCHER_PATH = "customer/voucher";
-
-    // how to call it
-    /*
-        GetItems getItems = new GetItems(this); // this must implement HttpResponse interface
-        Thread thr = new Thread(GetItems);
-        thr.start();
-     */
+    protected final String GET_PAST_TRANSACTIONS_PATH = "customer/order";
 
     protected String readStream(InputStream in) {
         BufferedReader reader = null;

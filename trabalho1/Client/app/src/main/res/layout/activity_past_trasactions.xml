@@ -13,6 +13,6 @@
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/vouchers_empty"
+        android:text="@string/past_trasactions_empty"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 </FrameLayout>

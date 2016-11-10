@@ -10,4 +10,4 @@ FROM voucher
 JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
 JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
 LEFT JOIN itemType on itemType.idItemType = voucherTemplate.idItemType
-WHERE voucher.idSale IS NULL AND voucher.usedVoucher IS NULL AND voucher.idCustomer = 1;
+WHERE voucher.idSale IS NULL AND voucher.idCustomer = 1;

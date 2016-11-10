@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"errors"
 	"server/models"
 	"strconv"
 )
@@ -149,7 +150,7 @@ func (db *DB) GetVouchers(customerId int64, saleId int64) ([]*models.Voucher, er
 
 	var voucherRows *sql.Rows
 	var err error
-	if (saleId > 0) {
+	if saleId > 0 {
 		voucherRows, err = db.raw.Query(`
 		SELECT
 		voucher.idVoucher, voucher.code, voucher.gotVoucher,
@@ -173,7 +174,7 @@ func (db *DB) GetVouchers(customerId int64, saleId int64) ([]*models.Voucher, er
 		JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
 		JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
 		LEFT JOIN itemType on itemType.idItemType = voucherTemplate.idItemType
-		WHERE voucher.idSale IS NULL AND voucher.usedVoucher IS NULL AND voucher.idCustomer = $1
+		WHERE voucher.idSale IS NULL AND voucher.idCustomer = $1
 	`, customerId)
 	}
 
@@ -257,7 +258,7 @@ func (db *DB) GetVouchers(customerId int64, saleId int64) ([]*models.Voucher, er
 
 func (db *DB) GetOrders(idCustomer int64) ([]*models.Sale, error) {
 	saleRows, err := db.raw.Query(`
-		SELECT idSale, myDateTime
+		SELECT idSale, myDateTime, total
 		FROM sale
 		WHERE idCustomer = $1`, idCustomer)
 
@@ -271,7 +272,8 @@ func (db *DB) GetOrders(idCustomer int64) ([]*models.Sale, error) {
 		sale := new(models.Sale)
 		err := saleRows.Scan(
 			&sale.IdSale,
-			&sale.MyDateTime)
+			&sale.MyDateTime,
+			&sale.Total)
 
 		if err != nil {
 			return nil, err
@@ -317,4 +319,129 @@ func (db *DB) GetOrders(idCustomer int64) ([]*models.Sale, error) {
 	}
 
 	return sales, err
+}
+
+func (db *DB) GetVouchersSale(idCustomer int64, vouchers []*models.Voucher) ([]*models.Voucher, error) {
+	if idCustomer <= 0 || vouchers == nil || len(vouchers) == 0 {
+		return nil, errors.New("Expecting at least one voucher")
+	}
+	vouchersLength := len(vouchers)
+	var ins string
+	argsFactory := make([]interface{}, 1+vouchersLength*2)
+	start := 0
+	argsFactory[start] = idCustomer
+	start++
+	for i, voucher := range vouchers {
+		offset := start + i
+		argsFactory[offset] = voucher.IdVoucher
+		argsFactory[offset+vouchersLength] = voucher.Code
+		ins = "?" + ins
+		if i != (vouchersLength - 1) {
+			ins = "," + ins
+		}
+	}
+
+	rows, err := db.raw.Query(`
+	SELECT voucher.idVoucher, voucher.code, voucher.idSale, voucher.gotVoucher, voucherTemplateType.idVoucherTemplateType, voucherTemplateType.description
+	FROM voucher
+	JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
+	JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
+	WHERE idSale IS NULL AND idCustomer = ? AND idVoucher IN (`+ins+`) AND code IN (`+ins+`)
+	`, argsFactory...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	vouchersMeta := make([]*models.Voucher, 0)
+	for rows.Next() {
+		voucher := new(models.Voucher)
+		nullableIdSale := sql.NullInt64{}
+
+		err = rows.Scan(
+			&voucher.IdVoucher,
+			&voucher.Code,
+			&nullableIdSale,
+			&voucher.GotVoucher,
+			&voucher.VoucherTemplate.VoucherTemplateType.IdVoucherTemplateType,
+			&voucher.VoucherTemplate.VoucherTemplateType.Description)
+		if err != nil {
+			return nil, err
+		}
+
+		if nullableIdSale.Valid {
+			voucher.IdSale = nullableIdSale.Int64
+		}
+
+		vouchersMeta = append(vouchersMeta, voucher)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return vouchersMeta, err
+
+}
+
+func (db *DB) GetVoucherTemplateTypes() (*map[string]int64, error) {
+	rows, err := db.raw.Query(`SELECT * FROM voucherTemplateType`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	voucherTemplateTypeMap := make(map[string]int64, 0)
+	voucherTemplateType := models.VoucherTemplateType{}
+	for rows.Next() {
+		err = rows.Scan(
+			&voucherTemplateType.IdVoucherTemplateType,
+			&voucherTemplateType.Description)
+		if err != nil {
+			return nil, err
+		}
+		voucherTemplateTypeMap[voucherTemplateType.Description] = voucherTemplateType.IdVoucherTemplateType
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return &voucherTemplateTypeMap, err
+}
+
+func (db *DB) GetItemsTotal(items []*models.SaleItem) (float64, error) {
+	stmt, err := db.raw.Prepare(`SELECT price FROM item WHERE idItem = $1`)
+	if err != nil {
+		return 0, err
+	}
+	defer stmt.Close()
+
+	total := 0.0
+	for _, item := range items {
+		var itemPrice float64 = 0
+		row := stmt.QueryRow(item.IdItem)
+		err = row.Scan(&itemPrice)
+		if err != nil {
+			return 0, err
+		}
+		total += itemPrice * float64(item.Quantity)
+	}
+
+	return total, err
+}
+
+func (db *DB) GetSalesTotal(idCustomer int64) (float64, error) {
+	var nullableSalesTotal sql.NullFloat64
+	row := db.raw.QueryRow(`
+		SELECT sum(total) AS salestotal
+		FROM sale WHERE idCustomer = ?`, idCustomer)
+	err := row.Scan(&nullableSalesTotal)
+	if err != nil {
+		return 0, err
+	}
+	if nullableSalesTotal.Valid {
+		return nullableSalesTotal.Float64, nil
+	}
+	return 0, nil
 }

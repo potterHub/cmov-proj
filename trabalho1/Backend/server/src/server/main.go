@@ -6,13 +6,15 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"server/api/cardTypes"
+	"server/api/cardtype"
 	"server/api/customer"
 	"server/api/item"
 	"server/api/terminal"
 	"server/authentication"
 	"server/db"
-	"server/globals"
+	"server/globals/keys"
+	"server/globals/sqlite"
+	"server/keypair"
 	"time"
 )
 
@@ -20,14 +22,21 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	cdToBinary()
 
-	db := db.Connect(globals.Sqlite3DbPath)
+	db := db.Connect(sqlite.Path)
 	defer db.Close()
-	globals.DB = db
+	sqlite.DB = db
+
+	var exists bool = false
+	keys.Server, exists = keypair.CreateKeypairIfNoExists(keys.ServerKeypairPath)
+	keys.Server.SaveKeypair(keys.ServerKeypairPath)
+	if !exists {
+		keys.Server.ExportPublicKey(keys.ServerPublicKeyPath)
+	}
 
 	router := chi.NewRouter()
 	router.Use(authentication.GetToken())
 
-	router.Route(cardTypes.MainPath, cardTypes.SubRoutes)
+	router.Route(cardtype.MainPath, cardtype.SubRoutes)
 	router.Route(customer.MainPath, customer.SubRoutes)
 	router.Route(terminal.MainPath, terminal.SubRoutes)
 	router.Route(item.MainPath, item.SubRoutes)

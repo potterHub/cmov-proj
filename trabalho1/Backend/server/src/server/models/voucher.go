@@ -6,6 +6,5 @@ type Voucher struct {
 	IdCustomer      int64           `json:"idCustomer,omitempty"`
 	IdSale          int64           `json:"idSale,omitempty"`
 	Code            string          `json:"code"`
-	GotVoucher      string          `json:"gotVoucher"`
-	UsedVoucher     string          `json:"usedVoucher,omitempty"`
+	GotVoucher      string          `json:"gotVoucher,omitempty"`
 }

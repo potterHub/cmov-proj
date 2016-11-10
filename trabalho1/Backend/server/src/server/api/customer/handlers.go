@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"regexp"
 	"server/authentication"
-	"server/globals"
+	"server/globals/sqlite"
 	"server/helpers"
 	"server/models"
 	"strconv"
@@ -62,7 +62,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	creditCardType, err := globals.DB.GetCreditCardType(newCustomer.CreditCard.IdCreditCardType)
+	creditCardType, err := sqlite.DB.GetCreditCardType(newCustomer.CreditCard.IdCreditCardType)
 	if err == sql.ErrNoRows {
 		http.Error(w, "Invalid creditCardType", 400)
 		return
@@ -87,7 +87,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check if username is already registered
-	_, err = globals.DB.GetCustomer(newCustomer.Username)
+	_, err = sqlite.DB.GetCustomer(newCustomer.Username)
 	if err != sql.ErrNoRows {
 		http.Error(w, "A customer already exists with that username", 400)
 		return
@@ -105,7 +105,7 @@ func registerCustomer(w http.ResponseWriter, r *http.Request) {
 	newCustomer.PIN = rand.Intn(9000) + 1000
 
 	// Insert the new customer
-	err = globals.DB.InsertCustomer(newCustomer)
+	err = sqlite.DB.InsertCustomer(newCustomer)
 	if err != nil {
 		http.Error(w, "Failed inserting new Customer", 400)
 		return
@@ -154,7 +154,7 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Check if username is already registered
-	dbCustomer, err := globals.DB.GetCustomer(postCustomer.Username)
+	dbCustomer, err := sqlite.DB.GetCustomer(postCustomer.Username)
 	if err != nil {
 		http.Error(w, "Failed querying customer by username", 500)
 		return
@@ -181,7 +181,7 @@ func loginCustomer(w http.ResponseWriter, r *http.Request) {
 func getCustomerVouchers(w http.ResponseWriter, r *http.Request) {
 	claims := helpers.GetAuth(r)
 
-	vouchers, err := globals.DB.GetVouchers(claims.IdCustomer, -1)
+	vouchers, err := sqlite.DB.GetVouchers(claims.IdCustomer, -1)
 	if err != nil {
 		http.Error(w, "Failed retrieving vouchers", 500)
 		return
@@ -198,7 +198,7 @@ func getCustomerVouchers(w http.ResponseWriter, r *http.Request) {
 func getCustomerOrders(w http.ResponseWriter, r *http.Request) {
 	claims := helpers.GetAuth(r)
 
-	orders, err := globals.DB.GetOrders(claims.IdCustomer)
+	orders, err := sqlite.DB.GetOrders(claims.IdCustomer)
 	if err != nil {
 		http.Error(w, "Failed retrieving orders", 500)
 		return

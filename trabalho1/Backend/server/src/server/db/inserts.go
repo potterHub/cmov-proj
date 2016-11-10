@@ -6,6 +6,7 @@ import (
 	"server/authentication"
 	"server/models"
 	"time"
+	"math/rand"
 )
 
 func (db *DB) InsertCustomer(customer *models.Customer) (err error) {
@@ -65,6 +66,11 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 		}
 		err = tx.Commit()
 	}()
+
+	previousSalesTotal, err := db.GetSalesTotal(sale.IdCustomer)
+	if err != nil {
+		return err
+	}
 
 	res, err := tx.Exec(`
 	INSERT INTO sale(idSale, idCustomer, myDateTime, total)
@@ -129,11 +135,6 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 	}
 
 	// Generate vouchers
-	_, err = db.GetSalesTotal(sale.IdCustomer)
-	if err != nil {
-		return err
-	}
-
 	stmt, err := tx.Prepare(`
 	INSERT INTO voucher(idVoucher,idVoucherTemplate,idCustomer,idSale,code,gotVoucher)
 	VALUES
@@ -146,7 +147,19 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 	defer stmt.Close()
 
 	if sale.Total >= 20.00 {
-		err = insertNewVoucher(stmt, "%free popcorn%", sale.IdCustomer, now)
+		discount := "%free popcorn%"
+		if rand.Intn(2) == 0 {
+			discount = "%free coffee%"
+		}
+		err = insertNewVoucher(stmt, discount, sale.IdCustomer, now)
+		if err != nil {
+			return err
+		}
+	}
+
+	var nGlobalDiscounts int64 = int64((previousSalesTotal+sale.Total)/100) - int64(previousSalesTotal/100)
+	for ; nGlobalDiscounts > 0; nGlobalDiscounts-- {
+		err = insertNewVoucher(stmt, "%5%% Discount%", sale.IdCustomer, now)
 		if err != nil {
 			return err
 		}

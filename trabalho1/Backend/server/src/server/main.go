@@ -41,7 +41,10 @@ func main() {
 	router.Route(terminal.MainPath, terminal.SubRoutes)
 	router.Route(item.MainPath, item.SubRoutes)
 
-	http.ListenAndServe(":8080", router)
+	err := http.ListenAndServe(":8080", router)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func cdToBinary() {

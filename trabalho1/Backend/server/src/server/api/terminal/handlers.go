@@ -94,7 +94,7 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 	// Insert the new sale, update used vouchers, and generate new vouchers
 	err = sqlite.DB.InsertSale(claims, newSale)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, "Failed inserting new order", 500)
 		return
 	}
 

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.NFC" />
 
     <application
-        android:name=".nfc.NfcApp"
+        android:name=".LunchAppData"
         android:allowBackup="true"
         android:icon="@drawable/rest_img"
         android:label="@string/app_name"
@@ -19,6 +19,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".HandleOrder"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
             android:name=".nfc.NfcReceive"
@@ -32,5 +36,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

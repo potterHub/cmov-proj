@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.R;
 import org.feup.potter.client.db.ItemInList;
+import org.feup.potter.client.db.VouchersInList;
 import org.feup.potter.client.menus.BaseItemMenuList;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class OrderSelectActivity extends BaseItemMenuList {
 
         this.data = (LunchAppData) getApplicationContext();
         this.data.orderItemList = new ArrayList<ItemInList>();
+        this.data.orderVoucherList = new ArrayList<VouchersInList>();
+        this.data.alreadyHasGlobalDiscont = false;
 
         // initiate list adapter
         initiateListAndListAdapter();
@@ -51,11 +54,11 @@ public class OrderSelectActivity extends BaseItemMenuList {
     // when the menu is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.next_icon:
-            // if add button pressed a new activity (details activity) to add the restaurant is going to start
-            startActivity(new Intent(OrderSelectActivity.this, OrderConfirmAndMake.class));
-            return (true);
+                // if add button pressed a new activity (details activity) to add the restaurant is going to start
+                startActivity(new Intent(OrderSelectActivity.this, OrderConfirmAndMake.class));
+                return (true);
             case R.id.back_icon:
                 finish();
                 return true;

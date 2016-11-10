@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -49,7 +50,8 @@ public class GenerateQRCodeActivity extends Activity implements View.OnClickList
 
         this.invalidQrCode = "";
         try {
-            contentStr = new String(Util.getBytesForOrder(this.data.user.getUsername(),this.data.orderItemList), "ISO-8859-1");
+            Toast.makeText(GenerateQRCodeActivity.this, this.data.orderVoucherList.toString(), Toast.LENGTH_SHORT).show();
+            contentStr = new String(Util.getBytesForOrder(this.data.user.getUsername(),this.data.orderItemList, this.data.orderVoucherList), "ISO-8859-1");
         } catch (UnsupportedEncodingException | JSONException e) {
             errorTv.setText(e.getMessage());
         }

@@ -42,7 +42,8 @@ public class NFCtranmitor extends Activity implements NfcAdapter.OnNdefPushCompl
 
         byte[] order;
         try {
-            order = Util.getBytesForOrder(this.data.user.getUsername(), this.data.orderItemList);
+            Toast.makeText(NFCtranmitor.this, this.data.orderVoucherList.toString(), Toast.LENGTH_SHORT).show();
+            order = Util.getBytesForOrder(this.data.user.getUsername(), this.data.orderItemList, this.data.orderVoucherList);
 
             NdefMessage msg = new NdefMessage(new NdefRecord[]{createMimeRecord(tag, order)});
 

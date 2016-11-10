@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import org.feup.potter.client.db.ItemInList;
+import org.feup.potter.client.db.VouchersInList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +67,7 @@ public class Util {
         return obj;
     }
 
-    public static byte[] getBytesForOrder(String username,ArrayList<ItemInList> orderList) throws JSONException, UnsupportedEncodingException {
+    public static byte[] getBytesForOrder(String username, ArrayList<ItemInList> orderList, ArrayList<VouchersInList> orderVouchers) throws JSONException, UnsupportedEncodingException {
         JSONObject jsonOrder = new JSONObject();
         jsonOrder.put("idUser", username);
         JSONArray itemJsonArray = new JSONArray();
@@ -78,7 +79,16 @@ public class Util {
         }
         jsonOrder.put("items", itemJsonArray);
 
-        Log.d("QR code","Json: " + jsonOrder.toString());
+        JSONArray voucherJsonArray = new JSONArray();
+        for (VouchersInList voucher : orderVouchers) {
+            JSONObject voucherJson = new JSONObject();
+            voucherJson.put("code", voucher.getCodeVoucher());
+            voucherJson.put("type", voucher.getVoucherType().toString());
+            voucherJsonArray.put(voucherJson);
+        }
+        jsonOrder.put("vouchers", voucherJsonArray);
+
+        Log.d("Json Of Order", jsonOrder.toString());
         return jsonOrder.toString().getBytes("ISO-8859-1");
     }
 }

@@ -13,7 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import org.feup.potter.terminal.db.Order;
+import org.feup.potter.terminal.nfc.NfcReceive;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,10 +28,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private NfcAdapter mNfcAdapter;
 
+    private LunchAppData data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.data = (LunchAppData) getApplicationContext();
 
         // get the phone nfc adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -44,6 +49,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        // clears previous order
+        this.data.currentOrder = null;
+
         switch (v.getId()) {
             case R.id.button_qr:
                 try {
@@ -59,6 +67,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     // Stop here, we definitely need NFC
                     Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
                     break;
+                }else{
+                    startActivity(new Intent(MainActivity.this, NfcReceive.class));
                 }
                 break;
             default:
@@ -78,26 +88,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if (format.equals(QR_CODE_FORMAT)) {
                     try {
                         JSONObject obj = new JSONObject(contents);
-                        String idUser = obj.getString("idUser");
+                        this.data.currentOrder = new Order(obj);
 
-                        JSONArray jsonArray = obj.getJSONArray("items");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            final JSONObject itemObj = jsonArray.getJSONObject(i);
-                            String idItem = itemObj.getString("idItem");
-                            String quantity = itemObj.getString("quantity");
-                        }
-                        // need vouchers
-                        Toast.makeText(this, "Scan was successfully Complete.", Toast.LENGTH_LONG).show();
-
-                        // make data base request
-                        // ----------------------
-                        // **********************
-
+                        hadleOrder(this.data.currentOrder);
                     } catch (JSONException e) {
-                        Toast.makeText(this, "Error retriving information from QR code.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Error retriving information from QR code.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(this, "Valid order was not detected.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Valid order was not detected.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -125,8 +123,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return downloadDialog.show();
     }
 
+    // nfc onResume
     public void onResume() {
         super.onResume();
-        //replyMsg.setText(app.reply);
+        hadleOrder(this.data.currentOrder);
+    }
+
+    private void hadleOrder(Order currentOrder) {
+        if(this.data.currentOrder != null){
+            Toast.makeText(this, "Scan was successfully Complete.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, HandleOrder.class));
+        }
     }
 }

@@ -38,7 +38,7 @@ public class GetItem extends ServerConnectionAPI implements Runnable {
 
             int responseCode = urlConnection.getResponseCode();
 
-            String response = "";
+            String response;
             if (responseCode == 200) {
                 response = readStream(urlConnection.getInputStream());
                 Log.d("GetItem","Server Response OK");

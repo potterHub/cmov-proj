@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.feup.potter.client.Util.Util;
 import org.feup.potter.client.db.ItemInList;
 import org.feup.potter.client.db.User;
+import org.feup.potter.client.db.VouchersInList;
 import org.feup.potter.client.log_in.SignUp;
 import org.feup.potter.client.serverConnection.HttpResponsePassword;
 import org.feup.potter.client.serverConnection.LogIn;
@@ -34,13 +35,16 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
         this.data.user = (User) Util.loadData(this.data.userPath, this);
 
         this.data.orderItemList = new ArrayList<ItemInList>();
+        this.data.orderVoucherList = new ArrayList<VouchersInList>();
+        this.data.alreadyHasGlobalDiscont = false;
+
         this.data.hash = (String) Util.loadData(this.data.itemHashPath, this);
         if (this.data.hash == null)
             Log.d("hash", "null");
 
 
         // to skip automatic login
-        //this.data.user = null;
+        // this.data.user = null;
 
         // test no data in table
         // this.data.hash = null;
@@ -48,7 +52,6 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
         // drop all tables
         // DataBaseHelper DB = new DataBaseHelper(this);
         // DB.dropAllTables();
-
         // this.deleteDatabase(DB.DATABASE_NAME);
 
         // connection api

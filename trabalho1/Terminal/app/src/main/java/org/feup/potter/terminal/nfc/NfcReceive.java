@@ -8,20 +8,24 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.widget.TextView;
 
+import org.feup.potter.terminal.LunchAppData;
 import org.feup.potter.terminal.R;
+import org.feup.potter.terminal.db.Order;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class NfcReceive extends Activity {
-    NfcApp app;
     private TextView waitting_view_message;
 
+    private LunchAppData data;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_receive);
 
-        this.waitting_view_message = (TextView) findViewById(R.id.text_view_message);
+        this.data = (LunchAppData) getApplicationContext();
 
-        app = (NfcApp) getApplication();
+        this.waitting_view_message = (TextView) findViewById(R.id.text_view_message);
     }
 
     @Override
@@ -40,8 +44,14 @@ public class NfcReceive extends Activity {
     void processIntent(Intent intent) {
         Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         NdefMessage msg = (NdefMessage) rawMsgs[0];
+        String message = new String(msg.getRecords()[0].getPayload());
 
-        app.reply = new String(msg.getRecords()[0].getPayload());
-        //tv.setText(app.reply);
+        try {
+            JSONObject obj = new JSONObject(message);
+            this.data.currentOrder = new Order(obj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

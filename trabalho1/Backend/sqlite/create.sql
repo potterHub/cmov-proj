@@ -90,9 +90,8 @@ CREATE TABLE voucher (
   idVoucherTemplate INTEGER NOT NULL,
   idCustomer INTEGER NOT NULL,
   idSale INTEGER,
-  code TEXT CHECK (code IS NOT NULL AND LENGTH(code) >= 28),
+  code TEXT CHECK (code IS NOT NULL AND LENGTH(code) >= 20),
   gotVoucher DATETIME NOT NULL,
-  usedVoucher DATETIME,
   UNIQUE (code),
   FOREIGN KEY (idVoucherTemplate) REFERENCES voucherTemplate(idVoucherTemplate),
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
@@ -104,6 +103,7 @@ CREATE TABLE sale (
   idSale INTEGER,
   idCustomer INTEGER NOT NULL,
   myDateTime DATETIME NOT NULL,
+  total REAL CHECK (total IS NOT NULL AND total > 0),
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
   PRIMARY KEY (idSale)
 );

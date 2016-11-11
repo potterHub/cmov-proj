@@ -1,13 +1,13 @@
-package cardTypes
+package cardtype
 
 import (
 	"encoding/json"
 	"net/http"
-	"server/globals"
+	"server/globals/sqlite"
 )
 
 func getCreditCardTypes(w http.ResponseWriter, r *http.Request) {
-	creditCardTypes, err := globals.DB.GetCreditCardTypes()
+	creditCardTypes, err := sqlite.DB.GetCreditCardTypes()
 	if err != nil {
 		http.Error(w, "Failed retrieving creditCardTypes", 500)
 		return

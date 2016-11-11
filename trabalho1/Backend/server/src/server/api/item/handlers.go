@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"github.com/pressly/chi"
 	"net/http"
-	"server/globals"
+	"server/globals/sqlite"
 )
 
 func getItems(w http.ResponseWriter, r *http.Request) {
-	items, err := globals.DB.GetItems()
+	items, err := sqlite.DB.GetItems()
 	if err != nil {
 		http.Error(w, "Failed retrieving items", 500)
 		return
@@ -23,7 +23,7 @@ func getItems(w http.ResponseWriter, r *http.Request) {
 }
 
 func getItem(w http.ResponseWriter, r *http.Request) {
-	item, err := globals.DB.GetItem(chi.URLParam(r, "id"))
+	item, err := sqlite.DB.GetItem(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, "Failed retrieving item", 500)
 		return

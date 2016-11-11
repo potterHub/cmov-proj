@@ -202,7 +202,16 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
             @Override
             public void run() {
                 stopProgressBar();
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage(response);
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         });
     }

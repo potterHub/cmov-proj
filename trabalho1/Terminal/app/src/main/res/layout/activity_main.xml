@@ -16,7 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/label_qr" />
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"
+            android:background="@drawable/button_layout_qr"
+            android:textSize="24sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -29,6 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/label_nfc" />
+            android:background="@drawable/button_layout_nfc"
+            android:maxHeight="50dp"
+            android:maxWidth="50dp"
+            android:textSize="24sp" />
     </RelativeLayout>
 </LinearLayout>

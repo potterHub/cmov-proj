@@ -172,11 +172,9 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
 
     public void resetDB(){
         SignIn.this.data.hash = "";
-        Util.saveData(SignIn.this.data.hash,SignIn.this.data.userPath,getApplicationContext());
+        Util.saveData(SignIn.this.data.hash,SignIn.this.data.itemHashPath,getApplicationContext());
 
-        DataBaseHelper DB = new DataBaseHelper(SignIn.this);
-        DB.dropAllTables();
-        this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
-        DB.close();
+        // remove data base
+        getApplicationContext().deleteDatabase(DataBaseHelper.DATABASE_NAME);
     }
 }

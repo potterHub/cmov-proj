@@ -222,11 +222,9 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
 
     public void resetDB(){
         SignUp.this.data.hash = "";
-        Util.saveData(SignUp.this.data.hash,SignUp.this.data.userPath,getApplicationContext());
+        Util.saveData(SignUp.this.data.hash,SignUp.this.data.itemHashPath,getApplicationContext());
 
-        DataBaseHelper DB = new DataBaseHelper(SignUp.this);
-        DB.dropAllTables();
-        SignUp.this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
-        DB.close();
+        // remove data base
+        getApplicationContext().deleteDatabase(DataBaseHelper.DATABASE_NAME);
     }
 }

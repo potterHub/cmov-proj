@@ -135,7 +135,6 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
                               }
                           }
                       }
-
         );
     }
 
@@ -155,9 +154,11 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
             }
             final PastTransactionsInList tranfer = transactions.get(position);
 
-            ((TextView) row.findViewById(R.id.transfer_name)).setText(tranfer.getIdSale());   // sets the restaurant address by the cursor from the selected line
-            // set the custom row view values
-            //((TextView) row.findViewById(R.id.code_voucher)).setText(voucher.getCodeVoucher().toString());        // sets the restaurant name by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.text_price)).setText(tranfer.getIdSale());   // sets the restaurant address by the cursor from the selected line
+
+            ((TextView) row.findViewById(R.id.text_num_items)).setText(tranfer.getTotalQuantityItems());
+
+            ((TextView) row.findViewById(R.id.text_vouchers_used)).setText(tranfer.getTotalVouchersUsed());
 
             return (row);
         }

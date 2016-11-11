@@ -14,6 +14,7 @@ import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.MainActivity;
 import org.feup.potter.client.R;
 import org.feup.potter.client.Util.Util;
+import org.feup.potter.client.db.DataBaseHelper;
 import org.feup.potter.client.db.User;
 import org.feup.potter.client.serverConnection.HttpResponsePassword;
 import org.feup.potter.client.serverConnection.LogIn;
@@ -147,6 +148,9 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
                         // String id, String name, String username, String password,String pin, String tokan
                         Util.saveData(SignIn.this.data.user, SignIn.this.data.userPath, getApplicationContext());
 
+                        // reset DB
+                        resetDB();
+
                         Toast.makeText(getApplicationContext(), "Log In was successful.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -164,5 +168,15 @@ public class SignIn extends Activity implements View.OnClickListener, HttpRespon
     private void logInFail(String message) {
         this.connecting = false;
         Toast.makeText(getApplicationContext(), message.isEmpty() ? "Log in Fail..." : message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void resetDB(){
+        SignIn.this.data.hash = "";
+        Util.saveData(SignIn.this.data.hash,SignIn.this.data.userPath,getApplicationContext());
+
+        DataBaseHelper DB = new DataBaseHelper(SignIn.this);
+        DB.dropAllTables();
+        this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
+        DB.close();
     }
 }

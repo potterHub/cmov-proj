@@ -69,10 +69,10 @@ public class Register extends ServerConnectionAPI implements Runnable {
             String response = "";
             if (responseCode == 200) {
                 response = readStream(urlConnection.getInputStream());
-                Log.d("GetItem","Server Response OK");
+                Log.d("Register","Server Response OK");
             } else {
                 response = readStream(urlConnection.getErrorStream());
-                Log.d("GetItem","Server Response ERROR");
+                Log.d("Register","Server Response ERROR");
             }
             androidActivity.handleResponse(responseCode, response, password);
         } catch (Exception e) {

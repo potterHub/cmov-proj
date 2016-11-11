@@ -35,6 +35,10 @@ public class NfcReceive extends Activity {
             processIntent(getIntent());
         }
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
     @Override
     public void onNewIntent(Intent intent) {

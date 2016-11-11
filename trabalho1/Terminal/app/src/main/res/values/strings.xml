@@ -6,4 +6,5 @@
     <string name="nfc_receive_msg">Receiving Order...</string>
 
     <string name="label_qr">QR code</string>
+    <string name="button_ok">OK</string>
 </resources>

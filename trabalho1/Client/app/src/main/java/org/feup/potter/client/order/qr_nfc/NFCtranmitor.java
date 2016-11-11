@@ -15,6 +15,8 @@ import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.MainActivity;
 import org.feup.potter.client.R;
 import org.feup.potter.client.Util.Util;
+import org.feup.potter.client.db.DataBaseHelper;
+import org.feup.potter.client.db.VouchersInList;
 import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
@@ -24,12 +26,16 @@ public class NFCtranmitor extends Activity implements NfcAdapter.OnNdefPushCompl
     private final String tag = "application/nfc.feup.potter.message.type1";
     private LunchAppData data;
 
+    private DataBaseHelper DB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_nfc_send);
+
+        this.DB = new DataBaseHelper(this);
 
         // Check for available NFC Adapter
         NfcAdapter mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -43,7 +49,7 @@ public class NFCtranmitor extends Activity implements NfcAdapter.OnNdefPushCompl
         byte[] order;
         try {
             Toast.makeText(NFCtranmitor.this, this.data.orderVoucherList.toString(), Toast.LENGTH_SHORT).show();
-            order = Util.getBytesForOrder(this.data.user.getUsername(), this.data.orderItemList, this.data.orderVoucherList);
+            order = Util.getBytesForOrder(this.data.user, this.data.orderItemList, this.data.orderVoucherList);
 
             NdefMessage msg = new NdefMessage(new NdefRecord[]{createMimeRecord(tag, order)});
 
@@ -58,9 +64,27 @@ public class NFCtranmitor extends Activity implements NfcAdapter.OnNdefPushCompl
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DB.close();
+    }
+
     public void onNdefPushComplete(NfcEvent arg0) {
         runOnUiThread(new Runnable() {
             public void run() {
+                // delete from db vouchers
+                for(VouchersInList vouc : NFCtranmitor.this.data.orderVoucherList) {
+                    DB.deleteVoucher(vouc.getCodeVoucher());
+                }
+
                 Toast.makeText(getApplicationContext(), "Order sent.", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

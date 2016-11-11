@@ -117,6 +117,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // ****************************************************
     // ****************** vouchers ************************
     // ****************************************************
+
     // insert data into the data base
     public synchronized long insertVoucher(VouchersInList data) {
         ContentValues row = new ContentValues();
@@ -144,6 +145,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String[] args = {data.getCodeVoucher()};
         this.getWritableDatabase().update("voucher", row, "code=?", args);
+    }
+
+    public boolean deleteVoucher(String voucherCode) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete("voucher", "code='" + voucherCode + "'", null) > 0;
     }
 
     // gets all data base voucher rows
@@ -187,7 +193,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public VouchersInList getVoucherInList(Cursor c) {
         VouchersInList data = new VouchersInList(getIdVoucher(c), getCodeVoucher(c), getDateVoucher(c), getDescriptionVoucher(c),
                 getValueDiscOrNumItemsVoucher(c));
-        data.setVoucherType(VouchersInList.VOUCHER_TYPE.valueOf(getTypeVoucher(c)));
+
+        String type = getTypeVoucher(c);
+        if(type.equals("Free Item")){
+            data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM);
+        }else if (type.equals("Free Item type")){
+            data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM_TYPE);
+        }else{
+            data.setVoucherType(VouchersInList.VOUCHER_TYPE.GLOBAL_DISCOUNT);
+        }
         data.setTypeItem(getTypeItemVoucher(c));
         data.setItemIdList(getItemListVoucher(c));
         return data;

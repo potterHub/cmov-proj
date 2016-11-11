@@ -2,6 +2,7 @@ package org.feup.potter.terminal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,11 +16,13 @@ import android.widget.Toast;
 
 import org.feup.potter.terminal.db.Order;
 import org.feup.potter.terminal.nfc.NfcReceive;
+import org.feup.potter.terminal.serverConnection.DoOrder;
+import org.feup.potter.terminal.serverConnection.HttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener, HttpResponse {
     private static final String QR_CODE_FORMAT = "QR_CODE";
     static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
 
@@ -29,6 +32,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private NfcAdapter mNfcAdapter;
 
     private LunchAppData data;
+    private ProgressDialog progDiag;
+    private boolean onNFC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         this.data = (LunchAppData) getApplicationContext();
+
+        this.onNFC = false;
 
         // get the phone nfc adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -63,11 +70,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case R.id.button_nfc:
+
                 if (mNfcAdapter == null) {
                     // Stop here, we definitely need NFC
                     Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
                     break;
-                }else{
+                } else {
+                    this.onNFC = true;
                     startActivity(new Intent(MainActivity.this, NfcReceive.class));
                 }
                 break;
@@ -90,7 +99,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         JSONObject obj = new JSONObject(contents);
                         this.data.currentOrder = new Order(obj);
 
-                        hadleOrder(this.data.currentOrder);
+                        this.hadleOrder();
                     } catch (JSONException e) {
                         Toast.makeText(this, "Error retriving information from QR code.", Toast.LENGTH_SHORT).show();
                     }
@@ -126,13 +135,75 @@ public class MainActivity extends Activity implements View.OnClickListener {
     // nfc onResume
     public void onResume() {
         super.onResume();
-        hadleOrder(this.data.currentOrder);
+        if (this.onNFC) {
+            this.onNFC = false;
+            this.hadleOrder();
+        }
     }
 
-    private void hadleOrder(Order currentOrder) {
-        if(this.data.currentOrder != null){
-            Toast.makeText(this, "Scan was successfully Complete.", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, HandleOrder.class));
+    private void hadleOrder() {
+        if (this.data.currentOrder != null) {
+            // starts server connection
+            startProgressBar();
+
+            DoOrder connApi = new DoOrder(this, this.data.currentOrder); // this must implement HttpResponse interface
+            Thread thr = new Thread(connApi);
+            thr.start();
         }
+    }
+
+    public void startProgressBar() {
+        progDiag = new ProgressDialog(MainActivity.this);
+        progDiag.setTitle("Ordering");
+        progDiag.setMessage("Please wait...");
+        progDiag.show();
+    }
+
+    private void stopProgressBar() {
+        if (progDiag != null)
+            progDiag.dismiss();
+    }
+
+    @Override
+    public void handleResponse(int code, String response) {
+        if (code == 200) {
+            try {
+                Log.d("HandlerOrder", "response OK : " + response);
+                JSONObject obj = new JSONObject(response);
+
+                System.out.println(obj.toString());
+
+                String totalPrice = obj.getString("total");
+                String idSale = obj.getString("idSale");
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopProgressBar();
+                    }
+                });
+
+                Intent intent = new Intent(getApplicationContext(), ShowOrder.class);
+                intent.putExtra("totalP", totalPrice);
+                intent.putExtra("id", idSale);
+                startActivity(intent);
+            } catch (JSONException e) {
+                Log.d("HandlerOrder", "Json format error");
+                inCaseOfError(code, response);
+            }
+        } else {
+            Log.d("HandlerOrder", code + ": " + response);
+            inCaseOfError(code, response);
+        }
+    }
+
+    private void inCaseOfError(final int code, final String response) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                stopProgressBar();
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -73,7 +73,7 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Cursor c = DB.getAllItems();
+                Cursor c = DB.getAllVouchers();
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
                     listAdapter.add(DB.getVoucherInList(c));
             }

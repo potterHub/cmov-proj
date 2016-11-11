@@ -28,11 +28,11 @@ public class User implements Serializable {
     }
 
     public User(String id, String name, String username, String password, String pin, String tokan) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.tokan = tokan;
-        this.id = id;
         this.pin = pin;
         this.itemsHash = "";
     }
@@ -91,6 +91,10 @@ public class User implements Serializable {
 
     public String getTokan() {
         return tokan;
+    }
+
+    public String getIdUser(){
+        return this.id;
     }
 
 }

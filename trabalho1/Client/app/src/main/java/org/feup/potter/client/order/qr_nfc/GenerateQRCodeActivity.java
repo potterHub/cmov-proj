@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -19,23 +18,25 @@ import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.MainActivity;
 import org.feup.potter.client.R;
 import org.feup.potter.client.Util.Util;
+import org.feup.potter.client.db.DataBaseHelper;
+import org.feup.potter.client.db.VouchersInList;
 import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
 
 public class GenerateQRCodeActivity extends Activity implements View.OnClickListener {
     private LunchAppData data;
-
     private ImageView qrCodeImageview;
+
     private TextView errorTv;
     private TextView titleTv;
-
     private volatile String invalidQrCode;
 
     private String contentStr = null;
 
     public final static int QR_WIDTH_HEIGHT = 500;
 
+    private DataBaseHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +45,15 @@ public class GenerateQRCodeActivity extends Activity implements View.OnClickList
 
         this.data = (LunchAppData) getApplicationContext();
 
+        this.DB = new DataBaseHelper(this);
+
         qrCodeImageview = (ImageView) findViewById(R.id.img_qr_code_image);
         titleTv = (TextView) findViewById(R.id.title);
         errorTv = (TextView) findViewById(R.id.error);
 
         this.invalidQrCode = "";
         try {
-            Toast.makeText(GenerateQRCodeActivity.this, this.data.orderVoucherList.toString(), Toast.LENGTH_SHORT).show();
-            contentStr = new String(Util.getBytesForOrder(this.data.user.getUsername(),this.data.orderItemList, this.data.orderVoucherList), "ISO-8859-1");
+            contentStr = new String(Util.getBytesForOrder(this.data.user,this.data.orderItemList, this.data.orderVoucherList), "ISO-8859-1");
         } catch (UnsupportedEncodingException | JSONException e) {
             errorTv.setText(e.getMessage());
         }
@@ -98,7 +100,18 @@ public class GenerateQRCodeActivity extends Activity implements View.OnClickList
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DB.close();
+    }
+
+    @Override
     public void onClick(View v) {
+        // delete from db vouchers
+        for(VouchersInList vouc : this.data.orderVoucherList) {
+            DB.deleteVoucher(vouc.getCodeVoucher());
+        }
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

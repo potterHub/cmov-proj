@@ -79,10 +79,14 @@ public class EnterPinActivity extends Activity implements View.OnClickListener, 
     public void onDoneClick(DialogSendOptions.SEND_METHOD sendMethod) {
         switch (sendMethod){
             case NFC:
-                startActivity(new Intent(EnterPinActivity.this, NFCtranmitor.class));
+                Intent intent = new Intent(getApplicationContext(), NFCtranmitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case QR:
-                startActivity(new Intent(EnterPinActivity.this, GenerateQRCodeActivity.class));
+                Intent intente_2 = new Intent(getApplicationContext(), GenerateQRCodeActivity.class);
+                intente_2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intente_2);
                 break;
             case NOTHING:
                 break;

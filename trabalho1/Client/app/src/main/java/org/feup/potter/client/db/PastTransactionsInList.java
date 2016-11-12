@@ -6,9 +6,15 @@ import java.util.ArrayList;
 public class PastTransactionsInList {
     private String idSale;
 
+    private final int ITEM_ID = 0;
+    private final int ITEM_QUANTITY = 1;
+    private final int ITEM_PRICE = 2;
+
     // 3 houses[nameItem, quantity, price]
     private ArrayList<String[]> items;
 
+    private final int VOUCHER_TYPE = 0;
+    private final int VOUCHER_CODE = 0;
     // 2 houses[Type voucher, code]
     private ArrayList<String[]> vouchers;
 
@@ -56,4 +62,14 @@ public class PastTransactionsInList {
         this.data = data;
     }
 
+    public String getTotalQuantityItems() {
+        int i = 0;
+        for(String [] item : this.items)
+            i += Integer.parseInt(item[ITEM_QUANTITY]);
+        return i + "";
+    }
+
+    public String getTotalVouchersUsed() {
+        return this.vouchers.size() + "";
+    }
 }

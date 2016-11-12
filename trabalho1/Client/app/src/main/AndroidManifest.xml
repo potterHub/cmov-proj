@@ -67,11 +67,9 @@
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".order.qr_nfc.GenerateQRCodeActivity"
-            android:parentActivityName=".order.EnterPinActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity android:name=".order.qr_nfc.NFCtranmitor"
-            android:parentActivityName=".order.EnterPinActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>

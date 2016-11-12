@@ -17,7 +17,7 @@ public class DialogSendOptions extends Dialog implements View.OnClickListener {
     }
 
     public enum SEND_METHOD {
-        QR, NFC, NOTHING;
+        QR, NFC, NOTHING
     }
 
     private DialogSendOptionsListener listener;

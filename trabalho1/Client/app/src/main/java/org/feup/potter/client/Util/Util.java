@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import org.feup.potter.client.db.ItemInList;
+import org.feup.potter.client.db.User;
 import org.feup.potter.client.db.VouchersInList;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,9 +68,10 @@ public class Util {
         return obj;
     }
 
-    public static byte[] getBytesForOrder(String username, ArrayList<ItemInList> orderList, ArrayList<VouchersInList> orderVouchers) throws JSONException, UnsupportedEncodingException {
+    public static byte[] getBytesForOrder(User user, ArrayList<ItemInList> orderList, ArrayList<VouchersInList> orderVouchers) throws JSONException, UnsupportedEncodingException {
         JSONObject jsonOrder = new JSONObject();
-        jsonOrder.put("idUser", username);
+        jsonOrder.put("idUser", user.getIdUser());
+        jsonOrder.put("tokan", user.getTokan());
         JSONArray itemJsonArray = new JSONArray();
         for (ItemInList item : orderList) {
             JSONObject itemJson = new JSONObject();
@@ -82,6 +84,7 @@ public class Util {
         JSONArray voucherJsonArray = new JSONArray();
         for (VouchersInList voucher : orderVouchers) {
             JSONObject voucherJson = new JSONObject();
+            voucherJson.put("idVoucher",voucher.getIdVoucher());
             voucherJson.put("code", voucher.getCodeVoucher());
             voucherJson.put("type", voucher.getVoucherType().toString());
             voucherJsonArray.put(voucherJson);

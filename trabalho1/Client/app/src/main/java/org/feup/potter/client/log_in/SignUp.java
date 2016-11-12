@@ -16,6 +16,7 @@ import org.feup.potter.client.DataStructures.CreditCard;
 import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.R;
 import org.feup.potter.client.Util.Util;
+import org.feup.potter.client.db.DataBaseHelper;
 import org.feup.potter.client.db.User;
 import org.feup.potter.client.serverConnection.HttpResponsePassword;
 import org.feup.potter.client.serverConnection.Register;
@@ -186,6 +187,9 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
                         // String id, String name, String username, String password,String pin, String tokan
                         Util.saveData(SignUp.this.data.user, SignUp.this.data.userPath, getApplicationContext());
 
+                        // reset db
+                        resetDB();
+
                         Toast.makeText(getApplicationContext(), "Register was successful.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ShowPin.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -214,5 +218,13 @@ public class SignUp extends Activity implements GetCreditCardDialog.CredidCardIn
     private void RegisterFail(String message) {
         this.connecting = false;
         Toast.makeText(getApplicationContext(), message.isEmpty() ? "Register in Fail..." : message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void resetDB(){
+        SignUp.this.data.hash = "";
+        Util.saveData(SignUp.this.data.hash,SignUp.this.data.itemHashPath,getApplicationContext());
+
+        // remove data base
+        getApplicationContext().deleteDatabase(DataBaseHelper.DATABASE_NAME);
     }
 }

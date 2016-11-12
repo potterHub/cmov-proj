@@ -1,6 +1,7 @@
 package org.feup.potter.client.menus;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,8 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
 
     protected DataBaseHelper DB;
 
+    protected ProgressDialog progDiag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +51,23 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
     }
 
     protected void connectToServer() {
+        startProgressBar();
+
         this.connApi = new GetItem(this, this.data.hash); // this must implement HttpResponse interface
         Thread thr = new Thread(this.connApi);
         thr.start();
+    }
+
+    public void startProgressBar() {
+        progDiag = new ProgressDialog(BaseItemMenuList.this);
+        progDiag.setTitle("Ordering");
+        progDiag.setMessage("Please wait...");
+        progDiag.show();
+    }
+
+    private void stopProgressBar() {
+        if (progDiag != null)
+            progDiag.dismiss();
     }
 
     @Override
@@ -98,6 +115,7 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
             public void run() {
                 BaseItemMenuList.this.data.hash = hash;
                 Util.saveData(BaseItemMenuList.this.data.hash, BaseItemMenuList.this.data.itemHashPath, BaseItemMenuList.this);
+                stopProgressBar();
             }
         });
     }
@@ -109,6 +127,7 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
                 Cursor c = DB.getAllItems();
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
                     listAdapter.add(DB.getItemInList(c));
+                stopProgressBar();
             }
         });
     }

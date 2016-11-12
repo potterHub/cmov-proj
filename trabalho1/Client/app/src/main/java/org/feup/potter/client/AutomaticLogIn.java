@@ -46,10 +46,8 @@ public class AutomaticLogIn extends Activity implements HttpResponsePassword {
         // to skip automatic login
         // this.data.user = null;
 
-        // test no data in table
+        // drop all tables (when droping all tables i have to do hash = null)
         // this.data.hash = null;
-
-        // drop all tables
         // DataBaseHelper DB = new DataBaseHelper(this);
         // DB.dropAllTables();
         // this.deleteDatabase(DB.DATABASE_NAME);

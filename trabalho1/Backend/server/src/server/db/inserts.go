@@ -67,6 +67,8 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 		err = tx.Commit()
 	}()
 
+	now := time.Now().UTC()
+
 	previousSalesTotal, err := db.GetSalesTotal(sale.IdCustomer)
 	if err != nil {
 		return err
@@ -76,7 +78,7 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 	INSERT INTO sale(idSale, idCustomer, myDateTime, total)
 	VALUES (NULL,?,?,?)`,
 		sale.IdCustomer,
-		time.Now().UTC().String(),
+		now,
 		sale.Total)
 	if err != nil {
 		return err
@@ -114,7 +116,6 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 	vouchersLength := len(sale.Vouchers)
 	argsFactory = make([]interface{}, 2+vouchersLength)
 
-	now := time.Now().UTC()
 	start := 0
 	argsFactory[start] = sale.IdSale
 	start++

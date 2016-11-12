@@ -18,6 +18,7 @@ public class NfcReceive extends Activity {
     private TextView waitting_view_message;
 
     private LunchAppData data;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +35,6 @@ public class NfcReceive extends Activity {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             processIntent(getIntent());
         }
-    }
-    @Override
-    public void onBackPressed() {
         finish();
     }
 
@@ -53,7 +51,8 @@ public class NfcReceive extends Activity {
         try {
             JSONObject obj = new JSONObject(message);
             this.data.currentOrder = new Order(obj);
-
+            this.data.nfcRead = true;
+            this.waitting_view_message.setText("Order received.");
         } catch (JSONException e) {
             e.printStackTrace();
         }

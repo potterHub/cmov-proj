@@ -1,6 +1,7 @@
 package org.feup.potter.client.vouchers;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.db.DataBaseHelper;
 import org.feup.potter.client.db.VouchersInList;
+import org.feup.potter.client.menus.BaseItemMenuList;
 import org.feup.potter.client.serverConnection.GetVoucher;
 import org.feup.potter.client.serverConnection.HttpResponse;
 import org.json.JSONArray;
@@ -29,6 +31,8 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
 
     protected DataBaseHelper DB;
 
+    protected ProgressDialog progDiag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +49,23 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
     }
 
     protected void connectToServer() {
+        startProgressBar();
+
         this.connApi = new GetVoucher(this, this.data.user.getTokan()); // this must implement HttpResponse interface
         Thread thr = new Thread(this.connApi);
         thr.start();
+    }
+
+    public void startProgressBar() {
+        progDiag = new ProgressDialog(BaseVoucherList.this);
+        progDiag.setTitle("Ordering");
+        progDiag.setMessage("Please wait...");
+        progDiag.show();
+    }
+
+    private void stopProgressBar() {
+        if (progDiag != null)
+            progDiag.dismiss();
     }
 
     // handle response from server (don't here is exacly the same as oerder tab activity)
@@ -76,6 +94,8 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
                 Cursor c = DB.getAllVouchers();
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
                     listAdapter.add(DB.getVoucherInList(c));
+
+                stopProgressBar();
             }
         });
     }
@@ -133,6 +153,7 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
                               } catch (JSONException e) {
                                   e.printStackTrace();
                               }
+                              stopProgressBar();
                           }
                       }
 

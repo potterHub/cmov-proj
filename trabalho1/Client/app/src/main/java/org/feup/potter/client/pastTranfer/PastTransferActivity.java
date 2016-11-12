@@ -1,6 +1,7 @@
 package org.feup.potter.client.pastTranfer;
 
 import android.app.ListActivity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,9 +91,12 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               /* Cursor c = DB.getAllItems();
+                Cursor c = DB.getAllTransaction();
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-                    listAdapter.add(DB.getVoucherInList(c));*/
+                    try {
+                        listAdapter.add(DB.getTransactionInList(c));
+                    } catch (JSONException e) {
+                    }
             }
         });
     }
@@ -104,30 +108,23 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
                               try {
                                   for (int i = 0; i < jsonArray.length(); i++) {
                                       JSONObject saleObj = jsonArray.getJSONObject(i);
-                                      System.out.println(saleObj.toString());
-
                                       String idSale = saleObj.getString("idSale");
                                       String dateSale = saleObj.getString("myDateTime");
 
-                                      PastTransactionsInList data = new PastTransactionsInList(idSale, dateSale);
+                                      String total = saleObj.getString("total");
 
+                                      PastTransactionsInList data = new PastTransactionsInList(idSale, dateSale, total);
                                       JSONArray vouchers = saleObj.getJSONArray("vouchers");
-                                      for (int x = 0; x < vouchers.length(); x++) {
-                                          JSONObject voucherObj = vouchers.getJSONObject(x);
-                                          JSONObject voucherTemplate = voucherObj.getJSONObject("voucherTemplate");
-                                          String descriptionofVoucher = voucherTemplate.getString("description");
-                                          String codeVoucher = voucherObj.getString("code");
-
-                                          data.addVouchers(descriptionofVoucher, codeVoucher);
-                                      }
+                                      data.setVouchers(vouchers);
                                       JSONArray items = saleObj.getJSONArray("items");
-                                      for (int x = 0; x < items.length(); x++) {
-                                          JSONObject itemObj = items.getJSONObject(x);
-                                          String idItem = itemObj.getString("idItem");
-                                          String quantity = itemObj.getString("quantity");
+                                      data.setItems(items);
 
-                                          data.addItems(idItem, quantity, "price");
+                                      long id = PastTransferActivity.this.DB.insertTransaction(data);
+                                      if (id < 0) {
+                                          // needs to be updated
+                                          PastTransferActivity.this.DB.updateTransaction(data);
                                       }
+
                                       listAdapter.add(data);
                                   }
                               } catch (JSONException e) {
@@ -154,9 +151,17 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
             }
             final PastTransactionsInList tranfer = transactions.get(position);
 
-            ((TextView) row.findViewById(R.id.text_price)).setText(tranfer.getIdSale());   // sets the restaurant address by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.text_id_sale)).setText(tranfer.getIdSale());
+            ((TextView) row.findViewById(R.id.text_price)).setText("");   // sets the restaurant address by the cursor from the selected line
 
-            ((TextView) row.findViewById(R.id.text_num_items)).setText(tranfer.getTotalQuantityItems());
+            // DateTime result = DateTime.valueOf(tranfer.getData());
+            // ((TextView) row.findViewById(R.id.text_date)).setText(newDateFormat);
+
+            try {
+                ((TextView) row.findViewById(R.id.text_num_items)).setText(tranfer.getTotalQuantityItems());
+            } catch (JSONException e) {
+                ((TextView) row.findViewById(R.id.text_num_items)).setText(getResources().getString(R.string.nan));
+            }
 
             ((TextView) row.findViewById(R.id.text_vouchers_used)).setText(tranfer.getTotalVouchersUsed());
 

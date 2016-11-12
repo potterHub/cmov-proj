@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,6 +35,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private final int VOUCHER_ITEM_LIST = 6;
     private final int VOUCHER_TYPE_ITEM = 7;
 
+    private final int TRANSACTION_ID = 0;
+    private final int TRANSACTION_DATE = 1;
+    private final int TRANSACTION_ITEMS = 2;
+    private final int TRANSACTION_VOUCHERS = 3;
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
     }
@@ -40,12 +48,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE items (id TEXT unique, name TEXT, price TEXT, description TEXT, image TEXT, type TEXT);");
         db.execSQL("CREATE TABLE voucher (code TEXT unique, id TEXT, date TEXT, description TEXT, type TEXT, value_disc_or_num_items TEXT, item_list TEXT, type_item TEXT);");
+        db.execSQL("CREATE TABLE transactions (idSale TEXT unique, date TEXT, items TEXT, vauchers TEXT);");
     }
 
     public void dropAllTables() {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("items", null, null);
         db.delete("voucher", null, null);
+        db.delete("transactions", null, null);
     }
 
     @Override
@@ -195,15 +205,68 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 getValueDiscOrNumItemsVoucher(c));
 
         String type = getTypeVoucher(c);
-        if(type.equals("Free Item")){
+        if (type.equals("Free Item")) {
             data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM);
-        }else if (type.equals("Free Item type")){
+        } else if (type.equals("Free Item type")) {
             data.setVoucherType(VouchersInList.VOUCHER_TYPE.FREE_ITEM_TYPE);
-        }else{
+        } else {
             data.setVoucherType(VouchersInList.VOUCHER_TYPE.GLOBAL_DISCOUNT);
         }
         data.setTypeItem(getTypeItemVoucher(c));
         data.setItemIdList(getItemListVoucher(c));
         return data;
+    }
+
+    // ****************************************************
+    // *************** pastTransactions *******************
+    // ****************************************************
+
+    // insert data into the data base
+    public synchronized long insertTransaction(PastTransactionsInList data) {
+        ContentValues row = new ContentValues();
+        row.put("idSale", data.getIdSale());
+        row.put("date", data.getData());
+        row.put("items", data.getItems().toString());
+        row.put("vauchers", data.getVouchers().toString());
+        return this.getWritableDatabase().insertWithOnConflict("transactions", null, row, SQLiteDatabase.CONFLICT_IGNORE);
+    }
+
+    public synchronized void updateTransaction(PastTransactionsInList data) {
+        ContentValues row = new ContentValues();
+        row.put("idSale", data.getIdSale());
+        row.put("date", data.getData());
+        row.put("items", data.getItems().toString());
+        row.put("vauchers", data.getVouchers().toString());
+
+        String[] args = {data.getIdSale()};
+        this.getWritableDatabase().update("transactions", row, "idSale=?", args);
+    }
+
+    // gets all data base item values
+    public Cursor getAllTransaction() {
+        return (this.getReadableDatabase().rawQuery("SELECT idSale, date, items, vauchers FROM transactions", null));
+    }
+
+    public String getTransactionIdSale(Cursor c) {
+        return (c.getString(this.TRANSACTION_ID));
+    }
+
+    public String getTransactionDateSale(Cursor c) {
+        return (c.getString(this.TRANSACTION_DATE));
+    }
+
+    public JSONArray getTransactionItemsSale(Cursor c) throws JSONException {
+        return (new JSONArray(c.getString(this.TRANSACTION_ITEMS)));
+    }
+
+    public JSONArray getTransactionVouchersSale(Cursor c) throws JSONException {
+        return (new JSONArray(c.getString(this.TRANSACTION_VOUCHERS)));
+    }
+
+    public PastTransactionsInList getTransactionInList(Cursor c) throws JSONException {
+        PastTransactionsInList past = new PastTransactionsInList(getTransactionIdSale(c),getTransactionDateSale(c),"");
+        past.setItems(getTransactionItemsSale(c));
+        past.setVouchers(getTransactionVouchersSale(c));
+        return past;
     }
 }

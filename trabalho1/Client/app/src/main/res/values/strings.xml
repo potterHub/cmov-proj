@@ -27,7 +27,7 @@
     <string name="label_button_add_to_order">Add</string>
 
     <string name="menu_menus">Menus</string>
-    <string name="menus_empty">menus being updated...</string>
+    <string name="menus_empty">menus being updated…</string>
     <string name="dialog_item_details">Item details</string>
     <string name="label_price">price: </string>
 
@@ -36,26 +36,26 @@
     <string name="menu_transactions">Transactions</string>
     <string name="menu_vouchers">Vouchers</string>
     <string name="menu_setting">Settings</string>
-    <string name="menu_login">Login</string>
+    <string name="menu_logout">Logout</string>
 
-    <string name="list_items_empty">There are no items in stock...</string>
-    <string name="list_order_empty">No items picked to order...</string>
-    <string name="list_voucher_empty">No Vauchers picked to discount...</string>
+    <string name="list_items_empty">There are no items in stock…</string>
+    <string name="list_order_empty">No items picked to order…</string>
+    <string name="list_voucher_empty">No Vauchers picked to discount…</string>
 
     <string name="label_your_pin">Please take not of your pin!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_confrim_password">Re-type pass:</string>
-    <string name="label_loging_in">logging in...</string>
+    <string name="label_loging_in">logging in…</string>
     <string name="label_button_continue">OK</string>
     <string name="label_order">Order</string>
     <string name="quantity">Number:</string>
-    <string name="menus_order">No menus added...</string>
+    <string name="menus_order">No menus added…</string>
     <string name="label_menu">menus</string>
     <string name="label_button_delete_in_order">remove</string>
     <string name="dialog_voucher_details">Voucher details</string>
-    <string name="vouchers_empty">You have no vouchers...</string>
+    <string name="vouchers_empty">You have no vouchers…</string>
     <string name="nfc_send_msg">Touch and tap to send</string>
     <string name="label_next">next</string>
     <string name="label_back">back</string>
@@ -67,8 +67,10 @@
     <string name="label_description">Description: </string>
     <string name="label_type">Type:</string>
     <string name="label_code">Code:</string>
-    <string name="past_trasactions_empty">You never shoped in this cofe before... (or connection is down)</string>
-    <string name="items_quantity">Quantity:</string>
+    <string name="past_trasactions_empty">You never shoped in this cofe before… (or connection is down)</string>
+    <string name="items_quantity">nº items:</string>
     <string name="items_price">Price:</string>
     <string name="vouchers_quantity">nº vouchers:</string>
+    <string name="nan">NaN</string>
+    <string name="date">date:</string>
 </resources>

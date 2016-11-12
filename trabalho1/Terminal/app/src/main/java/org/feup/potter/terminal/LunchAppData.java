@@ -6,6 +6,7 @@ import org.feup.potter.terminal.db.Order;
 
 public class LunchAppData extends Application {
 
+    public boolean nfcRead = false;
     public Order currentOrder;
 
 }

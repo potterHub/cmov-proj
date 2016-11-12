@@ -11,15 +11,38 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <Button
-            android:id="@+id/button_qr"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_centerInParent="true"
-            android:maxHeight="50dp"
-            android:maxWidth="50dp"
-            android:background="@drawable/button_layout_qr"
-            android:textSize="24sp" />
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:id="@+id/nfc_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_activity_message_1"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="36sp" />
+            <TextView
+                android:id="@+id/or_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_activity_message_2"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="36sp" />
+            <TextView
+                android:id="@+id/qr_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/main_activity_message_3"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="36sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -28,13 +51,14 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/button_nfc"
+            android:id="@+id/button_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/button_layout_nfc"
+            android:background="@drawable/button_layout_qr"
             android:maxHeight="50dp"
             android:maxWidth="50dp"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="24sp" />
     </RelativeLayout>
 </LinearLayout>

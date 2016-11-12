@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import org.feup.potter.terminal.db.Order;
-import org.feup.potter.terminal.nfc.NfcReceive;
 import org.feup.potter.terminal.serverConnection.DoOrder;
 import org.feup.potter.terminal.serverConnection.HttpResponse;
 import org.json.JSONException;
@@ -33,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
 
     private LunchAppData data;
     private ProgressDialog progDiag;
-    private boolean onNFC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
 
         this.data = (LunchAppData) getApplicationContext();
 
-        this.onNFC = false;
-
         // get the phone nfc adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
-        this.button_qr = (Button) findViewById(R.id.button_nfc);
-        this.button_qr.setOnClickListener(this);
 
         this.button_nfc = (Button) findViewById(R.id.button_qr);
         this.button_nfc.setOnClickListener(this);
@@ -67,17 +60,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
                     startActivityForResult(intent, 0);
                 } catch (ActivityNotFoundException anfe) {
                     showDialog(this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
-                }
-                break;
-            case R.id.button_nfc:
-
-                if (mNfcAdapter == null) {
-                    // Stop here, we definitely need NFC
-                    Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
-                    break;
-                } else {
-                    this.onNFC = true;
-                    startActivity(new Intent(MainActivity.this, NfcReceive.class));
                 }
                 break;
             default:
@@ -135,8 +117,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
     // nfc onResume
     public void onResume() {
         super.onResume();
-        if (this.onNFC) {
-            this.onNFC = false;
+        if (this.data.nfcRead) {
+            this.data.nfcRead = false;
             this.hadleOrder();
         }
     }
@@ -149,6 +131,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
             DoOrder connApi = new DoOrder(this, this.data.currentOrder); // this must implement HttpResponse interface
             Thread thr = new Thread(connApi);
             thr.start();
+
+            this.data.currentOrder = null;
         }
     }
 

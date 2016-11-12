@@ -60,7 +60,7 @@ public abstract class BaseItemMenuList extends ListActivity implements HttpRespo
 
     public void startProgressBar() {
         progDiag = new ProgressDialog(BaseItemMenuList.this);
-        progDiag.setTitle("Ordering");
+        progDiag.setTitle("Loading menus");
         progDiag.setMessage("Please wait...");
         progDiag.show();
     }

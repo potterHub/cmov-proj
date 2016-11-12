@@ -28,8 +28,8 @@
         <activity
             android:name=".nfc.NfcReceive"
             android:label="@string/title_activity_nfc_receive"
-            android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />

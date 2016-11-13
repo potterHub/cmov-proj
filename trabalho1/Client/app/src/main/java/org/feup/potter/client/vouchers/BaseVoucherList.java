@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import org.feup.potter.client.LunchAppData;
 import org.feup.potter.client.db.DataBaseHelper;
 import org.feup.potter.client.db.VouchersInList;
-import org.feup.potter.client.menus.BaseItemMenuList;
 import org.feup.potter.client.serverConnection.GetVoucher;
 import org.feup.potter.client.serverConnection.HttpResponse;
 import org.json.JSONArray;
@@ -58,7 +57,7 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
 
     public void startProgressBar() {
         progDiag = new ProgressDialog(BaseVoucherList.this);
-        progDiag.setTitle("Ordering");
+        progDiag.setTitle("Loading vouchers");
         progDiag.setMessage("Please wait...");
         progDiag.show();
     }
@@ -107,7 +106,6 @@ public abstract class BaseVoucherList extends ListActivity implements HttpRespon
                               try {
                                   for (int i = 0; i < jsonArray.length(); i++) {
                                       JSONObject voucherObj = jsonArray.getJSONObject(i);
-                                      System.out.println(voucherObj.toString());
 
                                       String idVoucher = voucherObj.getString("idVoucher");
                                       String codeVoucher = voucherObj.getString("code");

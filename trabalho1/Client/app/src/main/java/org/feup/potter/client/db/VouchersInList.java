@@ -63,6 +63,11 @@ public class VouchersInList implements Serializable {
         return codeVoucher;
     }
 
+    public String getCodeToShowUser(){
+        String [] arr = this.codeVoucher.split("\\.");
+        return arr.length > 0 ? arr[0] : this.codeVoucher;
+    }
+
     public String getDateVoucherEmition() {
         return dateVoucherEmition;
     }

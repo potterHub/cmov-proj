@@ -49,7 +49,7 @@ public class VoucherActivity extends BaseVoucherList{
 
             ((TextView) row.findViewById(R.id.text_description_voucher)).setText(voucher.getDescriptionOfVoucher());   // sets the restaurant address by the cursor from the selected line
             // set the custom row view values
-            ((TextView) row.findViewById(R.id.code_voucher)).setText(voucher.getCodeVoucher().toString());        // sets the restaurant name by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.code_voucher)).setText(voucher.getCodeToShowUser());        // sets the restaurant name by the cursor from the selected line
 
             return (row);
         }

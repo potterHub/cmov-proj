@@ -3,10 +3,10 @@ package db
 import (
 	"database/sql"
 	"errors"
+	"math/rand"
 	"server/authentication"
 	"server/models"
 	"time"
-	"math/rand"
 )
 
 func (db *DB) InsertCustomer(customer *models.Customer) (err error) {
@@ -54,10 +54,12 @@ func (db *DB) InsertCustomer(customer *models.Customer) (err error) {
 	}
 
 	customer.IdCustomer = idCustomer
-	return nil
+	return err
 }
 
-func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (err error) {
+func (db *DB) InsertSale(claims *authentication.MyClaims,
+	items []*models.Item, itemsQuantities map[int64]int64, total float64,
+	vouchers []*models.Voucher) (int64, error) {
 	tx, err := db.raw.Begin()
 	defer func() {
 		if err != nil {
@@ -69,57 +71,57 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 
 	now := time.Now().UTC()
 
-	previousSalesTotal, err := db.GetSalesTotal(sale.IdCustomer)
+	previousSalesTotal, err := db.GetSalesTotal(claims.IdCustomer)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	res, err := tx.Exec(`
 	INSERT INTO sale(idSale, idCustomer, myDateTime, total)
 	VALUES (NULL,?,?,?)`,
-		sale.IdCustomer,
+		claims.IdCustomer,
 		now,
-		sale.Total)
+		total)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	sale.IdSale, err = res.LastInsertId()
+	idSale, err := res.LastInsertId()
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	elementsPer := 3
 	var values string
-	itemsLength := len(sale.Items)
+	itemsLength := len(items)
 	argsFactory := make([]interface{}, itemsLength*elementsPer)
-	for i, _ := range sale.Items {
+	for i, item := range items {
 		values = "(?,?,?)" + values
 		if i != (itemsLength - 1) {
 			values = "," + values
 		}
 		offset := i * elementsPer
-		argsFactory[offset] = sale.IdSale
-		argsFactory[offset+1] = sale.Items[i].IdItem
-		argsFactory[offset+2] = sale.Items[i].Quantity
+		argsFactory[offset] = idSale
+		argsFactory[offset+1] = item.IdItem
+		argsFactory[offset+2] = itemsQuantities[item.IdItem]
 	}
 
 	res, err = tx.Exec(`
 	INSERT INTO saleItem(idSale, idItem, quantity)
 	VALUES `+values, argsFactory...)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	// Disable used vouchers
 	var ins string
-	vouchersLength := len(sale.Vouchers)
+	vouchersLength := len(vouchers)
 	argsFactory = make([]interface{}, 2+vouchersLength)
 
 	start := 0
-	argsFactory[start] = sale.IdSale
+	argsFactory[start] = idSale
 	start++
-	for i, voucher := range sale.Vouchers {
+	for i, voucher := range vouchers {
 		offset := start + i
 		argsFactory[offset] = voucher.IdVoucher
 		ins = "?" + ins
@@ -132,7 +134,7 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 	SET idSale = ?
 	WHERE idVoucher IN (`+ins+`)`, argsFactory...)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	// Generate vouchers
@@ -143,30 +145,30 @@ func (db *DB) InsertSale(claims *authentication.MyClaims, sale *models.Sale) (er
 		(SELECT idVoucherTemplate FROM voucherTemplate WHERE description LIKE ?),
 		?, NULL, ?, ?)`)
 	if err != nil {
-		return err
+		return 0, err
 	}
 	defer stmt.Close()
 
-	if sale.Total >= 20.00 {
+	if total >= 20.00 {
 		discount := "%free popcorn%"
 		if rand.Intn(2) == 0 {
 			discount = "%free coffee%"
 		}
-		err = insertNewVoucher(stmt, discount, sale.IdCustomer, now)
+		err = insertNewVoucher(stmt, discount, claims.IdCustomer, now)
 		if err != nil {
-			return err
+			return 0, err
 		}
 	}
 
-	var nGlobalDiscounts int64 = int64((previousSalesTotal+sale.Total)/100) - int64(previousSalesTotal/100)
+	var nGlobalDiscounts int64 = int64((previousSalesTotal+total)/100) - int64(previousSalesTotal/100)
 	for ; nGlobalDiscounts > 0; nGlobalDiscounts-- {
-		err = insertNewVoucher(stmt, "%5%% Discount%", sale.IdCustomer, now)
+		err = insertNewVoucher(stmt, "%5%% Discount%", claims.IdCustomer, now)
 		if err != nil {
-			return err
+			return 0, err
 		}
 	}
 
-	return nil
+	return idSale, err
 }
 
 func insertNewVoucher(stmt *sql.Stmt, template string, customer int64, now time.Time) error {

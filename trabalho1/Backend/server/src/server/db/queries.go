@@ -342,7 +342,7 @@ func (db *DB) GetVouchersSale(idCustomer int64, vouchers []*models.Voucher) ([]*
 	}
 
 	rows, err := db.raw.Query(`
-	SELECT voucher.idVoucher, voucher.code, voucher.idSale, voucher.gotVoucher, voucherTemplateType.idVoucherTemplateType, voucherTemplateType.description
+	SELECT voucher.idVoucher, voucher.code, voucher.gotVoucher, voucherTemplateType.idVoucherTemplateType, voucherTemplateType.description
 	FROM voucher
 	JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
 	JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
@@ -356,21 +356,15 @@ func (db *DB) GetVouchersSale(idCustomer int64, vouchers []*models.Voucher) ([]*
 	vouchersMeta := make([]*models.Voucher, 0)
 	for rows.Next() {
 		voucher := new(models.Voucher)
-		nullableIdSale := sql.NullInt64{}
 
 		err = rows.Scan(
 			&voucher.IdVoucher,
 			&voucher.Code,
-			&nullableIdSale,
 			&voucher.GotVoucher,
 			&voucher.VoucherTemplate.VoucherTemplateType.IdVoucherTemplateType,
 			&voucher.VoucherTemplate.VoucherTemplateType.Description)
 		if err != nil {
 			return nil, err
-		}
-
-		if nullableIdSale.Valid {
-			voucher.IdSale = nullableIdSale.Int64
 		}
 
 		vouchersMeta = append(vouchersMeta, voucher)
@@ -382,6 +376,83 @@ func (db *DB) GetVouchersSale(idCustomer int64, vouchers []*models.Voucher) ([]*
 
 	return vouchersMeta, err
 
+}
+
+func (db *DB) GetVoucherSale(idCustomer int64, voucher *models.Voucher) error {
+	if idCustomer <= 0 || voucher == nil {
+		return errors.New("Expecting a customerId and a voucher")
+	}
+
+	voucher.IdCustomer = idCustomer
+
+	rows := db.raw.QueryRow(`
+	SELECT  voucher.gotVoucher,
+		voucherTemplate.idVoucherTemplate, voucherTemplate.description, voucherTemplate.value,
+		voucherTemplate.idItemType, voucherTemplate.description,
+		voucherTemplateType.idVoucherTemplateType, voucherTemplateType.description
+	FROM voucher
+	JOIN voucherTemplate on voucherTemplate.idVoucherTemplate = voucher.idVoucherTemplate
+	JOIN voucherTemplateType on voucherTemplateType.idVoucherTemplateType = voucherTemplate.idVoucherTemplateType
+	LEFT JOIN itemType on itemType.idItemType = voucherTemplate.idItemType
+	WHERE idSale IS NULL AND idCustomer = ? AND idVoucher = ? AND code = ?`, idCustomer, voucher.IdVoucher, voucher.Code)
+
+	type itemTypeNullable struct {
+		IdItemType  sql.NullInt64
+		Description sql.NullString
+	}
+	tempItemType := itemTypeNullable{}
+	err := rows.Scan(
+		&voucher.GotVoucher,
+		&voucher.VoucherTemplate.IdVoucherTemplate,
+		&voucher.VoucherTemplate.Description,
+		&voucher.VoucherTemplate.Value,
+		&tempItemType.IdItemType,
+		&tempItemType.Description,
+		&voucher.VoucherTemplate.VoucherTemplateType.IdVoucherTemplateType,
+		&voucher.VoucherTemplate.VoucherTemplateType.Description)
+	if err != nil {
+		return err
+	}
+
+	if tempItemType.IdItemType.Valid && tempItemType.Description.Valid {
+		idItemType, err := tempItemType.IdItemType.Value()
+		if err != nil {
+			return err
+		}
+		description, err := tempItemType.Description.Value()
+		if err != nil {
+			return err
+		}
+		voucher.VoucherTemplate.ItemType = new(models.ItemType)
+		voucher.VoucherTemplate.ItemType.IdItemType = idItemType.(int64)
+		voucher.VoucherTemplate.ItemType.Description = description.(string)
+	}
+
+	voucherTemplateItemRows, err := db.raw.Query(`
+		SELECT idItem
+		FROM voucherTemplateItem
+		WHERE idVoucherTemplate = $1`, voucher.VoucherTemplate.IdVoucherTemplate)
+	itemsIds := make([]int64, 0)
+	for voucherTemplateItemRows.Next() {
+		var itemId int64
+		err = voucherTemplateItemRows.Scan(&itemId)
+		if err != nil {
+			voucherTemplateItemRows.Close()
+			return err
+		}
+		itemsIds = append(itemsIds, itemId)
+	}
+
+	err = voucherTemplateItemRows.Err()
+	if err == nil {
+		voucher.VoucherTemplate.ItemsIds = itemsIds
+	} else if err != sql.ErrNoRows {
+		voucherTemplateItemRows.Close()
+		return err
+	}
+	voucherTemplateItemRows.Close()
+
+	return err
 }
 
 func (db *DB) GetVoucherTemplateTypes() (*map[string]int64, error) {
@@ -444,4 +515,15 @@ func (db *DB) GetSalesTotal(idCustomer int64) (float64, error) {
 		return nullableSalesTotal.Float64, nil
 	}
 	return 0, nil
+}
+
+func (db *DB) GetCreditCardYearMonth(idCustomer int64) (int, int, error) {
+	var year, month int64
+	row := db.raw.QueryRow(`
+		SELECT creditcard.year, creditcard.month
+		FROM creditcard
+		JOIN customer on customer.idCreditCard = creditcard.idCreditCard
+		WHERE customer.idCustomer = ?`, idCustomer)
+	err := row.Scan(&year, &month)
+	return int(year), int(month), err
 }

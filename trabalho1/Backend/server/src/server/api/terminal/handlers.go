@@ -1,13 +1,14 @@
 package terminal
 
 import (
-	"database/sql"
 	"encoding/json"
 	"net/http"
 	"server/globals/sqlite"
 	"server/helpers"
 	"server/models"
+	"sort"
 	"strconv"
+	"time"
 )
 
 func issueOrder(w http.ResponseWriter, r *http.Request) {
@@ -26,82 +27,161 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check if all fields are set and correct
-	error := ""
+	// Check fields
 	if newSale.IdCustomer != claims.IdCustomer {
-		error += "Cannot make an order by another customer "
-	}
-	if newSale.Items == nil || len(newSale.Items) == 0 {
-		error += "A sale must have at least one item "
+		http.Error(w, "Cannot make an order by another customer", 400)
+		return
 	}
 
-	if newSale.Vouchers != nil {
+	now := time.Now()
+	cardYear, cardMonth, err := sqlite.DB.GetCreditCardYearMonth(newSale.IdCustomer)
+	if cardYear < now.Year() || cardMonth < int(now.Month()) {
+		// TODO update blacklist and send json, expired card.
+		http.Error(w, "Credit card expired", 400)
+		return
+	}
+
+	if newSale.Items == nil || len(newSale.Items) == 0 {
+		http.Error(w, "A sale must have at least one item", 400)
+		return
+	}
+
+	// Get items with metadata
+	items := make([]*models.Item, 0)
+	itemsQuantities := make(map[int64]int64)
+	for _, postItem := range newSale.Items {
+		if postItem.Quantity <= 0 {
+			http.Error(w, "Quantity must be greater than 0", 400)
+			return
+		}
+		if itemsQuantities[postItem.IdItem] != 0 {
+			itemsQuantities[postItem.IdItem] += postItem.Quantity
+			continue
+		}
+		item, err := sqlite.DB.GetItem(strconv.FormatInt(postItem.IdItem, 10))
+		if err != nil {
+			http.Error(w, "Invalid item", 400)
+			return
+		}
+		itemsQuantities[postItem.IdItem] += postItem.Quantity
+		items = append(items, item)
+	}
+
+	var globalDiscountVoucher *models.Voucher
+	popcornVouchers := make([]*models.Voucher, 0)
+	coffeeVouchers := make([]*models.Voucher, 0)
+
+	var popcornItemsCount int64
+	var coffeeItemsCount int64
+	var popcornPrice float64
+	coffeeEligible := models.Items{}
+	for _, item := range items {
+		if item.Name == "Popcorn" {
+			popcornItemsCount = itemsQuantities[item.IdItem]
+			popcornPrice = item.Price
+		} else if item.ItemType.Description == "Coffee" {
+			coffeeItemsCount += itemsQuantities[item.IdItem]
+			coffeeEligible = append(coffeeEligible, item)
+		}
+	}
+	sort.Sort(coffeeEligible)
+
+	if voucherDuplicateCheck := make(map[int64]bool); newSale.Vouchers != nil {
 		vouchersLength := len(newSale.Vouchers)
 		if vouchersLength > 3 {
-			error += "At most 3 vouchers "
+			http.Error(w, "At most 3 vouchers", 400)
+			return
 		} else if vouchersLength > 0 {
-			vouchersWithMeta, err := sqlite.DB.GetVouchersSale(claims.IdCustomer, newSale.Vouchers)
-			if err != nil {
-				http.Error(w, "Invalid vouchers", 400)
-				return
-			}
-			if len(vouchersWithMeta) != vouchersLength {
-				error += "Invalid vouchers "
-			}
-
-			templates, err := sqlite.DB.GetVoucherTemplateTypes()
-			if err != nil {
-				http.Error(w, "Failed fetching voucherTemplatesTypes from db", 500)
-				return
-			}
-
-			oneGlobalDiscount := false
-			for _, voucher := range vouchersWithMeta {
-				if voucher.IdSale != 0 {
-					error = strconv.FormatInt(voucher.IdVoucher, 10) + ":" + voucher.Code + " voucher already used "
+			for _, voucher := range newSale.Vouchers {
+				if voucherDuplicateCheck[voucher.IdVoucher] {
+					// Ignore duplicate vouchers
+					continue
 				}
-				if voucher.VoucherTemplate.VoucherTemplateType.IdVoucherTemplateType == (*templates)["Global Discount"] {
-					if oneGlobalDiscount {
-						error += "Can only have one global discount "
-						break
+				voucherDuplicateCheck[voucher.IdVoucher] = true
+
+				err = sqlite.DB.GetVoucherSale(newSale.IdCustomer, voucher)
+				if err != nil {
+					// TODO update blacklist and send json, wrong voucher
+					http.Error(w, "Invalid voucher", 400)
+					return
+				}
+
+				/*** Ignore the vouchers that do not make sense and grab the values for the discount ***/
+				// Coded just for the cases asked by the professor. Not generic.
+				// Only 5% discount, Free popcorn, and Free coffee
+				// The correct generic implementation would have a
+				// switch for voucher.VoucherTemplate.VoucherTemplateType.Description
+
+				// Global Discount Vouchers, only one, the bigger if multiple
+				switch voucher.VoucherTemplate.Description {
+				case "5% Discount":
+					if globalDiscountVoucher == nil {
+						globalDiscountVoucher = voucher
 					}
-					oneGlobalDiscount = true
+				case "Free popcorn":
+					if int64(len(popcornVouchers)) >= popcornItemsCount {
+						continue
+					}
+					popcornVouchers = append(popcornVouchers, voucher)
+				case "Free coffee":
+					if int64(len(coffeeVouchers)) >= coffeeItemsCount {
+						continue
+					}
+					coffeeVouchers = append(coffeeVouchers, voucher)
+				default:
+					http.Error(w, "Missing voucherTemplateType implementation", 500)
+					return
 				}
 			}
 		}
 	}
 
-	if newSale.Items == nil || len(newSale.Items) == 0 {
-		error += "Missing basket items "
+	// Calculate totalWithoutDiscount, total, discount
+	var totalWithoutDiscount float64
+	vouchers := make([]*models.Voucher, 0)
+	for _, item := range items {
+		totalWithoutDiscount += item.Price * float64(itemsQuantities[item.IdItem])
 	}
-
-	if error != "" {
-		http.Error(w, error, 400)
-		return
+	var discount float64
+	// Selected Global discount
+	if globalDiscountVoucher != nil {
+		discount = totalWithoutDiscount * globalDiscountVoucher.VoucherTemplate.Value
+		vouchers = append(vouchers, globalDiscountVoucher)
 	}
-
-	// Calculate the value of items to generate custom vouchers
-	newSale.Total, err = sqlite.DB.GetItemsTotal(newSale.Items)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			http.Error(w, "Invalid item in basket", 400)
-		} else {
-			http.Error(w, "Failed calculating sale total price", 500)
+	// Selected Free popcorn vouchers
+	for _, voucher := range popcornVouchers {
+		discount += popcornPrice
+		vouchers = append(vouchers, voucher)
+	}
+	// Selected Free coffee vouchers
+	itemsQuantitiesCopy := make(map[int64]int64)
+	for k, v := range itemsQuantities {
+		itemsQuantitiesCopy[k] = v
+	}
+	coffeeEligibleOffset := 0
+	for _, voucher := range coffeeVouchers {
+		coffee := coffeeEligible[coffeeEligibleOffset]
+		itemsQuantitiesCopy[coffee.IdItem] -= 1
+		if itemsQuantitiesCopy[coffee.IdItem] == 0 {
+			coffeeEligibleOffset += 1
 		}
-		return
+		discount += coffee.Price
+		vouchers = append(vouchers, voucher)
 	}
+
+	total := helpers.RoundFloat(totalWithoutDiscount-discount, 2)
+	totalWithoutDiscount = helpers.RoundFloat(totalWithoutDiscount, 2)
+	discount = helpers.RoundFloat(discount, 2)
 
 	// Insert the new sale, update used vouchers, and generate new vouchers
-	err = sqlite.DB.InsertSale(claims, newSale)
+	idSale, err := sqlite.DB.InsertSale(claims, items, itemsQuantities, total, vouchers)
 	if err != nil {
-		http.Error(w, "Failed inserting new order", 500)
+		http.Error(w, err.Error(), 500)
 		return
 	}
 
 	// On success return the price of all the items and the idSale
-	w.Write([]byte(`{"idSale":` + strconv.FormatInt(newSale.IdSale, 10) + `,"total":` + strconv.FormatFloat(newSale.Total, 'f', 2, 32) + `}`))
-}
-
-func getBlacklist(w http.ResponseWriter, r *http.Request) {
-
+	w.Write([]byte(`{"idSale":` + strconv.FormatInt(idSale, 10) +
+		`,"total":` + strconv.FormatFloat(total, 'f', 2, 32) +
+		`,"discount":` + strconv.FormatFloat(discount, 'f', 2, 32) + `}`))
 }

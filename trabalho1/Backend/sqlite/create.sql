@@ -103,7 +103,7 @@ CREATE TABLE sale (
   idSale INTEGER,
   idCustomer INTEGER NOT NULL,
   myDateTime DATETIME NOT NULL,
-  total REAL CHECK (total IS NOT NULL AND total > 0),
+  total REAL CHECK (total IS NOT NULL AND total >= 0),
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
   PRIMARY KEY (idSale)
 );

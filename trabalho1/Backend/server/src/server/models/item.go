@@ -16,3 +16,17 @@ func NewItem() *Item {
 		Price:    -1,
 	}
 }
+
+type Items []*Item
+
+func (items Items) Len() int {
+	return len(items)
+}
+
+func (items Items) Less(i, j int) bool {
+	return items[i].Price > items[j].Price
+}
+
+func (items Items) Swap(i, j int) {
+	items[i], items[j] = items[j], items[i]
+}

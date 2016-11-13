@@ -53,6 +53,7 @@ CREATE TABLE customer (
   username TEXT CHECK (username IS NOT NULL AND length(username) >= 3),
   password TEXT CHECK (password IS NOT NULL AND length(password) >= 6),
   PIN INTEGER CHECK (PIN IS NOT NULL AND length(PIN) = 4),
+  blacklisted INTEGER DEFAULT 0,
   FOREIGN KEY (idCreditCard) REFERENCES creditCard(idCreditCard),
   UNIQUE(username),
   PRIMARY KEY (idCustomer)
@@ -103,7 +104,7 @@ CREATE TABLE sale (
   idSale INTEGER,
   idCustomer INTEGER NOT NULL,
   myDateTime DATETIME NOT NULL,
-  total REAL CHECK (total IS NOT NULL AND total > 0),
+  total REAL CHECK (total IS NOT NULL AND total >= 0),
   FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
   PRIMARY KEY (idSale)
 );

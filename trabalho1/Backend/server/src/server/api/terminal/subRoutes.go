@@ -9,5 +9,5 @@ const MainPath = "/terminal"
 
 func SubRoutes(router chi.Router) {
 	router.Post("/order", helpers.Authenticated(helpers.PostJson(issueOrder)))
-	router.Get("/blacklist", helpers.Authenticated(helpers.PostJson(getBlacklist)))
+	router.Get("/blacklist", helpers.ReplyJson(getBlacklist))
 }

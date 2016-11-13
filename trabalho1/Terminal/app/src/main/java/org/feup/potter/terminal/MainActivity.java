@@ -157,27 +157,32 @@ public class MainActivity extends Activity implements View.OnClickListener, Http
 
                 System.out.println(obj.toString());
 
-                String totalPrice = obj.getString("total");
-                String idSale = obj.getString("idSale");
+                final String totalPrice = obj.getString("total");
+                final String idSale = obj.getString("idSale");
+                final String discont = obj.getString("discount");
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Intent intent = new Intent(getApplicationContext(), ShowOrder.class);
+                        intent.putExtra("id", idSale);
+                        intent.putExtra("totalP", totalPrice);
+                        intent.putExtra("discount", discont);
+                        startActivity(intent);
                         stopProgressBar();
                     }
                 });
-
-                Intent intent = new Intent(getApplicationContext(), ShowOrder.class);
-                intent.putExtra("totalP", totalPrice);
-                intent.putExtra("id", idSale);
-                startActivity(intent);
             } catch (JSONException e) {
                 Log.d("HandlerOrder", "Json format error");
                 inCaseOfError(code, response);
             }
         } else {
-            Log.d("HandlerOrder", code + ": " + response);
-            inCaseOfError(code, response);
+            if (code == 403) {
+                inCaseOfError(code, "Your are black listed.");//"Your are black listed.");
+            } else {
+                Log.d("HandlerOrder", code + ": " + response);
+                inCaseOfError(code, response);
+            }
         }
     }
 

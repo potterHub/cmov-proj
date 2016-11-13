@@ -2,29 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <TextView
+        <TextView
+            android:id="@+id/lable_id_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/lable_id_sale"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_id_sale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_id_sale"
-        android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="36sp"
-        android:textColor="@android:color/holo_green_dark" />
+        android:orientation="horizontal">
 
-    <TextView
+        <TextView
+            android:id="@+id/lable_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/lable_total_price"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_total_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/holo_red_dark" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_total_price"
-        android:textAlignment="center"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lable_discont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="@string/lable_discount"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_discount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/holo_red_dark" />
+    </LinearLayout>
 
     <Button
-        android:text="@string/button_ok"
+        android:id="@+id/button_ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button_ok"
-        android:onClick="done"/>
-
+        android:onClick="done"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="@string/button_ok" />
 </LinearLayout>

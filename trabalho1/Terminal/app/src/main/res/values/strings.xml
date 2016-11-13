@@ -3,11 +3,16 @@
 
     <string name="label_nfc">NFC</string>
     <string name="title_activity_nfc_receive">Nfc</string>
-    <string name="nfc_receive_msg">Receiving Order...</string>
+    <string name="nfc_receive_msg">Receiving Order…</string>
 
     <string name="label_qr">QR code</string>
     <string name="button_ok">OK</string>
     <string name="main_activity_message_1">Approach your device to use NFC</string>
     <string name="main_activity_message_2">or</string>
     <string name="main_activity_message_3">select the QR code button</string>
+
+    <string name="money">€</string>
+    <string name="lable_id_sale">Order nº:</string>
+    <string name="lable_total_price">Price paid:</string>
+    <string name="lable_discount">Discount</string>
 </resources>

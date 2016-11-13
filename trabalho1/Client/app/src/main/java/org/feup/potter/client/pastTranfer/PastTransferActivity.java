@@ -1,6 +1,7 @@
 package org.feup.potter.client.pastTranfer;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
 
     protected DataBaseHelper DB;
 
+    private ProgressDialog progDiag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +66,23 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
     }
 
     protected void connectToServer() {
+        startProgressBar();
+
         this.connApi = new GetPastTransactions(this, this.data.user.getTokan()); // this must implement HttpResponse interface
         Thread thr = new Thread(this.connApi);
         thr.start();
+    }
+
+    public void startProgressBar() {
+        progDiag = new ProgressDialog(PastTransferActivity.this);
+        progDiag.setTitle("Loading transactions");
+        progDiag.setMessage("Please wait...");
+        progDiag.show();
+    }
+
+    private void stopProgressBar() {
+        if (progDiag != null)
+            progDiag.dismiss();
     }
 
     // handle response from server (don't here is exactly the same as order tab activity)
@@ -92,11 +109,13 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
             @Override
             public void run() {
                 Cursor c = DB.getAllTransaction();
-                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
+                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                     try {
                         listAdapter.add(DB.getTransactionInList(c));
                     } catch (JSONException e) {
                     }
+                }
+                stopProgressBar();
             }
         });
     }
@@ -130,6 +149,7 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
                               } catch (JSONException e) {
                                   e.printStackTrace();
                               }
+                              stopProgressBar();
                           }
                       }
         );
@@ -152,10 +172,10 @@ public class PastTransferActivity extends ListActivity implements HttpResponse {
             final PastTransactionsInList tranfer = transactions.get(position);
 
             ((TextView) row.findViewById(R.id.text_id_sale)).setText(tranfer.getIdSale());
-            ((TextView) row.findViewById(R.id.text_price)).setText("");   // sets the restaurant address by the cursor from the selected line
+            ((TextView) row.findViewById(R.id.text_price)).setText(tranfer.getFinalPrice() + " " + getResources().getString(R.string.money));   // sets the restaurant address by the cursor from the selected line
 
-            // DateTime result = DateTime.valueOf(tranfer.getData());
-            // ((TextView) row.findViewById(R.id.text_date)).setText(newDateFormat);
+
+            ((TextView) row.findViewById(R.id.text_date)).setText(tranfer.getOnlyDate() + " (" + tranfer.getOnlyHour() + ")");
 
             try {
                 ((TextView) row.findViewById(R.id.text_num_items)).setText(tranfer.getTotalQuantityItems());

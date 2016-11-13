@@ -16,12 +16,16 @@ public class PastTransactionsInList {
 
     private String data;
 
-    public PastTransactionsInList(String idSale, String data, String total) {
+    private String finalPrice;
+
+    public PastTransactionsInList(String idSale, String data, String finalPrice) {
         this.idSale = idSale;
         this.data = data;
 
         this.items = new JSONArray();
         this.vouchers = new JSONArray();
+
+        this.finalPrice = finalPrice;
     }
 
     public void setIdSale(String idSale) {
@@ -36,8 +40,12 @@ public class PastTransactionsInList {
         this.vouchers = arrJson;
     }
 
-    public String getData() {
-        return data;
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setFinalPrice(String finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
     public String getIdSale() {
@@ -68,8 +76,27 @@ public class PastTransactionsInList {
         data.addItems(idItem, quantity, "price");
     }*/
 
-    public void setData(String data) {
-        this.data = data;
+    public String getData() {
+        return data;
+    }
+
+    public String getOnlyDate() {
+        String[] d = getData().split("T");
+        return d.length > 0 ? d[0] : getData();
+    }
+
+    public String getOnlyHour() {
+        String[] d = getData().split("T");
+        if (d.length > 1) {
+            String[] h = d[1].split("\\.");
+            return h.length > 0 ? h[0] : "";
+        } else
+            return "";
+    }
+
+
+    public String getFinalPrice() {
+        return finalPrice;
     }
 
     public String getTotalQuantityItems() throws JSONException {

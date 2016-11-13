@@ -27,17 +27,39 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check fields
 	if newSale.IdCustomer != claims.IdCustomer {
 		http.Error(w, "Cannot make an order by another customer", 400)
+		return
+	}
+	blacklisted, err := sqlite.DB.CheckBlacklisted(claims.IdCustomer);
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	if blacklisted {
+		http.Error(w, "User is blacklisted", 400)
 		return
 	}
 
 	now := time.Now()
 	cardYear, cardMonth, err := sqlite.DB.GetCreditCardYearMonth(newSale.IdCustomer)
 	if cardYear < now.Year() || cardMonth < int(now.Month()) {
-		// TODO update blacklist and send json, expired card.
-		http.Error(w, "Credit card expired", 400)
+		// Update blacklist and send json, expired card.
+		if sqlite.DB.Blacklist(claims.IdCustomer) != nil {
+			http.Error(w, "Failed blacklisting user", 500)
+			return
+		}
+		blacklist, err := sqlite.DB.GetBlacklist()
+		if err != nil {
+			http.Error(w, "Failed retrieving blacklist", 500)
+			return
+		}
+		blacklistJson, err := json.Marshal(blacklist)
+		if err != nil {
+			http.Error(w, "Failed converting item to JSON", 500)
+			return
+		}
+		http.Error(w, string(blacklistJson), 403)
 		return
 	}
 
@@ -101,8 +123,22 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 
 				err = sqlite.DB.GetVoucherSale(newSale.IdCustomer, voucher)
 				if err != nil {
-					// TODO update blacklist and send json, wrong voucher
-					http.Error(w, "Invalid voucher", 400)
+					// Update blacklist and send json, wrong voucher
+					if sqlite.DB.Blacklist(claims.IdCustomer) != nil {
+						http.Error(w, "Failed blacklisting user", 500)
+						return
+					}
+					blacklist, err := sqlite.DB.GetBlacklist()
+					if err != nil {
+						http.Error(w, "Failed retrieving blacklist", 500)
+						return
+					}
+					blacklistJson, err := json.Marshal(blacklist)
+					if err != nil {
+						http.Error(w, "Failed converting item to JSON", 500)
+						return
+					}
+					http.Error(w, string(blacklistJson), 403)
 					return
 				}
 
@@ -184,4 +220,18 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"idSale":` + strconv.FormatInt(idSale, 10) +
 		`,"total":` + strconv.FormatFloat(total, 'f', 2, 32) +
 		`,"discount":` + strconv.FormatFloat(discount, 'f', 2, 32) + `}`))
+}
+
+func getBlacklist(w http.ResponseWriter, r *http.Request) {
+	blacklist, err := sqlite.DB.GetBlacklist()
+	if err != nil {
+		http.Error(w, "Error retrieving blacklist", 500)
+		return
+	}
+	blacklistJson, err := json.Marshal(blacklist)
+	if err != nil {
+		http.Error(w, "Failed converting item to JSON", 500)
+		return
+	}
+	w.Write(blacklistJson)
 }

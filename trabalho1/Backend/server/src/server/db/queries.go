@@ -527,3 +527,39 @@ func (db *DB) GetCreditCardYearMonth(idCustomer int64) (int, int, error) {
 	err := row.Scan(&year, &month)
 	return int(year), int(month), err
 }
+
+func (db *DB) GetBlacklist() ([]int64, error) {
+	rows, err := db.raw.Query(`
+	SELECT idCustomer FROM customer WHERE blacklisted = 1`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	blacklist := make([]int64, 0)
+	for rows.Next() {
+		var idCustomer int64
+		err = rows.Scan(&idCustomer)
+		if err != nil {
+			return nil, err
+		}
+		blacklist = append(blacklist, idCustomer)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return blacklist, err
+}
+
+func (db *DB) CheckBlacklisted(idCustomer int64) (bool, error) {
+	row := db.raw.QueryRow(`SELECT blacklisted FROM customer WHERE idCustomer = ?`, idCustomer)
+	var blacklisted int
+	err := row.Scan(&blacklisted)
+	b := false
+	if blacklisted == 1 {
+		b = true
+	}
+	return b, err
+}

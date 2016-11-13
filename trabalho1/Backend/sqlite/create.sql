@@ -53,6 +53,7 @@ CREATE TABLE customer (
   username TEXT CHECK (username IS NOT NULL AND length(username) >= 3),
   password TEXT CHECK (password IS NOT NULL AND length(password) >= 6),
   PIN INTEGER CHECK (PIN IS NOT NULL AND length(PIN) = 4),
+  blacklisted INTEGER DEFAULT 0,
   FOREIGN KEY (idCreditCard) REFERENCES creditCard(idCreditCard),
   UNIQUE(username),
   PRIMARY KEY (idCustomer)
@@ -115,10 +116,4 @@ CREATE TABLE saleItem (
   FOREIGN KEY (idSale) REFERENCES sale(idSale),
   FOREIGN KEY (idItem) REFERENCES item(idItem),
   PRIMARY KEY (idSale, idItem)
-);
-
-CREATE TABLE blacklist (
-  idCustomer INTEGER,
-  FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
-  PRIMARY KEY (idCustomer)
 );

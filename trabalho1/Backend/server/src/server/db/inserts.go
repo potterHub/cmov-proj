@@ -37,8 +37,8 @@ func (db *DB) InsertCustomer(customer *models.Customer) (err error) {
 	customer.CreditCard.IdCreditCard = idCreditCard
 
 	res, err = tx.Exec(`
-	INSERT INTO customer(idCustomer, idCreditCard, name, username, password, PIN)
-	VALUES (NULL,?,?,?,?,?)`,
+	INSERT INTO customer(idCustomer, idCreditCard, name, username, password, PIN, blacklisted)
+	VALUES (NULL,?,?,?,?,?,0)`,
 		idCreditCard,
 		customer.Name,
 		customer.Username,

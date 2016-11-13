@@ -1,12 +1,13 @@
 package models
 
 type Customer struct {
-	IdCustomer int64      `json:"id"`
-	CreditCard CreditCard `json:"creditCard"`
-	Name       string     `json:"name"`
-	Username   string     `json:"username"`
-	Password   string     `json:"password,omitempty"`
-	PIN        int        `json:"PIN"`
+	IdCustomer  int64      `json:"id"`
+	CreditCard  CreditCard `json:"creditCard"`
+	Name        string     `json:"name"`
+	Username    string     `json:"username"`
+	Password    string     `json:"password,omitempty"`
+	PIN         int        `json:"PIN"`
+	Blacklisted int        `json:"blacklisted,omitempty"`
 }
 
 func NewCustomer() *Customer {

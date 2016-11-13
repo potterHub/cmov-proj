@@ -116,3 +116,9 @@ CREATE TABLE saleItem (
   FOREIGN KEY (idItem) REFERENCES item(idItem),
   PRIMARY KEY (idSale, idItem)
 );
+
+CREATE TABLE blacklist (
+  idCustomer INTEGER,
+  FOREIGN KEY (idCustomer) REFERENCES customer(idCustomer),
+  PRIMARY KEY (idCustomer)
+);

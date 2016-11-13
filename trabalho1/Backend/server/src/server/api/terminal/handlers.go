@@ -43,7 +43,7 @@ func issueOrder(w http.ResponseWriter, r *http.Request) {
 
 	now := time.Now()
 	cardYear, cardMonth, err := sqlite.DB.GetCreditCardYearMonth(newSale.IdCustomer)
-	if cardYear < now.Year() || cardMonth < int(now.Month()) {
+	if cardYear < now.Year() || (cardYear == now.Year() && cardMonth < int(now.Month())) {
 		// Update blacklist and send json, expired card.
 		if sqlite.DB.Blacklist(claims.IdCustomer) != nil {
 			http.Error(w, "Failed blacklisting user", 500)

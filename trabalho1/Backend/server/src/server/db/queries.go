@@ -90,6 +90,7 @@ func (db *DB) GetCustomer(username string) (*models.Customer, error) {
 		&customer.Username,
 		&customer.Password,
 		&customer.PIN,
+		&customer.Blacklisted,
 		&customer.CreditCard.IdCreditCardType,
 		&customer.CreditCard.Code,
 		&customer.CreditCard.Year,
